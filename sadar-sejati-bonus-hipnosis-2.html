@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SADAR SEJATI — Hipnosis Lanjutan: Dari Laboratorium ke Kehidupan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#060508;--deep:#0e0b12;--warm:#18141e;--card:#14111a;
+  --purple:#6b3fa0;--purple2:#8b5cc8;--purple3:#b08ee0;
+  --gold:#b8883a;--gold2:#d4a855;--gold3:#f0c878;
+  --green:#2a6b4a;--green2:#3a9b6a;--green3:#5abf8a;
+  --ivory:#f2e8f8;--ivory2:#c8b8d8;
+  --w60:rgba(242,232,248,0.60);--w35:rgba(242,232,248,0.35);--w15:rgba(242,232,248,0.15);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--ivory);font-family:'Lato',sans-serif;font-weight:300;overflow-x:hidden;}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1000;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+@keyframes wave{0%,100%{transform:scaleY(1);}50%{transform:scaleY(1.6);}}
+
+/* ══ CHAPTER HEADER ══ */
+.ch{
+  min-height:52vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:80px 32px;
+  position:relative;overflow:hidden;
+}
+.ch-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 65% at 50% 50%,#1e0a3a 0%,transparent 60%),
+    radial-gradient(ellipse 30% 30% at 80% 90%,#0e0420 0%,transparent 50%),
+    #060508;
+}
+.ch-content{position:relative;z-index:2;}
+.ch-badge{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.55em;
+  color:var(--purple3);text-transform:uppercase;margin-bottom:20px;
+  opacity:0;animation:fadeUp .7s ease .2s forwards;
+}
+.ch-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,7vw,70px);font-weight:900;font-style:italic;
+  background:linear-gradient(160deg,#e0c8f8 0%,var(--purple3) 45%,var(--purple2) 80%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:14px;line-height:1.1;
+  opacity:0;animation:fadeUp .9s ease .4s forwards;
+}
+.ch-sub{
+  font-family:'Cinzel',serif;font-size:clamp(12px,2vw,18px);font-weight:600;
+  letter-spacing:.2em;color:var(--w60);
+  opacity:0;animation:fadeUp .7s ease .7s forwards;
+}
+
+/* ══ LAYOUT ══ */
+.wrap{max-width:780px;margin:0 auto;padding:80px 32px;}
+.sl{
+  font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.5em;
+  color:var(--purple2);text-transform:uppercase;
+  margin-bottom:48px;display:flex;align-items:center;gap:14px;
+}
+.sl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(107,63,160,.5),transparent);}
+.sl.gold-sl{color:var(--gold);}
+.sl.gold-sl::after{background:linear-gradient(to right,rgba(184,136,58,.5),transparent);}
+.sl.green-sl{color:var(--green3);}
+.sl.green-sl::after{background:linear-gradient(to right,rgba(90,191,138,.5),transparent);}
+
+.rule{width:100%;max-width:780px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:0 32px;}
+.rule::before,.rule::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(107,63,160,.25));}
+.rule::after{background:linear-gradient(to left,transparent,rgba(107,63,160,.25));}
+.gem{width:7px;height:7px;background:var(--purple2);transform:rotate(45deg);flex-shrink:0;}
+.gem.g{background:var(--gold2);}
+
+.body-p{font-size:16.5px;line-height:1.95;color:var(--w60);margin-bottom:28px;}
+.body-p strong{color:var(--ivory);font-weight:400;}
+.body-p em{color:var(--purple3);font-style:italic;}
+.body-p .gl{color:var(--gold2);}
+.body-p .gr{color:var(--green3);}
+
+/* ══ BRAINWAVE VISUALIZER ══ */
+.wave-section{
+  background:var(--deep);
+  border-top:1px solid rgba(107,63,160,.15);
+  border-bottom:1px solid rgba(107,63,160,.15);
+  padding:90px 32px;
+}
+.wave-wrap{max-width:780px;margin:0 auto;}
+
+.wave-cards{display:flex;flex-direction:column;gap:3px;margin-top:52px;}
+
+.wave-card{
+  display:grid;grid-template-columns:140px 1fr;
+  align-items:stretch;gap:0;
+  background:var(--card);border:1px solid rgba(107,63,160,.08);
+  overflow:hidden;transition:border-color .3s;
+}
+.wave-card:hover{border-color:rgba(107,63,160,.3);}
+
+.wave-left{
+  padding:28px 24px;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  border-right:1px solid rgba(107,63,160,.08);
+  gap:10px;
+}
+.wave-name{
+  font-family:'Cinzel',serif;font-size:18px;font-weight:700;
+  letter-spacing:.05em;
+}
+.wave-hz{font-size:12px;color:var(--w35);letter-spacing:.1em;}
+
+/* animated wave bars */
+.wave-bars{display:flex;align-items:center;gap:3px;height:28px;}
+.wb{width:3px;border-radius:2px;animation:wave 1s ease-in-out infinite;}
+.wb:nth-child(1){animation-delay:0s;}
+.wb:nth-child(2){animation-delay:.1s;}
+.wb:nth-child(3){animation-delay:.2s;}
+.wb:nth-child(4){animation-delay:.3s;}
+.wb:nth-child(5){animation-delay:.4s;}
+.wb:nth-child(6){animation-delay:.5s;}
+.wb:nth-child(7){animation-delay:.6s;}
+.wb:nth-child(8){animation-delay:.7s;}
+
+.wave-right{padding:28px 32px;}
+.wave-state{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:700;
+  color:var(--ivory);margin-bottom:8px;
+}
+.wave-desc{font-size:13.5px;line-height:1.8;color:var(--w60);}
+.wave-desc em{font-style:italic;}
+.wave-link{
+  display:inline-block;margin-top:10px;
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;
+  padding:6px 16px;border:1px solid;border-radius:0;
+  text-transform:uppercase;
+}
+
+/* color per wave */
+.delta .wave-name,.delta .wave-link{color:#4a90d9;}
+.delta .wave-link{border-color:rgba(74,144,217,.3);}
+.delta .wb{background:#4a90d9;}
+.theta .wave-name,.theta .wave-link{color:var(--purple3);}
+.theta .wave-link{border-color:rgba(176,142,224,.3);}
+.theta .wb{background:var(--purple2);}
+.alpha .wave-name,.alpha .wave-link{color:var(--green3);}
+.alpha .wave-link{border-color:rgba(90,191,138,.3);}
+.alpha .wb{background:var(--green2);}
+.beta .wave-name,.beta .wave-link{color:var(--gold2);}
+.beta .wave-link{border-color:rgba(212,168,85,.3);}
+.beta .wb{background:var(--gold);}
+.gamma .wave-name,.gamma .wave-link{color:#f0c878;}
+.gamma .wave-link{border-color:rgba(240,200,120,.3);}
+.gamma .wb{background:var(--gold3);}
+
+/* wave speed varies by type */
+.delta .wb{animation-duration:2.5s;height:8px;}
+.theta .wb{animation-duration:1.8s;height:14px;}
+.alpha .wb{animation-duration:1.2s;height:18px;}
+.beta .wb{animation-duration:.6s;height:22px;}
+.gamma .wb{animation-duration:.3s;height:26px;}
+
+/* ══ KASUS NYATA ══ */
+.kasus-section{padding:90px 32px;}
+.kasus-wrap{max-width:780px;margin:0 auto;}
+
+.kasus-timeline{display:flex;flex-direction:column;gap:0;margin-top:52px;position:relative;}
+.kasus-timeline::before{
+  content:'';position:absolute;left:24px;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,var(--purple2),rgba(107,63,160,.1));
+}
+
+.kasus-item{
+  display:grid;grid-template-columns:48px 1fr;gap:0;
+  padding-bottom:40px;
+}
+.kasus-item:last-child{padding-bottom:0;}
+
+.k-dot-col{
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:6px;
+}
+.k-dot{
+  width:12px;height:12px;border-radius:50%;
+  border:2px solid var(--purple2);background:var(--black);
+  flex-shrink:0;position:relative;z-index:2;
+  transition:background .3s;
+}
+.kasus-item:hover .k-dot{background:var(--purple2);}
+
+.k-body{padding:0 0 0 20px;}
+.k-label{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;
+  color:var(--purple2);text-transform:uppercase;margin-bottom:8px;
+}
+.k-title{
+  font-family:'Playfair Display',serif;font-size:clamp(17px,3vw,24px);font-weight:700;
+  color:var(--ivory);margin-bottom:10px;
+}
+.k-content{font-size:14px;line-height:1.85;color:var(--w60);}
+.k-content em{color:var(--purple3);font-style:italic;}
+.k-content strong{color:var(--ivory);font-weight:400;}
+.k-content .gl{color:var(--gold2);}
+.k-content .gr{color:var(--green3);}
+
+.k-result{
+  display:inline-block;margin-top:14px;
+  padding:8px 20px;
+  border:1px solid rgba(90,191,138,.25);
+  font-size:12px;color:var(--green3);
+  font-family:'Cinzel',serif;letter-spacing:.2em;
+}
+
+/* ══ HIPNOSIS & SPIRITUAL ══ */
+.spirit-section{
+  background:linear-gradient(180deg,var(--warm) 0%,#120a1e 50%,var(--warm) 100%);
+  border-top:1px solid rgba(107,63,160,.15);
+  border-bottom:1px solid rgba(107,63,160,.15);
+  padding:90px 32px;
+}
+.spirit-wrap{max-width:780px;margin:0 auto;}
+
+.spirit-quote{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,3.5vw,32px);font-weight:400;font-style:italic;
+  line-height:1.55;color:var(--ivory);
+  padding:40px 44px 40px 56px;
+  border-left:2px solid var(--purple2);
+  background:linear-gradient(90deg,rgba(107,63,160,.07),transparent 80%);
+  position:relative;margin-bottom:52px;
+}
+.spirit-quote::before{
+  content:'\201C';position:absolute;left:12px;top:16px;
+  font-size:72px;line-height:1;
+  color:var(--purple2);opacity:.35;
+  font-family:'Playfair Display',serif;
+}
+.spirit-quote em{color:var(--gold2);}
+
+.spirit-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:2px;margin-top:52px;
+}
+.spirit-card{
+  padding:36px 28px;
+  background:rgba(107,63,160,.05);
+  border:1px solid rgba(107,63,160,.1);
+  transition:all .3s;
+}
+.spirit-card:hover{background:rgba(107,63,160,.1);border-color:rgba(107,63,160,.3);}
+
+.sc-icon{font-size:28px;margin-bottom:14px;}
+.sc-tradition{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:8px;
+}
+.sc-name{
+  font-family:'Playfair Display',serif;font-size:17px;font-weight:700;
+  color:var(--ivory);margin-bottom:10px;
+}
+.sc-desc{font-size:13px;line-height:1.75;color:var(--w60);}
+.sc-desc em{color:var(--purple3);font-style:italic;}
+.sc-desc .gl{color:var(--gold2);}
+
+/* ══ SELF-HYPNOSIS GUIDE ══ */
+.guide-section{padding:90px 32px;}
+.guide-wrap{max-width:780px;margin:0 auto;}
+
+.guide-intro{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(18px,3vw,28px);font-weight:400;font-style:italic;
+  line-height:1.55;color:var(--ivory2);margin-bottom:60px;
+  padding-bottom:40px;
+  border-bottom:1px solid rgba(107,63,160,.1);
+}
+.guide-intro strong{color:var(--ivory);font-style:normal;font-weight:700;}
+
+.guide-steps{display:flex;flex-direction:column;gap:2px;}
+
+.g-step{
+  background:var(--card);
+  border:1px solid rgba(107,63,160,.08);
+  overflow:hidden;
+  transition:border-color .3s;
+}
+.g-step:hover{border-color:rgba(107,63,160,.25);}
+
+.g-step-header{
+  display:grid;grid-template-columns:72px 1fr;
+  align-items:center;gap:0;
+}
+.g-step-num{
+  background:rgba(107,63,160,.08);
+  border-right:1px solid rgba(107,63,160,.1);
+  padding:28px 0;
+  text-align:center;
+  font-family:'Cinzel',serif;font-size:26px;font-weight:700;
+  background-image:linear-gradient(160deg,var(--purple3),var(--purple2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.g-step-info{padding:24px 28px;}
+.g-step-phase{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;
+  color:var(--purple2);text-transform:uppercase;margin-bottom:6px;
+}
+.g-step-name{
+  font-family:'Playfair Display',serif;font-size:19px;font-weight:700;
+  color:var(--ivory);
+}
+
+.g-step-body{
+  padding:0 28px 32px 100px;
+  border-top:1px solid rgba(107,63,160,.06);
+}
+.g-step-body p{font-size:14.5px;line-height:1.85;color:var(--w60);margin-top:20px;}
+.g-step-body p em{color:var(--purple3);font-style:italic;}
+.g-step-body p strong{color:var(--ivory);font-weight:400;}
+.g-step-body p .gl{color:var(--gold2);}
+.g-step-tip{
+  margin-top:14px;padding:14px 18px;
+  border-left:2px solid rgba(184,136,58,.4);
+  background:rgba(184,136,58,.04);
+  font-size:13px;line-height:1.7;
+  color:var(--gold2);font-style:italic;
+}
+.g-step-timer{
+  display:inline-block;margin-top:14px;
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;
+  color:rgba(107,63,160,.5);text-transform:uppercase;
+}
+
+/* ══ MITOS BERBAHAYA ══ */
+.danger-section{
+  background:var(--deep);
+  border-top:1px solid rgba(107,63,160,.12);
+  border-bottom:1px solid rgba(107,63,160,.12);
+  padding:90px 32px;
+}
+.danger-wrap{max-width:780px;margin:0 auto;}
+
+.danger-intro{
+  font-size:15px;line-height:1.85;color:var(--w60);
+  max-width:600px;margin-bottom:52px;
+}
+.danger-intro em{color:var(--purple3);font-style:italic;}
+
+.danger-list{list-style:none;display:flex;flex-direction:column;gap:20px;}
+.danger-item{
+  padding:28px 32px;
+  background:linear-gradient(135deg,rgba(139,26,26,.07),transparent 60%);
+  border:1px solid rgba(239,68,68,.12);
+  transition:border-color .3s;
+}
+.danger-item:hover{border-color:rgba(239,68,68,.25);}
+
+.di-label{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;
+  color:rgba(239,68,68,.4);text-transform:uppercase;margin-bottom:10px;
+}
+.di-myth{
+  font-family:'Playfair Display',serif;font-size:clamp(16px,2.5vw,21px);font-weight:700;
+  color:rgba(242,232,248,.5);margin-bottom:10px;
+}
+.di-danger{font-size:13.5px;line-height:1.8;color:var(--w60);}
+.di-danger em{color:rgba(239,68,68,.6);font-style:italic;}
+.di-danger strong{color:var(--ivory);font-weight:400;}
+.di-danger .gl{color:var(--gold2);}
+
+/* ══ WORKSHEET HIPNOSIS ══ */
+.ws-section{padding:90px 32px;}
+.ws-wrap{max-width:780px;margin:0 auto;}
+
+.ws-card{
+  border:1px solid rgba(107,63,160,.2);
+  padding:52px 48px;
+  position:relative;
+  background:linear-gradient(135deg,rgba(107,63,160,.04),transparent 55%);
+  margin-bottom:32px;
+}
+.ws-card::before,.ws-card::after{
+  content:'';position:absolute;
+  width:20px;height:20px;
+  border-color:var(--purple2);border-style:solid;opacity:.4;
+}
+.ws-card::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+.ws-card::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
+
+.ws-title{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.45em;
+  color:var(--purple2);text-transform:uppercase;
+  margin-bottom:36px;padding-bottom:16px;
+  border-bottom:1px solid rgba(107,63,160,.12);
+}
+
+.q-block{margin-bottom:40px;}
+.q-block:last-child{margin-bottom:0;}
+.q-num{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;
+  color:rgba(107,63,160,.45);margin-bottom:10px;display:block;
+}
+.q-text{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(16px,2.5vw,22px);font-weight:400;
+  color:var(--ivory);line-height:1.5;margin-bottom:10px;
+  padding-left:18px;border-left:2px solid rgba(107,63,160,.25);
+}
+.q-text em{color:var(--purple3);font-style:italic;}
+.q-hint{font-size:12.5px;color:var(--w35);font-style:italic;margin-bottom:16px;margin-left:18px;line-height:1.65;}
+
+.write-area{margin-top:16px;}
+.write-line{height:44px;border-bottom:1px dashed rgba(107,63,160,.08);}
+
+/* ══ GRAND CONCLUSION ══ */
+.grand-section{
+  min-height:85vh;display:flex;align-items:center;justify-content:center;
+  padding:100px 32px;position:relative;overflow:hidden;
+}
+.grand-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 70% at 50% 50%,#200840 0%,var(--black) 65%),
+    radial-gradient(ellipse 25% 25% at 50% 50%,rgba(107,63,160,.12),transparent 70%);
+}
+
+/* rotating outer ring */
+.grand-ring{
+  position:absolute;top:50%;left:50%;
+  width:500px;height:500px;border-radius:50%;
+  border:1px solid rgba(107,63,160,.08);
+  transform:translate(-50%,-50%);
+  animation:rotate 60s linear infinite;
+}
+.grand-ring::before{
+  content:'';position:absolute;
+  top:-4px;left:50%;transform:translateX(-50%);
+  width:8px;height:8px;border-radius:50%;
+  background:var(--purple2);opacity:.5;
+}
+@keyframes rotate{to{transform:translate(-50%,-50%) rotate(360deg);}}
+
+.grand-content{position:relative;z-index:2;text-align:center;max-width:720px;}
+
+.grand-pre{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.55em;
+  color:var(--purple2);text-transform:uppercase;margin-bottom:36px;
+}
+
+.grand-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,6vw,58px);font-weight:400;font-style:italic;
+  line-height:1.4;color:var(--ivory);margin-bottom:40px;
+}
+.grand-title em{color:var(--purple3);}
+.grand-title strong{
+  font-weight:900;font-style:normal;display:block;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  font-size:1.2em;line-height:1;margin:8px 0;
+}
+
+.grand-body{
+  font-size:clamp(14px,2vw,18px);line-height:1.9;
+  color:var(--w60);margin-bottom:48px;
+  max-width:600px;margin-left:auto;margin-right:auto;
+}
+.grand-body em{color:var(--purple3);font-style:italic;}
+.grand-body .gl{color:var(--gold2);}
+
+.grand-divider{
+  display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:36px;
+}
+.grand-divider::before,.grand-divider::after{
+  content:'';width:80px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(107,63,160,.5));
+}
+.grand-divider::after{background:linear-gradient(to left,transparent,rgba(107,63,160,.5));}
+.gd-gem{width:7px;height:7px;background:var(--purple2);transform:rotate(45deg);}
+
+.grand-seal{
+  display:inline-block;
+  padding:24px 56px;
+  border:1px solid rgba(107,63,160,.3);
+  font-family:'Cinzel',serif;font-size:11px;font-weight:700;
+  letter-spacing:.35em;text-transform:uppercase;
+  color:var(--purple3);
+  position:relative;overflow:hidden;cursor:default;
+  background:linear-gradient(135deg,rgba(107,63,160,.07),transparent);
+}
+
+/* ══ DAFTAR BACAAN ══ */
+.reading-section{
+  background:var(--warm);
+  border-top:1px solid rgba(107,63,160,.12);
+  padding:80px 32px;
+}
+.reading-wrap{max-width:780px;margin:0 auto;}
+.reading-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:2px;margin-top:52px;
+}
+.reading-card{
+  background:var(--card);padding:32px 28px;
+  border:1px solid rgba(107,63,160,.07);
+  transition:all .3s;
+}
+.reading-card:hover{background:#18141e;border-color:rgba(107,63,160,.25);}
+.rc-cat{
+  font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.35em;
+  color:var(--purple2);text-transform:uppercase;margin-bottom:10px;
+}
+.rc-title{
+  font-family:'Playfair Display',serif;font-size:16px;font-weight:700;
+  color:var(--ivory);margin-bottom:4px;font-style:italic;
+}
+.rc-author{font-size:12px;color:var(--w35);margin-bottom:10px;}
+.rc-note{font-size:12.5px;color:var(--w60);line-height:1.65;}
+.rc-note em{color:var(--purple3);font-style:italic;}
+
+/* ══ FOOTER ══ */
+.footer{
+  border-top:1px solid rgba(107,63,160,.08);
+  padding:40px 32px;text-align:center;
+}
+.footer-logo{
+  font-family:'Cinzel',serif;
+  font-size:clamp(18px,4vw,30px);font-weight:700;
+  background:linear-gradient(160deg,var(--purple3),var(--purple2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:10px;
+}
+.footer-copy{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;
+  color:rgba(107,63,160,.2);text-transform:uppercase;
+}
+
+@media(max-width:640px){
+  .wave-card{grid-template-columns:1fr;}
+  .wave-left{border-right:none;border-bottom:1px solid rgba(107,63,160,.08);}
+  .g-step-header{grid-template-columns:56px 1fr;}
+  .g-step-body{padding-left:24px;}
+  .ws-card{padding:36px 24px;}
+  .kasus-timeline::before{left:18px;}
+  .kasus-item{grid-template-columns:40px 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ CHAPTER HEADER ══ -->
+<section class="ch">
+  <div class="ch-bg"></div>
+  <div class="ch-content">
+    <p class="ch-badge">Bab Bonus · Bagian Kedua</p>
+    <h1 class="ch-title">Dari Laboratorium ke Kehidupan</h1>
+    <p class="ch-sub">Gelombang Otak · Kasus Nyata · Koneksi Spiritual · Panduan Mandiri</p>
+  </div>
+</section>
+
+<div class="rule"><div class="gem"></div></div>
+
+<!-- ══ PEMBUKA ══ -->
+<div class="wrap">
+  <div class="sl">Melanjutkan Perjalanan</div>
+
+  <p class="body-p">
+    Di bagian pertama, kita membongkar mitos dan menemukan kebenaran dasar:
+    hipnosis bukan sihir — ia adalah <em>mekanisme pikiran yang sudah berjalan dalam dirimu setiap hari.</em>
+    Kini saatnya kita masuk lebih dalam.
+  </p>
+  <p class="body-p">
+    Bagian ini akan membawamu dari pemahaman teoritis menuju <strong>penerapan nyata yang bisa kamu mulai hari ini.</strong>
+    Kita akan melihat bagaimana gelombang otak bekerja, belajar dari kasus-kasus nyata yang mengubah hidup,
+    menemukan benang merah antara hipnosis dan tradisi spiritual,
+    dan akhirnya menyusun <span class="gl">panduan self-hypnosis langkah demi langkah</span> yang aman dan efektif.
+  </p>
+</div>
+
+<!-- ══ GELOMBANG OTAK ══ -->
+<section class="wave-section">
+  <div class="wave-wrap">
+    <div class="sl">Peta Gelombang Otak</div>
+    <p style="font-size:15px;color:var(--w60);max-width:580px;margin-bottom:0;line-height:1.8;">
+      Pikiranmu beroperasi pada frekuensi yang berbeda-beda sepanjang hari.
+      Memahami gelombang ini adalah kunci untuk mengetahui <em>kapan dan bagaimana</em>
+      kamu bisa mengakses bawah sadarmu secara optimal.
+    </p>
+
+    <div class="wave-cards">
+
+      <!-- DELTA -->
+      <div class="wave-card delta">
+        <div class="wave-left">
+          <div class="wave-name">Delta</div>
+          <div class="wave-hz">0.5 – 4 Hz</div>
+          <div class="wave-bars">
+            <div class="wb" style="height:6px;"></div>
+            <div class="wb" style="height:10px;"></div>
+            <div class="wb" style="height:7px;"></div>
+            <div class="wb" style="height:9px;"></div>
+            <div class="wb" style="height:6px;"></div>
+            <div class="wb" style="height:8px;"></div>
+            <div class="wb" style="height:7px;"></div>
+            <div class="wb" style="height:9px;"></div>
+          </div>
+          <div class="wave-link">Tidur Dalam</div>
+        </div>
+        <div class="wave-right">
+          <div class="wave-state">Tidur Tanpa Mimpi · Pemulihan Total</div>
+          <div class="wave-desc">
+            Gelombang paling lambat dan paling dalam. Di sinilah tubuhmu memperbaiki diri, sistem imun bekerja paling keras, dan memori jangka panjang terkonsolidasi.
+            <em>Kurang tidur delta = sistem bawah sadar yang kelelahan dan lebih mudah bereaksi negatif.</em>
+            Orang yang tidurnya buruk bukan hanya lelah fisik — <strong>program bawah sadarnya ikut korup.</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- THETA -->
+      <div class="wave-card theta">
+        <div class="wave-left">
+          <div class="wave-name">Theta</div>
+          <div class="wave-hz">4 – 8 Hz</div>
+          <div class="wave-bars">
+            <div class="wb" style="height:10px;"></div>
+            <div class="wb" style="height:18px;"></div>
+            <div class="wb" style="height:12px;"></div>
+            <div class="wb" style="height:20px;"></div>
+            <div class="wb" style="height:10px;"></div>
+            <div class="wb" style="height:16px;"></div>
+            <div class="wb" style="height:12px;"></div>
+            <div class="wb" style="height:18px;"></div>
+          </div>
+          <div class="wave-link">Pintu Bawah Sadar</div>
+        </div>
+        <div class="wave-right">
+          <div class="wave-state">Hypnagogic · Meditasi Dalam · Mimpi Sadar</div>
+          <div class="wave-desc">
+            Ini adalah <em>"jendela emas" yang paling berharga.</em> Terjadi saat kamu setengah tidur, meditasi dalam, atau dalam kondisi trance ringan.
+            Pintu bawah sadar terbuka lebar — sugesti masuk tanpa resistensi dari pikiran kritis.
+            <strong>Semua teknik self-hypnosis yang efektif menargetkan kondisi theta ini.</strong>
+            Anak usia 0–7 tahun hidup dominan di gelombang ini — itulah mengapa pemrograman masa kecil begitu kuat.
+          </div>
+        </div>
+      </div>
+
+      <!-- ALPHA -->
+      <div class="wave-card alpha">
+        <div class="wave-left">
+          <div class="wave-name">Alpha</div>
+          <div class="wave-hz">8 – 13 Hz</div>
+          <div class="wave-bars">
+            <div class="wb" style="height:14px;"></div>
+            <div class="wb" style="height:22px;"></div>
+            <div class="wb" style="height:16px;"></div>
+            <div class="wb" style="height:24px;"></div>
+            <div class="wb" style="height:14px;"></div>
+            <div class="wb" style="height:20px;"></div>
+            <div class="wb" style="height:16px;"></div>
+            <div class="wb" style="height:22px;"></div>
+          </div>
+          <div class="wave-link">Relaks Sadar</div>
+        </div>
+        <div class="wave-right">
+          <div class="wave-state">Relaksasi Ringan · Fokus Tenang · Visualisasi</div>
+          <div class="wave-desc">
+            Kondisi ideal untuk belajar, kreativitas, dan visualisasi positif. Terjadi saat kamu rileks tapi tetap sadar — setelah olahraga ringan, di alam terbuka, atau saat menikmati musik.
+            <em>Afirmasi paling efektif disampaikan di kondisi alpha.</em>
+            Ini adalah jembatan antara pikiran sadar (beta) dan bawah sadar (theta) —
+            <strong>kondisi yang paling mudah dicapai melalui pernapasan dalam.</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- BETA -->
+      <div class="wave-card beta">
+        <div class="wave-left">
+          <div class="wave-name">Beta</div>
+          <div class="wave-hz">13 – 30 Hz</div>
+          <div class="wave-bars">
+            <div class="wb" style="height:18px;"></div>
+            <div class="wb" style="height:24px;"></div>
+            <div class="wb" style="height:20px;"></div>
+            <div class="wb" style="height:26px;"></div>
+            <div class="wb" style="height:18px;"></div>
+            <div class="wb" style="height:22px;"></div>
+            <div class="wb" style="height:20px;"></div>
+            <div class="wb" style="height:24px;"></div>
+          </div>
+          <div class="wave-link">Waspada Aktif</div>
+        </div>
+        <div class="wave-right">
+          <div class="wave-state">Logika · Analisis · Pikiran Kritis</div>
+          <div class="wave-desc">
+            Kondisi standar kesadaran saat terjaga — bekerja, berpikir, menganalisis.
+            Di sini <em>filter kritis aktif sepenuhnya</em> — itulah mengapa sugesti dan afirmasi sering ditolak saat kamu sedang "terlalu sadar".
+            Stress kronik membuat orang terjebak di beta tinggi — pikiran terus berlari, <strong>tidak bisa berhenti dan tidak bisa mengakses kecerdasan bawah sadar.</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAMMA -->
+      <div class="wave-card gamma">
+        <div class="wave-left">
+          <div class="wave-name">Gamma</div>
+          <div class="wave-hz">30 – 100 Hz</div>
+          <div class="wave-bars">
+            <div class="wb" style="height:22px;"></div>
+            <div class="wb" style="height:26px;"></div>
+            <div class="wb" style="height:24px;"></div>
+            <div class="wb" style="height:26px;"></div>
+            <div class="wb" style="height:22px;"></div>
+            <div class="wb" style="height:25px;"></div>
+            <div class="wb" style="height:23px;"></div>
+            <div class="wb" style="height:26px;"></div>
+          </div>
+          <div class="wave-link">Puncak Kesadaran</div>
+        </div>
+        <div class="wave-right">
+          <div class="wave-state">Peak Flow · Wawasan Mendalam · Pencerahan</div>
+          <div class="wave-desc">
+            Gelombang tercepat, terkait dengan kondisi <em>flow state, kreativitas puncak, dan momen "aha"</em> yang mengubah hidup.
+            Ditemukan dominan pada meditator berpengalaman dan orang dalam kondisi kebahagiaan intens.
+            <strong>Ini adalah kondisi di mana ketiga lapisan pikiran — sadar, bawah sadar, dan super-sadar — bekerja secara harmonis sepenuhnya.</strong>
+            Inilah yang oleh tradisi spiritual disebut "pencerahan".
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ KASUS NYATA ══ -->
+<section class="kasus-section">
+  <div class="kasus-wrap">
+    <div class="sl">Kasus Nyata yang Mengubah Sains</div>
+    <p style="font-size:15px;color:var(--w60);max-width:580px;margin-bottom:0;line-height:1.8;">
+      Bukan anekdot. Bukan klaim motivasi. Ini adalah kasus-kasus yang <em>mengubah cara sains memandang pikiran manusia.</em>
+    </p>
+
+    <div class="kasus-timeline">
+
+      <div class="kasus-item">
+        <div class="k-dot-col"><div class="k-dot"></div></div>
+        <div class="k-body">
+          <p class="k-label">Kedokteran · 1840an</p>
+          <h3 class="k-title">James Esdaile & 300 Operasi Tanpa Anestesi</h3>
+          <p class="k-content">
+            Dokter Skotlandia James Esdaile melakukan lebih dari 300 operasi besar di India
+            menggunakan hipnosis sebagai satu-satunya anestesi — sebelum anestesi kimia ditemukan.
+            <em>Tingkat kematian pasiennya turun dari 50% menjadi hanya 5%.</em>
+            <br><br>
+            Saat ia kembali ke Eropa dan melaporkan temuannya, komunitas medis menolaknya — bukan karena hasilnya tidak nyata,
+            tapi karena <strong>implikasinya terlalu mengancam paradigma yang ada.</strong>
+            <span class="gl">Pikiran bisa memblokir rasa sakit secara penuh. Sampai hari ini, fakta ini masih jarang diajarkan di sekolah kedokteran.</span>
+          </p>
+          <span class="k-result">✓ Terdokumentasi secara medis</span>
+        </div>
+      </div>
+
+      <div class="kasus-item">
+        <div class="k-dot-col"><div class="k-dot"></div></div>
+        <div class="k-body">
+          <p class="k-label">Psikologi · 1950an–1970an</p>
+          <h3 class="k-title">Milton Erickson & Pemrograman Ulang Melalui Metafora</h3>
+          <p class="k-content">
+            Milton Erickson, seorang psikiater Amerika yang menghabiskan masa kecilnya bersama polio,
+            mengembangkan pendekatan hipnosis yang revolusioner: bukan dengan induksi formal,
+            tapi melalui <em>cerita, metafora, dan percakapan biasa</em> yang terstruktur untuk menjangkau bawah sadar.
+            <br><br>
+            Ia menyembuhkan fobia seumur hidup dalam satu sesi, membantu pasien kronis bangkit kembali,
+            dan membuktikan bahwa <strong>bahasa yang tepat pada waktu yang tepat bisa mengubah program pikiran secara permanen.</strong>
+            <span class="gl">Pendekatannya menjadi dasar NLP (Neuro-Linguistic Programming) dan hampir semua terapi modern berbasis pikiran.</span>
+          </p>
+          <span class="k-result">✓ Fondasi terapi modern</span>
+        </div>
+      </div>
+
+      <div class="kasus-item">
+        <div class="k-dot-col"><div class="k-dot"></div></div>
+        <div class="k-body">
+          <p class="k-label">Neurosains · 1990an–2000an</p>
+          <h3 class="k-title">Dr. Bruce Lipton & Biologi Keyakinan</h3>
+          <p class="k-content">
+            Ahli biologi sel dari Stanford, Dr. Bruce Lipton, menemukan sesuatu yang mengguncang fondasi biologi:
+            <em>gen tidak menentukan nasib kita — lingkungan dan keyakinan yang memengaruhi bagaimana gen diekspresikan.</em>
+            <br><br>
+            Melalui penelitian sel di laboratorium, ia membuktikan bahwa pikiran dan keyakinan
+            — melalui mekanisme epigenetik — secara harfiah <strong>mengubah cara DNA dibaca dan diekspresikan.</strong>
+            <span class="gl">Artinya: bukan hanya perilakumu yang bisa berubah dengan mengubah keyakinan — bahkan respons biologis tubuhmu pun ikut berubah.</span>
+          </p>
+          <span class="k-result">✓ Dipublikasikan di jurnal ilmiah peer-reviewed</span>
+        </div>
+      </div>
+
+      <div class="kasus-item">
+        <div class="k-dot-col"><div class="k-dot"></div></div>
+        <div class="k-body">
+          <p class="k-label">Kedokteran Modern · 2015</p>
+          <h3 class="k-title">Placebo yang Bekerja Meski Pasien Tahu Itu Placebo</h3>
+          <p class="k-content">
+            Peneliti di Harvard Medical School melakukan eksperimen yang mengejutkan:
+            mereka memberikan pil plasebo kepada pasien dengan irritable bowel syndrome —
+            dan <em>secara jujur memberitahu mereka bahwa itu hanyalah pil gula kosong.</em>
+            <br><br>
+            Hasilnya: <strong>59% pasien mengalami perbaikan signifikan</strong> dibanding kelompok tanpa pengobatan.
+            Efek plasebo bekerja bahkan tanpa penipuan.
+            <span class="gl">Ini membuktikan bahwa harapan, ritual, dan kepercayaan — mekanisme yang sama dengan sugesti hipnosis — memiliki efek biologis yang nyata dan terukur.</span>
+          </p>
+          <span class="k-result">✓ New England Journal of Medicine</span>
+        </div>
+      </div>
+
+      <div class="kasus-item">
+        <div class="k-dot-col"><div class="k-dot"></div></div>
+        <div class="k-body">
+          <p class="k-label">Olahraga Puncak · Setiap Dekade</p>
+          <h3 class="k-title">Visualisasi Mental Atlet Olimpiade</h3>
+          <p class="k-content">
+            Michael Phelps, perenang dengan 23 medali emas olimpiade, mengakui bahwa ia
+            memvisualisasikan setiap perlombaan — stroke demi stroke — <em>setiap malam sebelum tidur selama bertahun-tahun.</em>
+            <br><br>
+            Penelitian neurosains mengonfirmasi: <strong>ketika kamu membayangkan gerakan dengan detail yang sangat vivid,
+            otak mengaktifkan jalur saraf yang sama seperti saat melakukannya secara fisik.</strong>
+            <span class="gl">Latihan mental yang konsisten, disampaikan di kondisi theta/alpha, membangun "otot saraf" yang sama dengan latihan fisik nyata.</span>
+          </p>
+          <span class="k-result">✓ Diverifikasi oleh neurosains olahraga</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ HIPNOSIS & SPIRITUAL ══ -->
+<section class="spirit-section">
+  <div class="spirit-wrap">
+    <div class="sl gold-sl">Hipnosis & Tradisi Spiritual</div>
+
+    <blockquote class="spirit-quote">
+      Orang bijak zaman dulu tidak menyebutnya hipnosis.<br>
+      Mereka menyebutnya <em>doa, dzikir, meditasi, tafakur, kontemplasi.</em><br>
+      Tapi mekanisme batinnya — mengakses lapisan pikiran yang lebih dalam —
+      adalah <em>persis sama.</em>
+    </blockquote>
+
+    <p class="body-p">
+      Ini bukan klaim bahwa spiritualitas "hanya" fenomena psikologis. Sebaliknya:
+      ini adalah bukti bahwa <em>tradisi spiritual ribuan tahun sudah menemukan</em>
+      apa yang baru dibuktikan neurosains dalam beberapa dekade terakhir.
+      <span class="gl">Wahyu dan sains bukan bertentangan — mereka berbicara tentang kedalaman yang sama dari dua arah yang berbeda.</span>
+    </p>
+
+    <div class="spirit-grid">
+
+      <div class="spirit-card">
+        <div class="sc-icon">☪️</div>
+        <p class="sc-tradition">Islam</p>
+        <div class="sc-name">Dzikir & Shalat</div>
+        <div class="sc-desc">
+          Pengulangan kalimat thayyibah secara ritmis menurunkan otak ke gelombang <em>alpha-theta.</em>
+          Waktu shalat — terutama subuh dan tahajud — adalah saat otak paling reseptif terhadap sugesti positif.
+          <span class="gl">Khusyu' bukan sekadar kehadiran hati — secara neurosains, itu adalah kondisi theta yang dalam.</span>
+        </div>
+      </div>
+
+      <div class="spirit-card">
+        <div class="sc-icon">🧘</div>
+        <p class="sc-tradition">Buddhisme & Hindu</p>
+        <div class="sc-name">Meditasi & Mantra</div>
+        <div class="sc-desc">
+          Penelitian EEG pada biksu meditasi menunjukkan gelombang gamma yang luar biasa stabil —
+          kondisi yang dalam tradisi disebut <em>"pencerahan"</em> dan dalam neurosains disebut
+          <span class="gl">"peak coherence" — integrasi sempurna seluruh lapisan pikiran.</span>
+        </div>
+      </div>
+
+      <div class="spirit-card">
+        <div class="sc-icon">✝️</div>
+        <p class="sc-tradition">Kristen</p>
+        <div class="sc-name">Kontemplasi & Doa Dalam</div>
+        <div class="sc-desc">
+          Praktik kontemplasi monastik — diam panjang, pengulangan doa, dan <em>lectio divina</em> —
+          secara sistematis menurunkan otak ke kondisi theta.
+          <span class="gl">Para mistikus Kristen seperti Teresa of Avila menggambarkan kondisi yang identik dengan kondisi hipnosis dalam yang dalam.</span>
+        </div>
+      </div>
+
+      <div class="spirit-card">
+        <div class="sc-icon">🌿</div>
+        <p class="sc-tradition">Tradisi Lokal</p>
+        <div class="sc-name">Mantra & Ritual Adat</div>
+        <div class="sc-desc">
+          Dalam banyak budaya Nusantara, <em>mantra, rapalan, dan ritual pengobatan</em> menggunakan ritme, pengulangan, dan sugesti verbal
+          yang — tanpa nama ilmiah apapun — <span class="gl">mengakses tepat mekanisme yang sama: membuka bawah sadar melalui kondisi trance yang diinduksi secara alami.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PANDUAN SELF-HYPNOSIS ══ -->
+<section class="guide-section">
+  <div class="guide-wrap">
+    <div class="sl green-sl">Panduan Self-Hypnosis · Langkah demi Langkah</div>
+
+    <p class="guide-intro">
+      Ini bukan eksperimen berbahaya. Ini adalah <strong>praktik relaksasi mendalam yang terarah</strong> —
+      yang sudah digunakan oleh jutaan orang secara aman di seluruh dunia untuk mengatasi
+      kecemasan, membangun kepercayaan diri, dan mengubah kebiasaan. Lakukan di tempat yang tenang,
+      tanpa gangguan, dalam posisi nyaman.
+    </p>
+
+    <div class="guide-steps">
+
+      <div class="g-step">
+        <div class="g-step-header">
+          <div class="g-step-num">01</div>
+          <div class="g-step-info">
+            <p class="g-step-phase">Persiapan</p>
+            <p class="g-step-name">Niatkan & Tentukan Tujuan</p>
+          </div>
+        </div>
+        <div class="g-step-body">
+          <p>Sebelum mulai, <strong>tentukan satu hal spesifik</strong> yang ingin kamu tanamkan atau ubah. Jangan terlalu banyak. Satu sesi, satu tujuan.
+          Contoh: "Saya ingin merasa lebih percaya diri saat berbicara di depan umum" atau "Saya ingin merespons stres dengan tenang."</p>
+          <div class="g-step-tip">Rumuskan tujuanmu dalam kalimat positif dan seolah sudah terjadi: "Saya adalah pembicara yang tenang dan percaya diri" — bukan "Saya ingin tidak gugup".</div>
+          <span class="g-step-timer">⏱ 2–3 menit</span>
+        </div>
+      </div>
+
+      <div class="g-step">
+        <div class="g-step-header">
+          <div class="g-step-num">02</div>
+          <div class="g-step-info">
+            <p class="g-step-phase">Induksi</p>
+            <p class="g-step-name">Turunkan Gelombang Otak ke Alpha</p>
+          </div>
+        </div>
+        <div class="g-step-body">
+          <p>Duduk atau berbaring nyaman. Tutup mata. Tarik napas dalam melalui hidung (4 hitungan), tahan (4 hitungan), keluarkan perlahan melalui mulut (8 hitungan). Ulangi 5–8 kali. Rasakan tubuhmu mulai berat dan rileks.</p>
+          <p>Kemudian hitung mundur dari 10 ke 1 dalam hati — dengan setiap angka, <em>bayangkan dirimu turun satu anak tangga menuju kedalaman yang lebih tenang.</em></p>
+          <div class="g-step-tip">Jika pikiran mengembara, tidak apa-apa. Cukup kembalikan perhatian dengan lembut ke napas. Resistensi di awal adalah normal — itu bukan gagal, itu proses.</div>
+          <span class="g-step-timer">⏱ 5–7 menit</span>
+        </div>
+      </div>
+
+      <div class="g-step">
+        <div class="g-step-header">
+          <div class="g-step-num">03</div>
+          <div class="g-step-info">
+            <p class="g-step-phase">Pendalaman</p>
+            <p class="g-step-name">Masuk ke Kondisi Theta</p>
+          </div>
+        </div>
+        <div class="g-step-body">
+          <p>Bayangkan kamu berada di tempat yang paling tenang dan aman dalam hidupmu — bisa nyata atau imajinasi. Sebuah tepi sungai, puncak bukit, atau kamar yang hangat.
+          <em>Gunakan semua indera:</em> apa yang kamu lihat, dengar, cium, rasakan di kulit.</p>
+          <p>Semakin detail bayangan ini, semakin dalam kamu masuk ke kondisi theta — <strong>di mana bawah sadar paling reseptif.</strong></p>
+          <div class="g-step-tip">Tanda kamu sudah di theta: anggota tubuh terasa berat, pikiran melayang seperti setengah tidur, waktu terasa melambat atau tidak terasa. Ini kondisi yang kamu inginkan.</div>
+          <span class="g-step-timer">⏱ 5–8 menit</span>
+        </div>
+      </div>
+
+      <div class="g-step">
+        <div class="g-step-header">
+          <div class="g-step-num">04</div>
+          <div class="g-step-info">
+            <p class="g-step-phase">Sugesti</p>
+            <p class="g-step-name">Tanam Benih Perubahan</p>
+          </div>
+        </div>
+        <div class="g-step-body">
+          <p>Dalam kondisi theta ini, ulangi kalimat tujuanmu — dalam hati atau dengan suara lembut — <em>sambil merasakan emosi seolah sudah terwujud.</em> Ini kuncinya: bukan sekadar kata-kata, tapi perasaannya.</p>
+          <p><strong>Kemudian visualisasikan:</strong> bayangkan dirimu sudah menjadi versi yang kamu inginkan. Sedetail mungkin. Bagaimana wajahmu? Bagaimana cara berjalanmu? Apa yang orang lain katakan tentangmu? Apa yang kamu rasakan dari dalam?</p>
+          <div class="g-step-tip">Saat visualisasi terasa sangat nyata dan kamu merasakan emosi yang kuat — itu tanda sugesti berhasil menembus bawah sadar. Rasa haru, gembira, atau tenang yang mendalam adalah sinyal terbaik.</div>
+          <span class="g-step-timer">⏱ 8–12 menit</span>
+        </div>
+      </div>
+
+      <div class="g-step">
+        <div class="g-step-header">
+          <div class="g-step-num">05</div>
+          <div class="g-step-info">
+            <p class="g-step-phase">Penguatan</p>
+            <p class="g-step-name">Segel dengan Jangkar Emosi</p>
+          </div>
+        </div>
+        <div class="g-step-body">
+          <p>Saat emosi positif sedang paling kuat, buat sebuah "<em>jangkar fisik</em>" — seperti menekan ibu jari dan jari telunjuk bersamaan, atau meletakkan tangan di dada.
+          Lakukan ini setiap kali kamu merasakan emosi puncak dalam sesi.</p>
+          <p><strong>Di masa depan, saat kamu membutuhkan kondisi itu secara cepat</strong> — cukup aktifkan jangkar ini. Otak yang terlatih akan mengasosiasikan gerakan itu dengan kondisi batin yang pernah kamu tanamkan.</p>
+          <div class="g-step-tip">Ini adalah teknik yang digunakan oleh atlet, aktor, dan pembicara publik sebelum penampilan besar mereka. Sederhana — tapi dibangun di atas fondasi neurosains yang solid.</div>
+          <span class="g-step-timer">⏱ 2–3 menit</span>
+        </div>
+      </div>
+
+      <div class="g-step">
+        <div class="g-step-header">
+          <div class="g-step-num">06</div>
+          <div class="g-step-info">
+            <p class="g-step-phase">Penutup</p>
+            <p class="g-step-name">Kembali dengan Penuh Kesadaran</p>
+          </div>
+        </div>
+        <div class="g-step-body">
+          <p>Hitung dari 1 ke 5 dalam hati — dengan setiap angka, rasakan dirimu kembali ke kesadaran penuh, segar dan berenergi. Gerakkan jari-jari, tarik napas dalam, dan buka mata perlahan.</p>
+          <p><em>Jangan langsung bangkit dan membuka ponsel.</em> Beri jeda 2–3 menit untuk menikmati kondisi antara — ini adalah saat terakhir otak masih reseptif. <span class="gl">Bawa perasaan tenang dan keyakinan itu ke dalam hari-harimu.</span></p>
+          <div class="g-step-tip">Lakukan sesi ini minimal sekali sehari selama 21 hari berturut-turut. Perubahan nyata biasanya mulai terasa di hari 7–14 — bukan karena keajaiban, tapi karena jalur saraf baru mulai terbentuk.</div>
+          <span class="g-step-timer">⏱ 3–5 menit · Total sesi: 25–35 menit</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ MITOS BERBAHAYA ══ -->
+<section class="danger-section">
+  <div class="danger-wrap">
+    <div class="sl">Yang Wajib Kamu Waspadai</div>
+    <p class="danger-intro">
+      Seiring meluasnya pemahaman tentang hipnosis, ada pula yang menyalahgunakannya.
+      <em>Kesadaran adalah perlindungan terbaik.</em> Kenali modus-modus berbahaya ini.
+    </p>
+
+    <ul class="danger-list">
+
+      <div class="danger-item">
+        <p class="di-label">⚠ Modus Berbahaya 01</p>
+        <h3 class="di-myth">"Hipnosis bisa membuatmu mengungkap rahasia tanpa sadar"</h3>
+        <p class="di-danger">
+          Digunakan untuk menakut-nakuti atau memeras. <em>Faktanya: kamu tidak bisa dipaksa mengungkap informasi yang kamu tidak ingin ungkapkan.</em>
+          Kamu selalu memiliki kendali atas apa yang kamu ucapkan — bahkan dalam kondisi hipnosis dalam.
+          <strong>Waspada terhadap siapapun yang mengklaim bisa "membongkar rahasia" dengan hipnosis.</strong>
+        </p>
+      </div>
+
+      <div class="danger-item">
+        <p class="di-label">⚠ Modus Berbahaya 02</p>
+        <h3 class="di-myth">"Gendam" dan manipulasi di tempat umum</h3>
+        <p class="di-danger">
+          Ada modus kejahatan yang menggunakan teknik sugesti cepat — menyentuh, berbicara dengan pola tertentu — untuk membuat korban dalam kondisi bingung sesaat.
+          <em>Perlindungan terbaik adalah kesadaran dan kewaspadaan.</em>
+          <span class="gl">Orang yang pikirannya terlatih fokus jauh lebih sulit untuk dimanipulasi dengan cara ini.</span>
+          Itulah nilai terbesar dari program SADAR SEJATI: pikiran yang sadar adalah pikiran yang terlindungi.
+        </p>
+      </div>
+
+      <div class="danger-item">
+        <p class="di-label">⚠ Modus Berbahaya 03</p>
+        <h3 class="di-myth">Hipnosis "Regresi Kehidupan Lalu" yang tidak bertanggung jawab</h3>
+        <p class="di-danger">
+          Beberapa praktisi tidak bertanggung jawab menggunakan hipnosis untuk "membawa" orang ke "kehidupan sebelumnya" — tanpa basis klinis yang jelas.
+          Klaim ini tidak memiliki dukungan ilmiah dan <em>bisa menciptakan memori palsu yang traumatis.</em>
+          <strong>Hipnosis yang bertanggung jawab selalu memiliki tujuan klinis yang jelas, dilakukan oleh terapis terlatih, dan tidak membuat klaim tentang hal-hal yang tidak bisa diverifikasi.</strong>
+        </p>
+      </div>
+
+    </ul>
+  </div>
+</section>
+
+<!-- ══ WORKSHEET ══ -->
+<section class="ws-section">
+  <div class="ws-wrap">
+    <div class="sl">Worksheet · Bab Bonus Hipnosis</div>
+
+    <div class="ws-card">
+      <p class="ws-title">Mengenali Kondisi Hipnosis Harianmu</p>
+
+      <div class="q-block">
+        <span class="q-num">Pertanyaan 01</span>
+        <p class="q-text">Kapan dalam keseharianmu kamu sering "melamun" atau masuk ke <em>autopilot tanpa sadar</em>? Apa yang biasanya kamu pikirkan saat itu?</p>
+        <p class="q-hint">Saat mengemudi? Mandi? Mencuci piring? Momen-momen ini adalah kondisi alpha/theta alami. Apa yang pikiran bawah sadarmu "putar" di sana?</p>
+        <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-num">Pertanyaan 02</span>
+        <p class="q-text">Kalimat atau frasa apa yang paling sering kamu <em>ulang dalam pikiranmu</em> — tentang dirimu, kemampuanmu, atau masa depanmu?</p>
+        <p class="q-hint">Ingat: pengulangan emosional adalah mekanisme sugesti. Kalimat apa yang sudah kamu "hipnosiskan" kepada dirimu sendiri tanpa sadar?</p>
+        <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-num">Pertanyaan 03</span>
+        <p class="q-text">Tuliskan <em>tiga kalimat sugesti positif</em> yang ingin kamu tanamkan kepada dirimu — dalam format seolah sudah terjadi, dengan emosi yang kuat.</p>
+        <p class="q-hint">Ini akan menjadi sugesti yang kamu gunakan dalam sesi self-hypnosis pertamamu malam ini.</p>
+        <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-num">Komitmen Sesi Pertama</span>
+        <p class="q-text">Saya berkomitmen untuk melakukan sesi self-hypnosis pertama saya pada:</p>
+        <p class="q-hint">Tulis tanggal, waktu, dan tempat yang spesifik. Komitmen tertulis meningkatkan kemungkinan tindakan nyata sebesar 70%.</p>
+        <div class="write-area"><div class="write-line"></div><div class="write-line"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ KESIMPULAN BESAR ══ -->
+<section class="grand-section">
+  <div class="grand-bg"></div>
+  <div class="grand-ring"></div>
+  <div class="grand-content">
+    <p class="grand-pre">Kesimpulan Bab Bonus</p>
+    <h2 class="grand-title">
+      Kamu bukan produk masa lalumu.<br>
+      Kamu adalah hasil dari<br>
+      <strong>program yang bisa kamu tulis ulang.</strong>
+    </h2>
+    <p class="grand-body">
+      Hipnosis bukan sihir dan bukan ancaman.<br>
+      Ia adalah <em>cermin yang memperlihatkan</em> bagaimana pikiran bekerja —
+      bagaimana program ditanam, bagaimana ia berjalan, dan yang paling penting:
+      <span class="gl">bagaimana ia bisa diubah.</span><br><br>
+      Orang yang paling bebas di dunia bukan orang yang tidak punya program —
+      tapi orang yang <em>sadar akan programnya</em> dan memilih untuk menulis ulang
+      yang tidak lagi selaras dengan siapa yang ia ingin jadi.<br><br>
+      <strong>Dan itulah, pada akhirnya, makna terdalam dari SADAR SEJATI.</strong>
+    </p>
+    <div class="grand-divider"><div class="gd-gem"></div></div>
+    <div class="grand-seal">✦ &nbsp; Bab Bonus Selesai &nbsp; ✦</div>
+  </div>
+</section>
+
+<!-- ══ REFERENSI ══ -->
+<section class="reading-section">
+  <div class="reading-wrap">
+    <div class="sl gold-sl">Untuk Memperdalam</div>
+    <p style="font-size:14px;color:var(--w60);max-width:540px;line-height:1.8;">
+      Karya-karya berikut adalah titik awal yang direkomendasikan untuk memperdalam pemahaman tentang pikiran, sugesti, dan transformasi diri.
+      <em>Verifikasi mandiri selalu dianjurkan.</em>
+    </p>
+    <div class="reading-grid">
+      <div class="reading-card">
+        <p class="rc-cat">Neurosains Populer</p>
+        <p class="rc-title">The Biology of Belief</p>
+        <p class="rc-author">Dr. Bruce Lipton</p>
+        <p class="rc-note">Bagaimana keyakinan <em>secara harfiah</em> memengaruhi ekspresi gen dan biologi sel.</p>
+      </div>
+      <div class="reading-card">
+        <p class="rc-cat">Psikologi Klinis</p>
+        <p class="rc-title">Trance-formations</p>
+        <p class="rc-author">Bandler & Grinder</p>
+        <p class="rc-note">Transkripsi sesi Milton Erickson — memperlihatkan bahasa hipnosis dalam percakapan nyata.</p>
+      </div>
+      <div class="reading-card">
+        <p class="rc-cat">Transformasi Diri</p>
+        <p class="rc-title">Breaking the Habit of Being Yourself</p>
+        <p class="rc-author">Dr. Joe Dispenza</p>
+        <p class="rc-note">Panduan praktis mengubah program bawah sadar <em>berbasis neurosains dan meditasi.</em></p>
+      </div>
+      <div class="reading-card">
+        <p class="rc-cat">Kebiasaan & Pikiran</p>
+        <p class="rc-title">The Power of Your Subconscious Mind</p>
+        <p class="rc-author">Joseph Murphy</p>
+        <p class="rc-note">Klasik yang menghubungkan <em>kekuatan bawah sadar</em> dengan pencapaian hidup nyata.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">SADAR SEJATI</div>
+  <p class="footer-copy">Bab Bonus · Hipnosis yang Kontradiktif · Bagian 1 & 2 · Lengkap</p>
+</footer>
+
+</body>
+</html>
