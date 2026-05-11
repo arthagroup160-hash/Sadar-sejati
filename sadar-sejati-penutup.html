@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SADAR SEJATI — Sertifikat & Penutup</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#080706;--deep:#110f0c;--warm:#1c1810;--card:#161210;
+  --gold:#b8883a;--gold2:#d4a855;--gold3:#f0c878;
+  --ivory:#f2e8d8;--ivory2:#c8b898;
+  --w60:rgba(242,232,216,0.60);--w35:rgba(242,232,216,0.35);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--ivory);font-family:'Lato',sans-serif;font-weight:300;overflow-x:hidden;}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1000;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes glow{0%,100%{opacity:.4;}50%{opacity:1;}}
+@keyframes spinSlow{to{transform:translate(-50%,-50%) rotate(360deg);}}
+@keyframes spinRev{to{transform:translate(-50%,-50%) rotate(-360deg);}}
+
+/* ─── EPILOG HERO ─── */
+.epilog{
+  min-height:90vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:80px 32px;
+  position:relative;overflow:hidden;
+}
+.epilog-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 75% at 50% 50%,#2c1a04 0%,var(--black) 68%),
+    radial-gradient(ellipse 40% 30% at 15% 80%,#1a0d03 0%,transparent 55%),
+    radial-gradient(ellipse 35% 30% at 85% 10%,#1a0d03 0%,transparent 55%);
+}
+.epilog-orbit{position:absolute;top:50%;left:50%;pointer-events:none;}
+.orbit-ring{
+  position:absolute;border-radius:50%;
+  border:1px solid rgba(184,136,58,0.07);
+  top:50%;left:50%;
+}
+.or1{width:200px;height:200px;transform:translate(-50%,-50%);border-color:rgba(184,136,58,0.2);animation:glow 4s ease-in-out infinite;}
+.or2{width:360px;height:360px;animation:spinSlow 90s linear infinite;}
+.or3{width:520px;height:520px;animation:spinRev 120s linear infinite;}
+.or4{width:700px;height:700px;animation:spinSlow 150s linear infinite;}
+
+/* star dots on orbit ring 2 */
+.orbit-dot{
+  position:absolute;width:4px;height:4px;border-radius:50%;background:var(--gold2);
+  top:50%;left:50%;
+  transform-origin:0 0;
+}
+
+.epilog-content{position:relative;z-index:2;}
+.epilog-pre{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.55em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:28px;
+  opacity:0;animation:fadeUp .7s ease .2s forwards;
+}
+.epilog-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(48px,11vw,110px);font-weight:900;
+  line-height:.9;letter-spacing:.06em;
+  background:linear-gradient(160deg,var(--gold3) 0%,var(--gold2) 40%,var(--gold) 70%,#7a5520 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  opacity:0;animation:fadeUp 1s ease .4s forwards;
+  margin-bottom:20px;
+}
+.epilog-title span{display:block;}
+.epilog-sub{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(16px,2.8vw,26px);font-style:italic;font-weight:300;
+  color:var(--w60);line-height:1.6;max-width:580px;margin:0 auto;
+  opacity:0;animation:fadeUp .8s ease .8s forwards;
+}
+.epilog-sub em{color:var(--gold2);}
+
+/* center glow orb */
+.center-orb{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:80px;height:80px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,168,85,0.15),transparent 70%);
+  box-shadow:0 0 60px rgba(184,136,58,0.2),0 0 120px rgba(184,136,58,0.08);
+  animation:glow 4s ease-in-out infinite;
+  z-index:1;
+}
+
+/* ─── WRAP ─── */
+.wrap{max-width:780px;margin:0 auto;padding:80px 32px;}
+.section-label{
+  font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.5em;
+  color:var(--gold);text-transform:uppercase;
+  margin-bottom:48px;
+  display:flex;align-items:center;gap:14px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(184,136,58,.5),transparent);}
+
+.gold-rule{
+  width:100%;max-width:780px;margin:0 auto;
+  display:flex;align-items:center;gap:16px;padding:0 32px;
+}
+.gold-rule::before,.gold-rule::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(to right,transparent,rgba(184,136,58,.3));
+}
+.gold-rule::after{background:linear-gradient(to left,transparent,rgba(184,136,58,.3));}
+.gr-gem{width:7px;height:7px;background:var(--gold2);transform:rotate(45deg);flex-shrink:0;}
+
+/* ─── PESAN PENUTUP ─── */
+.letter-box{
+  border:1px solid rgba(184,136,58,.18);
+  padding:56px 52px;
+  position:relative;
+  background:linear-gradient(135deg,rgba(184,136,58,.04),transparent 55%);
+  margin-bottom:60px;
+}
+.letter-box::before,.letter-box::after{
+  content:'';position:absolute;
+  width:22px;height:22px;
+  border-color:var(--gold2);border-style:solid;opacity:.5;
+}
+.letter-box::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+.letter-box::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
+
+.letter-greeting{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(18px,3vw,28px);font-style:italic;
+  color:var(--ivory);margin-bottom:32px;
+}
+.letter-body{
+  font-size:16px;line-height:2;color:var(--w60);margin-bottom:24px;
+}
+.letter-body strong{color:var(--ivory);font-weight:400;}
+.letter-body em{color:var(--gold2);font-style:italic;}
+.letter-sign{
+  margin-top:40px;padding-top:32px;
+  border-top:1px solid rgba(184,136,58,.1);
+}
+.letter-sign-name{
+  font-family:'Cinzel',serif;font-size:14px;letter-spacing:.2em;
+  color:var(--gold2);margin-bottom:4px;
+}
+.letter-sign-role{font-size:12px;color:var(--w35);letter-spacing:.1em;}
+
+/* ─── SERTIFIKAT ─── */
+.cert-section{
+  background:var(--deep);
+  border-top:1px solid rgba(184,136,58,.12);
+  border-bottom:1px solid rgba(184,136,58,.12);
+  padding:100px 32px;
+}
+
+.cert-frame{
+  max-width:740px;margin:0 auto;
+  border:1px solid rgba(184,136,58,.35);
+  padding:0;
+  position:relative;
+  background:linear-gradient(150deg,#181208 0%,#0f0d09 50%,#181208 100%);
+  overflow:hidden;
+}
+
+/* inner glow */
+.cert-frame::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(184,136,58,.05),transparent 70%);
+  pointer-events:none;
+}
+
+/* corner ornaments */
+.cert-corner{position:absolute;width:44px;height:44px;}
+.cert-corner svg{width:100%;height:100%;}
+.cc-tl{top:-1px;left:-1px;}
+.cc-tr{top:-1px;right:-1px;transform:scaleX(-1);}
+.cc-bl{bottom:-1px;left:-1px;transform:scaleY(-1);}
+.cc-br{bottom:-1px;right:-1px;transform:scale(-1);}
+
+.cert-inner{padding:60px 64px;position:relative;z-index:2;text-align:center;}
+
+.cert-badge-line{
+  display:flex;align-items:center;gap:16px;margin-bottom:36px;justify-content:center;
+}
+.cert-badge-line::before,.cert-badge-line::after{
+  content:'';width:60px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(184,136,58,.5));
+}
+.cert-badge-line::after{background:linear-gradient(to left,transparent,rgba(184,136,58,.5));}
+.cert-badge-gem{width:8px;height:8px;background:var(--gold2);transform:rotate(45deg);}
+
+.cert-pre{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.55em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:24px;
+}
+.cert-main-text{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(13px,2vw,18px);font-weight:300;
+  color:var(--w60);line-height:1.7;margin-bottom:28px;
+}
+.cert-name-field{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,6vw,52px);font-weight:700;font-style:italic;
+  background:linear-gradient(160deg,var(--gold3),var(--gold2) 50%,var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin:12px 0 28px;
+  min-height:64px;
+  border-bottom:1px solid rgba(184,136,58,.25);
+  padding-bottom:20px;
+  cursor:text;
+}
+.cert-name-field:empty::before{
+  content:'Nama Peserta';
+  -webkit-text-fill-color:rgba(184,136,58,.2);
+}
+
+.cert-program{
+  font-family:'Cinzel',serif;
+  font-size:clamp(22px,5vw,42px);font-weight:700;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:8px;letter-spacing:.05em;
+}
+.cert-program-sub{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(12px,2vw,18px);font-style:italic;
+  color:var(--w60);margin-bottom:36px;
+}
+
+.cert-desc{
+  font-size:13px;line-height:1.8;color:var(--w35);
+  max-width:480px;margin:0 auto 40px;
+}
+
+.cert-footer{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;gap:20px;
+  padding-top:32px;
+  border-top:1px solid rgba(184,136,58,.1);
+}
+.cert-sign-col{text-align:center;}
+.cert-sign-line{width:140px;height:1px;background:rgba(184,136,58,.3);margin:0 auto 8px;}
+.cert-sign-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.35em;color:var(--w35);}
+.cert-seal{
+  width:64px;height:64px;border-radius:50%;
+  border:1px solid rgba(184,136,58,.3);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:2px;
+}
+.cert-seal-txt{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.15em;color:rgba(184,136,58,.5);text-align:center;line-height:1.4;}
+
+.cert-print-btn{
+  display:block;max-width:200px;margin:40px auto 0;
+  padding:14px 32px;
+  border:1px solid rgba(184,136,58,.3);
+  color:rgba(184,136,58,.6);
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;
+  text-align:center;cursor:pointer;text-transform:uppercase;
+  transition:all .3s;background:transparent;
+}
+.cert-print-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(184,136,58,.05);}
+
+/* ─── JALUR SELANJUTNYA ─── */
+.next-section{padding:100px 32px;}
+.next-wrap{max-width:780px;margin:0 auto;}
+.next-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;margin-top:52px;}
+.next-card{
+  padding:40px 32px;background:var(--warm);
+  border:1px solid rgba(184,136,58,.07);
+  transition:all .3s;
+}
+.next-card:hover{background:#201a10;border-color:rgba(184,136,58,.22);}
+.next-icon{font-size:28px;margin-bottom:16px;}
+.next-label{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:10px;
+}
+.next-title{
+  font-family:'Playfair Display',serif;font-size:20px;font-weight:700;
+  color:var(--ivory);margin-bottom:10px;
+}
+.next-desc{font-size:13.5px;line-height:1.75;color:var(--w60);}
+.next-desc em{color:var(--gold2);font-style:italic;}
+
+/* ─── FINAL QUOTE ─── */
+.final-quote{
+  min-height:70vh;display:flex;align-items:center;justify-content:center;
+  padding:100px 32px;position:relative;overflow:hidden;
+}
+.fq-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 65% 80% at 50% 50%,#241506 0%,var(--black) 68%);
+}
+.fq-content{position:relative;z-index:2;text-align:center;max-width:700px;}
+.fq-mark{
+  font-family:'Playfair Display',serif;
+  font-size:140px;line-height:.6;
+  color:rgba(184,136,58,.07);
+  display:block;margin-bottom:24px;
+}
+.fq-text{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,5vw,50px);font-weight:400;font-style:italic;
+  line-height:1.45;color:var(--ivory);margin-bottom:40px;
+}
+.fq-text em{color:var(--gold2);}
+.fq-text strong{font-weight:900;font-style:normal;}
+.fq-divider{
+  display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:28px;
+}
+.fq-divider::before,.fq-divider::after{
+  content:'';width:80px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(184,136,58,.4));
+}
+.fq-divider::after{background:linear-gradient(to left,transparent,rgba(184,136,58,.4));}
+.fq-gem{width:7px;height:7px;background:var(--gold2);transform:rotate(45deg);}
+.fq-attr{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;
+  color:rgba(184,136,58,.45);text-transform:uppercase;
+}
+
+/* ─── FOOTER ─── */
+.footer{
+  border-top:1px solid rgba(184,136,58,.08);
+  padding:40px 32px;text-align:center;
+}
+.footer-logo{
+  font-family:'Cinzel',serif;
+  font-size:clamp(18px,4vw,32px);font-weight:700;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:12px;
+}
+.footer-tagline{
+  font-family:'Playfair Display',serif;
+  font-size:14px;font-style:italic;color:var(--w35);margin-bottom:28px;
+}
+.footer-copy{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;
+  color:rgba(184,136,58,.2);text-transform:uppercase;
+}
+
+@media(max-width:560px){
+  .cert-inner{padding:40px 28px;}
+  .cert-footer{grid-template-columns:1fr;gap:24px;}
+  .next-grid{grid-template-columns:1fr;}
+  .letter-box{padding:40px 28px;}
+}
+
+/* Print styles for certificate */
+@media print{
+  body{background:white;color:black;}
+  .cert-frame{border-color:#b8883a;}
+  .cert-program,.cert-name-field{color:#b8883a;-webkit-text-fill-color:#b8883a;}
+  .epilog,.letter-box,.next-section,.final-quote,.footer{display:none!important;}
+  .cert-section{background:white;border:none;padding:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ EPILOG HERO ═══ -->
+<section class="epilog">
+  <div class="epilog-bg"></div>
+  <div class="epilog-orbit">
+    <div class="orbit-ring or1"></div>
+    <div class="orbit-ring or2"></div>
+    <div class="orbit-ring or3"></div>
+    <div class="orbit-ring or4"></div>
+  </div>
+  <div class="center-orb"></div>
+  <div class="epilog-content">
+    <p class="epilog-pre">Bagian Keempat · Penutup & Sertifikat</p>
+    <h1 class="epilog-title">
+      <span>SELAMAT</span>
+      <span>DATANG</span>
+    </h1>
+    <p class="epilog-sub">
+      Kamu telah menyelesaikan perjalanan paling penting yang pernah ada —
+      perjalanan menuju <em>dirimu sendiri.</em>
+    </p>
+  </div>
+</section>
+
+<div class="gold-rule"><div class="gr-gem"></div></div>
+
+<!-- ═══ SURAT PENUTUP ═══ -->
+<div class="wrap">
+  <div class="section-label">Pesan Penutup</div>
+
+  <div class="letter-box">
+    <p class="letter-greeting">Kepada Kamu yang Telah Berani,</p>
+
+    <p class="letter-body">
+      Tidak mudah untuk berhenti dan menatap diri sendiri dengan jujur.<br>
+      Tidak mudah untuk membuka luka lama, membongkar keyakinan yang sudah bertahun-tahun bersarang,
+      dan mengakui bahwa ada bagian dari dirimu yang belum hidup sepenuhnya.
+    </p>
+
+    <p class="letter-body">
+      Tapi kamu melakukannya.<br>
+      Dan itu — <em>itu saja</em> — sudah menjadikanmu berbeda dari kebanyakan orang.
+    </p>
+
+    <p class="letter-body">
+      Banyak orang yang tahu mereka perlu berubah, tapi memilih untuk menunggu.
+      Menunggu waktu yang tepat. Menunggu kondisi yang ideal.
+      Menunggu sampai rasa takut itu hilang sendiri.<br>
+      <strong>Kamu tidak menunggu. Kamu melangkah.</strong>
+    </p>
+
+    <p class="letter-body">
+      Program ini bukan akhir dari perjalananmu.<br>
+      Justru ini adalah <em>awal yang sesungguhnya.</em><br>
+      Sekarang kamu punya peta, kompas, dan — yang paling penting —
+      kamu sudah membuktikan kepada dirimu sendiri bahwa kamu sanggup.
+    </p>
+
+    <p class="letter-body">
+      Bawa kesadaran ini ke dalam setiap hari.<br>
+      Ke dalam setiap pilihan kecil. Setiap percakapan. Setiap momen yang terasa biasa.<br>
+      Karena <em>hidup yang luar biasa</em> bukan terdiri dari momen-momen besar —
+      tapi dari momen-momen kecil yang dijalani <strong>dengan penuh kesadaran.</strong>
+    </p>
+
+    <p class="letter-body">
+      Teruslah tumbuh. Teruslah kembali ke dirimu.<br>
+      Dan ingat — saat hari-hari terasa berat — bahwa kamu sudah pernah membuktikan:
+      <em>kamu lebih kuat dari ketakutanmu.</em>
+    </p>
+
+    <div class="letter-sign">
+      <p class="letter-sign-name">Dengan sepenuh hormat dan bangga,</p>
+      <p class="letter-sign-role">Tim Fasilitator · SADAR SEJATI</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SERTIFIKAT ═══ -->
+<section class="cert-section">
+  <div class="wrap" style="padding-top:0;padding-bottom:0;">
+    <div class="section-label">Sertifikat Penyelesaian</div>
+  </div>
+
+  <div class="cert-frame" style="max-width:740px;margin:0 auto 0;">
+
+    <!-- Corner SVGs -->
+    <div class="cert-corner cc-tl">
+      <svg viewBox="0 0 44 44" fill="none">
+        <path d="M2 2 L2 22 M2 2 L22 2" stroke="#b8883a" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="2" cy="2" r="2" fill="#d4a855" opacity="0.7"/>
+        <path d="M8 2 L8 8 L2 8" stroke="#b8883a" stroke-width="0.5" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="cert-corner cc-tr">
+      <svg viewBox="0 0 44 44" fill="none">
+        <path d="M2 2 L2 22 M2 2 L22 2" stroke="#b8883a" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="2" cy="2" r="2" fill="#d4a855" opacity="0.7"/>
+        <path d="M8 2 L8 8 L2 8" stroke="#b8883a" stroke-width="0.5" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="cert-corner cc-bl">
+      <svg viewBox="0 0 44 44" fill="none">
+        <path d="M2 2 L2 22 M2 2 L22 2" stroke="#b8883a" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="2" cy="2" r="2" fill="#d4a855" opacity="0.7"/>
+        <path d="M8 2 L8 8 L2 8" stroke="#b8883a" stroke-width="0.5" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="cert-corner cc-br">
+      <svg viewBox="0 0 44 44" fill="none">
+        <path d="M2 2 L2 22 M2 2 L22 2" stroke="#b8883a" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="2" cy="2" r="2" fill="#d4a855" opacity="0.7"/>
+        <path d="M8 2 L8 8 L2 8" stroke="#b8883a" stroke-width="0.5" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <div class="cert-inner">
+      <div class="cert-badge-line"><div class="cert-badge-gem"></div></div>
+
+      <p class="cert-pre">Sertifikat Penyelesaian Program</p>
+
+      <p class="cert-main-text">
+        Dengan bangga dan penuh hormat, kami menyatakan bahwa
+      </p>
+
+      <div class="cert-name-field" contenteditable="true" id="certName"
+           title="Klik untuk mengetik nama">
+      </div>
+
+      <p class="cert-main-text">
+        telah menyelesaikan seluruh rangkaian program pelatihan transformasi diri
+      </p>
+
+      <div class="cert-program">SADAR SEJATI</div>
+      <p class="cert-program-sub">Mengenal Diri, Memimpin Hidup</p>
+
+      <p class="cert-desc">
+        Tujuh modul kesadaran diri · Refleksi mendalam · Komitmen perubahan nyata<br>
+        Peserta telah menunjukkan keberanian, kejujuran, dan tekad untuk bertumbuh.
+      </p>
+
+      <div class="cert-badge-line"><div class="cert-badge-gem"></div></div>
+
+      <div class="cert-footer">
+        <div class="cert-sign-col">
+          <div class="cert-sign-line"></div>
+          <p class="cert-sign-label">Fasilitator Utama</p>
+        </div>
+        <div class="cert-seal">
+          <p class="cert-seal-txt">SADAR<br>SEJATI<br>✦</p>
+        </div>
+        <div class="cert-sign-col">
+          <div class="cert-sign-line"></div>
+          <p class="cert-sign-label">Tanggal Penyelesaian</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="cert-print-btn" onclick="window.print()">Cetak Sertifikat</button>
+</section>
+
+<!-- ═══ JALUR SELANJUTNYA ═══ -->
+<section class="next-section">
+  <div class="next-wrap">
+    <div class="section-label">Langkah Selanjutnya</div>
+
+    <div class="next-grid">
+      <div class="next-card">
+        <div class="next-icon">📓</div>
+        <p class="next-label">Harian</p>
+        <div class="next-title">Jurnal Kesadaran</div>
+        <div class="next-desc">Luangkan 10 menit setiap pagi. Tulis satu hal yang kamu syukuri, satu niat hari ini, dan satu pelajaran dari kemarin. <em>Konsistensi kecil membangun perubahan besar.</em></div>
+      </div>
+
+      <div class="next-card">
+        <div class="next-icon">🌀</div>
+        <p class="next-label">Mingguan</p>
+        <div class="next-title">Review &amp; Reset</div>
+        <div class="next-desc">Setiap Minggu malam, buka kembali worksheet-mu. Apa yang berhasil? Apa yang perlu diperbaiki? <em>Evaluasi adalah kompas yang selalu memperbarui arahmu.</em></div>
+      </div>
+
+      <div class="next-card">
+        <div class="next-icon">🔥</div>
+        <p class="next-label">Bulanan</p>
+        <div class="next-title">Audit Roda Kehidupan</div>
+        <div class="next-desc">Isi ulang roda kehidupanmu setiap bulan. Lihat progresnya. Rayakan pertumbuhannya. <em>Pertumbuhan yang tidak diukur tidak akan terasa nyata.</em></div>
+      </div>
+
+      <div class="next-card">
+        <div class="next-icon">🤝</div>
+        <p class="next-label">Komunitas</p>
+        <div class="next-title">Berbagi &amp; Menginspirasi</div>
+        <div class="next-desc">Ceritakan perjalananmu. Ajak satu orang yang kamu percaya. <em>Kesadaran yang dibagikan adalah api yang semakin besar, bukan lilin yang terbagi habis.</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL QUOTE ═══ -->
+<section class="final-quote">
+  <div class="fq-bg"></div>
+  <div class="fq-content">
+    <span class="fq-mark">"</span>
+    <p class="fq-text">
+      Pada akhirnya, hidup yang paling <em>bermakna</em><br>
+      adalah hidup yang dijalani dengan <strong>penuh kesadaran</strong> —<br>
+      di mana setiap langkah adalah pilihan,<br>
+      setiap pilihan adalah cerminan jiwa,<br>
+      dan setiap hari adalah <em>kesempatan untuk menjadi</em><br>
+      versi dirimu yang paling sejati.
+    </p>
+    <div class="fq-divider"><div class="fq-gem"></div></div>
+    <p class="fq-attr">SADAR SEJATI · Mengenal Diri, Memimpin Hidup</p>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-logo">SADAR SEJATI</div>
+  <p class="footer-tagline">Mengenal Diri, Memimpin Hidup</p>
+  <p class="footer-copy">Program Transformasi Diri · 4 Bagian · 7 Modul · 1 Perjalanan</p>
+</footer>
+
+<script>
+// Auto-fill date on cert
+const today = new Date();
+const options = { year:'numeric', month:'long', day:'numeric' };
+const dateStr = today.toLocaleDateString('id-ID', options);
+
+// Placeholder behavior for cert name
+const nameField = document.getElementById('certName');
+nameField.addEventListener('focus', function(){
+  if(this.textContent.trim() === '') this.textContent = '';
+});
+</script>
+</body>
+</html>
