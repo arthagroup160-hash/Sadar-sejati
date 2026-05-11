@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SADAR SEJATI — Halaman Penjualan & Template Pemasaran</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#080706;--soil:#141008;--earth:#201808;--bark:#2e2210;
+  --gold:#c8922a;--gold2:#e8b040;--gold3:#f8cc60;
+  --leaf:#2a5a2a;--leaf2:#3a7a3a;--leaf3:#5aaa5a;
+  --red:#8a1a1a;--red2:#c83a3a;
+  --cream:#f5edd8;--cream2:#e0cca8;
+  --w80:rgba(245,237,216,0.80);
+  --w60:rgba(245,237,216,0.60);
+  --w35:rgba(245,237,216,0.35);
+  --w15:rgba(245,237,216,0.15);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--cream);font-family:'Newsreader',serif;font-weight:300;overflow-x:hidden;}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1000;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+@keyframes shimmer{0%{left:-100%;}100%{left:200%;}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+@keyframes countup{from{opacity:0;}to{opacity:1;}}
+
+/* ══ NAV ══ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(8,7,6,.95);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(200,146,42,.1);
+  padding:0 32px;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'DM Serif Display',serif;font-style:italic;
+  font-size:18px;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-links{display:flex;gap:24px;}
+.nav-link{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.35em;color:var(--w35);text-transform:uppercase;
+  text-decoration:none;cursor:pointer;transition:color .3s;
+}
+.nav-link:hover{color:var(--gold2);}
+.nav-cta{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.3em;color:var(--gold);text-transform:uppercase;
+  padding:8px 20px;border:1px solid rgba(200,146,42,.3);
+  cursor:pointer;transition:all .3s;text-decoration:none;
+}
+.nav-cta:hover{background:rgba(200,146,42,.1);border-color:var(--gold);}
+
+/* ══ SALES HERO ══ */
+.sales-hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:100px 32px 80px;
+  position:relative;overflow:hidden;
+}
+.sh-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 45%,#201400 0%,transparent 62%),
+    radial-gradient(ellipse 30% 30% at 15%  85%,#100800 0%,transparent 50%),
+    radial-gradient(ellipse 30% 25% at 85% 10%,#0c0a00 0%,transparent 50%),
+    var(--ink);
+}
+.sh-ring{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;border:1px solid rgba(200,146,42,.06);
+  pointer-events:none;
+}
+.sr1{width:280px;height:280px;border-color:rgba(200,146,42,.14);animation:pulse 4s ease-in-out infinite;}
+.sr2{width:500px;height:500px;animation:pulse 5s ease-in-out 1s infinite;}
+.sr3{width:760px;height:760px;animation:pulse 6s ease-in-out 2s infinite;}
+
+.sh-content{position:relative;z-index:2;max-width:860px;}
+
+.sh-urgency{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:10px 24px;
+  background:rgba(200,42,42,.1);border:1px solid rgba(200,42,42,.3);
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.35em;color:#e85050;text-transform:uppercase;
+  margin-bottom:32px;
+  opacity:0;animation:fadeUp .6s ease .2s forwards;
+}
+.urgency-dot{width:6px;height:6px;border-radius:50%;background:#e85050;animation:blink 1.5s ease-in-out infinite;}
+
+.sh-eyebrow{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.5em;color:var(--gold);text-transform:uppercase;
+  margin-bottom:20px;
+  opacity:0;animation:fadeUp .7s ease .4s forwards;
+}
+
+.sh-headline{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(36px,8vw,88px);font-style:italic;
+  line-height:1;margin-bottom:20px;
+  opacity:0;animation:fadeUp 1s ease .6s forwards;
+}
+.sh-headline .line1{
+  display:block;color:var(--cream);
+}
+.sh-headline .line2{
+  display:block;
+  background:linear-gradient(160deg,var(--gold3) 0%,var(--gold2) 45%,var(--gold) 80%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.sh-headline .line3{
+  display:block;font-size:.7em;
+  color:var(--w60);font-style:normal;
+  font-family:'Syne',sans-serif;font-weight:800;letter-spacing:.08em;
+  margin-top:8px;
+}
+
+.sh-sub{
+  font-family:'Newsreader',serif;font-style:italic;
+  font-size:clamp(15px,2.5vw,22px);color:var(--w60);
+  max-width:620px;margin:24px auto;line-height:1.7;
+  opacity:0;animation:fadeUp .8s ease .9s forwards;
+}
+.sh-sub em{color:var(--gold2);}
+.sh-sub strong{color:var(--cream);font-style:normal;font-weight:400;}
+
+/* price box */
+.price-box{
+  display:inline-block;
+  border:1px solid rgba(200,146,42,.3);
+  padding:32px 56px;
+  margin:32px auto 0;
+  background:linear-gradient(135deg,rgba(200,146,42,.06),transparent);
+  position:relative;overflow:hidden;
+  opacity:0;animation:fadeUp .8s ease 1.2s forwards;
+}
+.price-box::before,.price-box::after{
+  content:'';position:absolute;
+  width:16px;height:16px;
+  border-color:var(--gold2);border-style:solid;opacity:.5;
+}
+.price-box::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+.price-box::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
+
+.price-was{
+  font-family:'Syne',sans-serif;font-size:13px;
+  color:var(--w35);text-decoration:line-through;margin-bottom:4px;
+  letter-spacing:.05em;
+}
+.price-now{
+  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,52px);font-weight:800;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;margin-bottom:4px;
+}
+.price-note{font-size:12px;color:var(--w35);letter-spacing:.05em;}
+
+.sh-cta-btn{
+  display:inline-block;
+  margin-top:24px;padding:20px 64px;
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
+  letter-spacing:.3em;text-transform:uppercase;text-decoration:none;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--ink);border:none;
+  position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.sh-cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(200,146,42,.3);}
+.sh-cta-btn::after{
+  content:'';position:absolute;
+  top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  animation:shimmer 2.5s ease-in-out infinite;
+}
+
+.sh-guarantee{
+  margin-top:16px;
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.3em;color:var(--w25);text-transform:uppercase;
+}
+
+/* ══ LAYOUT ══ */
+.wrap{max-width:860px;margin:0 auto;padding:80px 32px;}
+.sl{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.5em;color:var(--gold);text-transform:uppercase;
+  margin-bottom:52px;display:flex;align-items:center;gap:16px;
+}
+.sl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(200,146,42,.5),transparent);}
+.sl.lf{color:var(--leaf3);}
+.sl.lf::after{background:linear-gradient(to right,rgba(90,170,90,.5),transparent);}
+
+.rule{width:100%;max-width:860px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:0 32px;}
+.rule::before,.rule::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(200,146,42,.18));}
+.rule::after{background:linear-gradient(to left,transparent,rgba(200,146,42,.18));}
+.rg{width:7px;height:7px;background:var(--gold2);transform:rotate(45deg);flex-shrink:0;}
+
+.body-p{font-size:16.5px;line-height:2;color:var(--w60);margin-bottom:24px;}
+.body-p em{color:var(--gold2);font-style:italic;}
+.body-p strong{color:var(--cream);font-weight:400;}
+.body-p .lf{color:var(--leaf3);}
+
+/* ══ PAIN POINTS ══ */
+.pain-section{
+  background:var(--soil);
+  border-top:1px solid rgba(200,146,42,.1);
+  border-bottom:1px solid rgba(200,146,42,.1);
+  padding:80px 32px;
+}
+.pain-wrap{max-width:860px;margin:0 auto;}
+
+.pain-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(24px,5vw,48px);font-style:italic;
+  color:var(--cream);margin-bottom:8px;text-align:center;
+}
+.pain-sub{
+  font-size:15px;color:var(--w45);text-align:center;font-style:italic;margin-bottom:52px;
+}
+.pain-sub em{color:var(--gold2);}
+
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;}
+.pain-card{
+  padding:32px 24px;
+  background:rgba(139,26,26,.06);
+  border:1px solid rgba(200,42,42,.08);
+  transition:all .3s;
+}
+.pain-card:hover{background:rgba(139,26,26,.1);border-color:rgba(200,42,42,.2);}
+.pain-icon{font-size:24px;margin-bottom:12px;}
+.pain-q{
+  font-family:'DM Serif Display',serif;font-size:clamp(15px,2.5vw,19px);
+  color:rgba(245,237,216,.6);line-height:1.4;font-style:italic;
+}
+
+.pain-bridge{
+  text-align:center;padding:48px 0 0;
+}
+.pb-text{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(20px,4vw,36px);font-style:italic;
+  color:var(--cream);line-height:1.5;
+}
+.pb-text em{color:var(--gold2);}
+
+/* ══ WHAT YOU GET ══ */
+.wyg-section{padding:80px 32px;}
+.wyg-wrap{max-width:860px;margin:0 auto;}
+
+.wyg-grid{display:flex;flex-direction:column;gap:2px;margin-top:52px;}
+.wyg-item{
+  display:grid;grid-template-columns:56px 1fr auto;
+  gap:0;align-items:center;
+  background:var(--soil);
+  border:1px solid rgba(200,146,42,.07);
+  overflow:hidden;transition:all .3s;
+}
+.wyg-item:hover{border-color:rgba(200,146,42,.25);}
+
+.wyg-icon{
+  display:flex;align-items:center;justify-content:center;
+  padding:20px 0;font-size:22px;
+  border-right:1px solid rgba(200,146,42,.07);
+}
+.wyg-body{padding:20px 24px;}
+.wyg-name{
+  font-family:'DM Serif Display',serif;font-size:clamp(15px,2.5vw,20px);
+  color:var(--cream);margin-bottom:4px;
+}
+.wyg-desc{font-size:13px;color:var(--w45);}
+.wyg-desc em{color:var(--gold2);font-style:italic;}
+.wyg-val{
+  padding:20px 20px;text-align:center;border-left:1px solid rgba(200,146,42,.07);
+}
+.wyg-price{
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  color:rgba(200,146,42,.35);text-decoration:line-through;
+  letter-spacing:.05em;display:block;
+}
+.wyg-free{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  color:var(--leaf3);letter-spacing:.2em;text-transform:uppercase;
+  display:block;margin-top:4px;
+}
+
+.wyg-total{
+  margin-top:2px;padding:24px 32px;
+  background:rgba(200,146,42,.05);
+  border:1px solid rgba(200,146,42,.2);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.wt-label{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.4em;color:var(--w35);text-transform:uppercase;
+}
+.wt-total{
+  font-family:'Syne',sans-serif;font-size:clamp(16px,3vw,24px);font-weight:800;
+  color:var(--w35);text-decoration:line-through;
+}
+.wt-arrow{color:var(--gold2);font-size:20px;margin:0 12px;}
+.wt-you{
+  font-family:'Syne',sans-serif;font-size:clamp(20px,4vw,32px);font-weight:800;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+/* ══ TESTIMONI ══ */
+.testi-section{
+  background:var(--soil);
+  border-top:1px solid rgba(200,146,42,.1);
+  border-bottom:1px solid rgba(200,146,42,.1);
+  padding:80px 32px;
+}
+.testi-wrap{max-width:860px;margin:0 auto;}
+
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;margin-top:52px;}
+.testi-card{
+  background:var(--earth);padding:36px 28px;
+  border:1px solid rgba(200,146,42,.07);
+  position:relative;overflow:hidden;
+  transition:border-color .3s;
+}
+.testi-card:hover{border-color:rgba(200,146,42,.2);}
+.testi-card::before{
+  content:'\201C';
+  position:absolute;top:16px;right:16px;
+  font-size:60px;line-height:1;
+  color:rgba(200,146,42,.06);
+  font-family:'DM Serif Display',serif;
+}
+.tc-stars{color:var(--gold2);font-size:12px;margin-bottom:14px;letter-spacing:2px;}
+.tc-text{
+  font-family:'Newsreader',serif;font-style:italic;
+  font-size:14.5px;line-height:1.8;color:var(--w60);margin-bottom:20px;
+}
+.tc-text em{color:var(--gold2);}
+.tc-author{
+  display:flex;align-items:center;gap:12px;
+  padding-top:16px;border-top:1px solid rgba(200,146,42,.08);
+}
+.tc-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--bark));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+  color:var(--cream);flex-shrink:0;
+}
+.tc-info{}
+.tc-name{
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  color:var(--cream);letter-spacing:.05em;
+}
+.tc-role{font-size:11px;color:var(--w35);}
+
+/* ══ TEMPLATE KONTEN ══ */
+.template-section{padding:80px 32px;}
+.tmpl-wrap{max-width:860px;margin:0 auto;}
+
+.tmpl-tabs{display:flex;gap:2px;margin-bottom:2px;flex-wrap:wrap;}
+.tmpl-tab{
+  flex:1;min-width:120px;padding:12px 8px;text-align:center;
+  font-family:'Syne',sans-serif;font-size:8.5px;font-weight:700;
+  letter-spacing:.3em;text-transform:uppercase;cursor:pointer;
+  border:1px solid transparent;transition:all .3s;
+  color:var(--gold);background:rgba(200,146,42,.04);
+}
+.tmpl-tab.active,.tmpl-tab:hover{
+  background:rgba(200,146,42,.1);border-color:rgba(200,146,42,.25);
+}
+
+.tmpl-panel{display:none;margin-top:2px;}
+.tmpl-panel.active{display:block;}
+
+.script-box{
+  background:var(--soil);
+  border:1px solid rgba(200,146,42,.12);
+  padding:40px 44px;
+  position:relative;overflow:hidden;
+}
+.script-box::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--gold3),var(--gold));
+}
+.script-label{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.4em;color:var(--gold);text-transform:uppercase;
+  margin-bottom:20px;display:flex;align-items:center;gap:12px;
+}
+.script-copy-btn{
+  margin-left:auto;padding:5px 14px;
+  border:1px solid rgba(200,146,42,.3);
+  font-size:8px;font-family:'Syne',sans-serif;font-weight:700;
+  letter-spacing:.25em;color:rgba(200,146,42,.5);cursor:pointer;
+  background:transparent;transition:all .3s;text-transform:uppercase;
+}
+.script-copy-btn:hover{border-color:var(--gold);color:var(--gold);}
+.script-copy-btn.copied{color:var(--leaf3);border-color:var(--leaf3);}
+
+.script-content{
+  font-family:'Newsreader',serif;font-size:15px;line-height:2;
+  color:var(--w60);white-space:pre-line;
+}
+.script-content em{color:var(--gold2);font-style:italic;}
+.script-content strong{color:var(--cream);font-weight:400;}
+.script-content .highlight{
+  background:rgba(200,146,42,.1);padding:2px 6px;
+  color:var(--gold2);
+}
+.script-note{
+  margin-top:20px;padding:14px 18px;
+  border-left:2px solid rgba(200,146,42,.25);
+  font-size:12.5px;color:var(--w35);font-style:italic;line-height:1.7;
+}
+.script-note em{color:var(--gold2);}
+
+/* variation pills */
+.variation-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.var-pill{
+  padding:6px 16px;
+  border:1px solid rgba(200,146,42,.15);
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.2em;color:rgba(200,146,42,.4);text-transform:uppercase;
+  cursor:pointer;transition:all .3s;
+}
+.var-pill:hover,.var-pill.active{
+  border-color:var(--gold);color:var(--gold);
+  background:rgba(200,146,42,.05);
+}
+
+/* ══ FAQ ══ */
+.faq-section{
+  background:var(--soil);
+  border-top:1px solid rgba(200,146,42,.1);
+  border-bottom:1px solid rgba(200,146,42,.1);
+  padding:80px 32px;
+}
+.faq-wrap{max-width:860px;margin:0 auto;}
+
+.faq-list{display:flex;flex-direction:column;gap:2px;margin-top:52px;}
+.faq-item{
+  background:var(--earth);border:1px solid rgba(200,146,42,.07);
+  overflow:hidden;transition:border-color .3s;
+}
+.faq-item.open,.faq-item:hover{border-color:rgba(200,146,42,.2);}
+
+.faq-q{
+  padding:22px 28px;cursor:pointer;
+  display:flex;align-items:center;gap:16px;
+  transition:background .3s;
+}
+.faq-q:hover{background:rgba(200,146,42,.03);}
+.fq-mark{
+  font-family:'Syne',sans-serif;font-size:16px;font-weight:800;
+  color:rgba(200,146,42,.25);flex-shrink:0;
+  transition:color .3s;
+}
+.faq-item.open .fq-mark{color:var(--gold2);}
+.fq-text{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(15px,2.5vw,19px);color:var(--cream);flex:1;
+}
+.fq-icon{
+  color:var(--gold);font-size:12px;flex-shrink:0;
+  transition:transform .3s;
+}
+.faq-item.open .fq-icon{transform:rotate(180deg);}
+
+.faq-a{
+  display:none;padding:0 28px 24px 64px;
+  font-size:14.5px;line-height:1.9;color:var(--w60);
+}
+.faq-item.open .faq-a{display:block;}
+.faq-a em{color:var(--gold2);font-style:italic;}
+.faq-a strong{color:var(--cream);font-weight:400;}
+
+/* ══ FINAL CTA ══ */
+.final-cta{
+  min-height:90vh;display:flex;align-items:center;justify-content:center;
+  padding:100px 32px;position:relative;overflow:hidden;text-align:center;
+}
+.fcta-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 50%,#201400 0%,transparent 62%),
+    var(--ink);
+}
+.fcta-ring{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;border:1px solid rgba(200,146,42,.06);
+  pointer-events:none;animation:pulse 5s ease-in-out infinite;
+}
+.fr1{width:300px;height:300px;border-color:rgba(200,146,42,.12);}
+.fr2{width:560px;height:560px;animation-delay:1s;}
+.fr3{width:840px;height:840px;animation-delay:2s;border-color:rgba(200,146,42,.03);}
+
+.fcta-content{position:relative;z-index:2;max-width:720px;}
+.fcta-pre{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:32px;
+}
+.fcta-headline{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(28px,6vw,60px);font-style:italic;
+  line-height:1.35;color:var(--cream);margin-bottom:28px;
+}
+.fcta-headline em{color:var(--gold2);}
+.fcta-headline strong{
+  font-style:normal;display:block;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  font-size:1.1em;line-height:1;margin:8px 0;
+}
+
+.fcta-price-box{
+  display:inline-block;margin:24px auto;
+  padding:28px 52px;
+  border:1px solid rgba(200,146,42,.3);
+  background:linear-gradient(135deg,rgba(200,146,42,.06),transparent);
+  position:relative;overflow:hidden;
+}
+.fcta-price-box::before,.fcta-price-box::after{
+  content:'';position:absolute;
+  width:14px;height:14px;
+  border-color:var(--gold2);border-style:solid;opacity:.5;
+}
+.fcta-price-box::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+.fcta-price-box::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
+
+.fcta-was{font-size:13px;color:var(--w25);text-decoration:line-through;margin-bottom:4px;}
+.fcta-price{
+  font-family:'Syne',sans-serif;font-size:clamp(32px,7vw,60px);font-weight:800;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;margin-bottom:6px;
+}
+.fcta-note{font-size:12px;color:var(--w35);}
+
+.fcta-btn{
+  display:inline-block;margin:24px auto 0;
+  padding:22px 72px;
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+  letter-spacing:.25em;text-transform:uppercase;
+  cursor:pointer;text-decoration:none;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--ink);border:none;
+  position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.fcta-btn:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(200,146,42,.35);}
+.fcta-btn::after{
+  content:'';position:absolute;
+  top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  animation:shimmer 2s ease-in-out infinite;
+}
+
+.fcta-guarantees{
+  display:flex;gap:24px;justify-content:center;flex-wrap:wrap;
+  margin-top:28px;
+}
+.fcta-g{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.2em;color:var(--w25);text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+}
+.fcta-g::before{content:'✓';color:var(--leaf3);}
+
+/* ══ FOOTER ══ */
+.footer{border-top:1px solid rgba(200,146,42,.08);padding:40px 32px;text-align:center;}
+.footer-logo{
+  font-family:'DM Serif Display',serif;font-size:clamp(20px,4vw,34px);font-style:italic;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:8px;
+}
+.footer-copy{font-family:'Syne',sans-serif;font-size:9px;letter-spacing:.3em;color:rgba(200,146,42,.15);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:640px){
+  .nav-links{display:none;}
+  .wyg-item{grid-template-columns:44px 1fr;}
+  .wyg-val{display:none;}
+  .tmpl-tabs{gap:1px;}
+  .script-box{padding:28px 24px;}
+  .fcta-price-box{padding:20px 32px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="nav-logo">Sadar Sejati</div>
+  <div class="nav-links">
+    <a class="nav-link" href="#wyg">Isi Program</a>
+    <a class="nav-link" href="#testi">Testimoni</a>
+    <a class="nav-link" href="#template">Template</a>
+    <a class="nav-link" href="#faq">FAQ</a>
+  </div>
+  <a class="nav-cta" href="#final-cta">Dapatkan Sekarang →</a>
+</nav>
+
+<!-- ══ SALES HERO ══ -->
+<section class="sales-hero">
+  <div class="sh-bg"></div>
+  <div class="sh-ring sr1"></div>
+  <div class="sh-ring sr2"></div>
+  <div class="sh-ring sr3"></div>
+
+  <div class="sh-content">
+    <div class="sh-urgency">
+      <div class="urgency-dot"></div>
+      Harga Early Bird — Berlaku Terbatas
+    </div>
+
+    <p class="sh-eyebrow">Program Transformasi Diri Paling Lengkap</p>
+
+    <h1 class="sh-headline">
+      <span class="line1">Kamu Sudah Cukup Lama</span>
+      <span class="line2">Hidup di Bawah Potensimu</span>
+      <span class="line3">Saatnya Terbangun — Sepenuhnya</span>
+    </h1>
+
+    <p class="sh-sub">
+      Program <strong>SADAR SEJATI</strong> adalah ekosistem transformasi diri terlengkap
+      yang pernah ada dalam Bahasa Indonesia —
+      <em>8 modul mendalam, worksheet interaktif, sertifikat, bonus hipnosis,
+      dan panduan mental kaya</em> yang biasanya hanya ada di training jutaan rupiah.
+    </p>
+
+    <div class="price-box">
+      <span class="price-was">Nilai Sesungguhnya: Rp 2.500.000</span>
+      <div class="price-now">Rp 297.000</div>
+      <span class="price-note">Pembayaran sekali — akses seumur hidup</span>
+    </div>
+
+    <div style="display:block;margin-top:20px;">
+      <a class="sh-cta-btn" href="#final-cta">Ya, Saya Siap Berubah →</a>
+    </div>
+    <p class="sh-guarantee">✓ &nbsp; Tanpa risiko &nbsp; · &nbsp; ✓ &nbsp; Akses langsung &nbsp; · &nbsp; ✓ &nbsp; Garansi kepuasan</p>
+  </div>
+</section>
+
+<div class="rule"><div class="rg"></div></div>
+
+<!-- ══ PAIN POINTS ══ -->
+<section class="pain-section">
+  <div class="pain-wrap">
+    <h2 class="pain-title">Apakah Ini Terdengar Familiar?</h2>
+    <p class="pain-sub">Jika ya — kamu di tempat yang tepat. <em>Dan kamu tidak sendirian.</em></p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">😔</div>
+        <p class="pain-q">"Saya tahu harus berubah — tapi tidak tahu dari mana mulainya."</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔄</div>
+        <p class="pain-q">"Saya sudah baca banyak buku motivasi — tapi tidak ada yang benar-benar mengubah saya."</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">💸</div>
+        <p class="pain-q">"Penghasilan saya cukup — tapi selalu habis dan tidak pernah berkembang."</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">😰</div>
+        <p class="pain-q">"Saya takut gagal — jadi lebih memilih tidak mencoba sama sekali."</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🧠</div>
+        <p class="pain-q">"Pikiran saya seperti tidak bisa dikendalikan — selalu negatif dan penuh kekhawatiran."</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🚶</div>
+        <p class="pain-q">"Saya merasa hidup terjadi kepada saya — bukan karena pilihan saya."</p>
+      </div>
+    </div>
+
+    <div class="pain-bridge">
+      <p class="pb-text">
+        Semua itu bukan kelemahanmu.<br>
+        Itu adalah <em>program lama yang sudah waktunya diganti.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT YOU GET ══ -->
+<div class="wyg-section" id="wyg">
+  <div class="wyg-wrap">
+    <div class="sl">Yang Kamu Dapatkan — Semua dalam Satu Paket</div>
+
+    <div class="wyg-grid">
+      <div class="wyg-item">
+        <div class="wyg-icon">🌟</div>
+        <div class="wyg-body">
+          <div class="wyg-name">Bagian 1 — Cover, Narasi & Akronim SADAR SEJATI</div>
+          <div class="wyg-desc">Fondasi program. Manifesto, 3 pilar, dan narasi pembuka yang <em>langsung menggerakkan hati.</em></div>
+        </div>
+        <div class="wyg-val"><span class="wyg-price">Rp 200rb</span><span class="wyg-free">Termasuk</span></div>
+      </div>
+      <div class="wyg-item">
+        <div class="wyg-icon">📚</div>
+        <div class="wyg-body">
+          <div class="wyg-name">Bagian 2 — 7 Modul Pelatihan Lengkap</div>
+          <div class="wyg-desc">Dari Cermin yang Jujur hingga Cahaya yang Menyebar. <em>Struktur sesi 6 fase + panduan fasilitator.</em></div>
+        </div>
+        <div class="wyg-val"><span class="wyg-price">Rp 500rb</span><span class="wyg-free">Termasuk</span></div>
+      </div>
+      <div class="wyg-item">
+        <div class="wyg-icon">✍️</div>
+        <div class="wyg-body">
+          <div class="wyg-name">Bagian 3 — Worksheet Refleksi 7 Modul + Roda Kehidupan</div>
+          <div class="wyg-desc">Progress bar interaktif, pertanyaan mendalam per modul, <em>ikrar peserta dengan kolom tanda tangan.</em></div>
+        </div>
+        <div class="wyg-val"><span class="wyg-price">Rp 300rb</span><span class="wyg-free">Termasuk</span></div>
+      </div>
+      <div class="wyg-item">
+        <div class="wyg-icon">🏆</div>
+        <div class="wyg-body">
+          <div class="wyg-name">Bagian 4 — Sertifikat, Surat Penutup & Panduan 90 Hari</div>
+          <div class="wyg-desc">Sertifikat yang bisa dicetak, surat penutup yang menyentuh, <em>panduan harian/mingguan/bulanan pasca program.</em></div>
+        </div>
+        <div class="wyg-val"><span class="wyg-price">Rp 200rb</span><span class="wyg-free">Termasuk</span></div>
+      </div>
+      <div class="wyg-item" style="border-color:rgba(107,63,160,.15);">
+        <div class="wyg-icon">🧠</div>
+        <div class="wyg-body">
+          <div class="wyg-name">BONUS — Rahasia di Balik Hipnosis yang Kontradiktif (2 Bagian)</div>
+          <div class="wyg-desc">6 mitos vs kebenaran, gelombang otak, panduan self-hypnosis 6 langkah. <em>Materi eksklusif yang biasanya hanya di training Rp 5 juta+.</em></div>
+        </div>
+        <div class="wyg-val"><span class="wyg-price">Rp 700rb</span><span class="wyg-free" style="color:#b08ee0;">BONUS</span></div>
+      </div>
+      <div class="wyg-item" style="border-color:rgba(90,170,90,.15);">
+        <div class="wyg-icon">💰</div>
+        <div class="wyg-body">
+          <div class="wyg-name">X-TRA BONUS — Mental Miskin vs Mental Kaya (2 Bagian)</div>
+          <div class="wyg-desc">DNA dua mentalitas, studi kasus Bob Sadino & Oprah, sistem 6 toples, rencana aksi 90 hari, <em>10 aturan mental detox finansial.</em></div>
+        </div>
+        <div class="wyg-val"><span class="wyg-price">Rp 600rb</span><span class="wyg-free">X-TRA</span></div>
+      </div>
+    </div>
+
+    <div class="wyg-total">
+      <div>
+        <p class="wt-label">Total Nilai Sesungguhnya</p>
+        <p style="font-size:13px;color:var(--w35);margin-top:4px;font-style:italic;">Jika dibeli terpisah sebagai training atau konsultasi</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span class="wt-total">Rp 2.500.000</span>
+        <span class="wt-arrow">→</span>
+        <span class="wt-you">Rp 297.000</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"><div class="rg"></div></div>
+
+<!-- ══ TESTIMONI ══ -->
+<section class="testi-section" id="testi">
+  <div class="testi-wrap">
+    <div class="sl">Apa Kata Mereka yang Sudah Merasakannya</div>
+    <p style="font-size:14px;color:var(--w35);font-style:italic;max-width:500px;">
+      Template testimoni siap pakai — ganti dengan testimoni nyata dari peserta pertamamu.
+    </p>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Saya kira ini program biasa. Tapi saat mengerjakan worksheet modul pertama — saya menangis. Bukan karena sedih. Tapi karena akhirnya <em>saya melihat diri saya dengan jujur</em> untuk pertama kalinya."</p>
+        <div class="tc-author">
+          <div class="tc-avatar">S</div>
+          <div class="tc-info">
+            <p class="tc-name">Siti R., 34 tahun</p>
+            <p class="tc-role">Ibu Rumah Tangga, Bandung</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Bab bonus hipnosis membuka mata saya lebar-lebar. Saya menyadari bahwa <em>iklan dan lingkungan saya selama ini sudah menghipnosis saya</em> tanpa saya sadari. Sekarang saya lebih terjaga."</p>
+        <div class="tc-author">
+          <div class="tc-avatar">A</div>
+          <div class="tc-info">
+            <p class="tc-name">Ahmad F., 28 tahun</p>
+            <p class="tc-role">Wirausaha, Surabaya</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"X-TRA bonus mental kaya adalah yang paling mengubah hidup saya. Saya akhirnya paham mengapa <em>gaji selalu habis meski cukup</em> — dan mulai menerapkan sistem 6 toples. Bulan ini pertama kali saya punya tabungan."</p>
+        <div class="tc-author">
+          <div class="tc-avatar">D</div>
+          <div class="tc-info">
+            <p class="tc-name">Dian P., 31 tahun</p>
+            <p class="tc-role">Karyawan Swasta, Jakarta</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Saya fasilitator yang menggunakan materi ini untuk pelatihan komunitas. Peserta saya bilang ini program terbaik yang pernah mereka ikuti. <em>Sertifikatnya pun mereka cetak dan pasang di rumah.</em>"</p>
+        <div class="tc-author">
+          <div class="tc-avatar">R</div>
+          <div class="tc-info">
+            <p class="tc-name">Rizky M., 42 tahun</p>
+            <p class="tc-role">Fasilitator & Trainer, Yogyakarta</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEMPLATE KONTEN PEMASARAN ══ -->
+<section class="template-section" id="template">
+  <div class="tmpl-wrap">
+    <div class="sl">Template Konten Pemasaran — Siap Pakai</div>
+    <p style="font-size:15px;color:var(--w60);max-width:580px;line-height:1.85;margin-bottom:40px;">
+      Copy, sesuaikan, dan posting. Semua template ini sudah teruji untuk
+      <em>menarik perhatian, membangun kepercayaan, dan mendorong tindakan.</em>
+    </p>
+
+    <div class="tmpl-tabs">
+      <div class="tmpl-tab active" onclick="switchTmpl('wa')">💬 WhatsApp</div>
+      <div class="tmpl-tab" onclick="switchTmpl('ig')">📸 Instagram</div>
+      <div class="tmpl-tab" onclick="switchTmpl('tiktok')">🎵 TikTok Script</div>
+      <div class="tmpl-tab" onclick="switchTmpl('email')">📧 Email / Broadcast</div>
+      <div class="tmpl-tab" onclick="switchTmpl('dm')">✉️ DM Penawaran</div>
+    </div>
+
+    <!-- WA -->
+    <div class="tmpl-panel active" id="tmpl-wa">
+      <div class="script-box">
+        <div class="script-label">
+          Template WhatsApp Broadcast
+          <button class="script-copy-btn" onclick="copyScript(this)">Salin Teks</button>
+        </div>
+        <div class="script-content">Hei [Nama] 👋
+
+Boleh saya tanya satu hal yang jujur?
+
+Pernahkah kamu merasa sudah bekerja keras — tapi hidup rasanya jalan di tempat?
+
+Atau tahu harus berubah — tapi tidak tahu dari mana mulainya?
+
+Kalau iya, saya mau kasih tahu sesuatu yang mengubah cara saya melihat semua itu.
+
+Namanya <span class="highlight">SADAR SEJATI</span> — program transformasi diri yang membahas tuntas:
+✦ Bagaimana pikiran bawah sadar mengendalikan hidupmu (tanpa kamu sadari)
+✦ Mengapa orang yang sama-sama miskin bisa punya nasib berbeda
+✦ Rahasia di balik hipnosis yang selama ini disembunyikan
+✦ Cara membangun mental kaya — mulai dari kondisi apapun
+
+Ini bukan seminar motivasi yang hilang dalam 3 hari.
+
+Ini sistem yang benar-benar mengubah program pikiran — dari dalam.
+
+[LINK PRODUK]
+
+Kalau kamu penasaran, saya bisa kirimkan preview gratisnya dulu.
+
+Cukup balas "SADAR" dan saya kirimkan. 🙏</div>
+        <div class="script-note">Tip: <em>Ganti [Nama] dengan nama penerima untuk pesan yang lebih personal. Respon rate pesan personal bisa 3–5x lebih tinggi dari broadcast umum.</em></div>
+        <div class="variation-row">
+          <div class="var-pill active">Versi Standar</div>
+          <div class="var-pill">Versi Lebih Pendek</div>
+          <div class="var-pill">Versi Follow-up</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IG -->
+    <div class="tmpl-panel" id="tmpl-ig">
+      <div class="script-box">
+        <div class="script-label">
+          Caption Instagram (Carousel / Quote Card)
+          <button class="script-copy-btn" onclick="copyScript(this)">Salin Teks</button>
+        </div>
+        <div class="script-content">Slide 1 — HOOK:
+"Kamu tidak miskin karena tidak bekerja keras.
+Kamu miskin karena program ini yang berjalan di pikiranmu tanpa kamu sadari."
+
+Slide 2 — PROBLEMA:
+Di antara usia 0–7 tahun, otak kita menyerap semua yang kita lihat dan dengar sebagai kebenaran mutlak.
+
+Termasuk kalimat-kalimat seperti:
+→ "Uang itu susah dicari"
+→ "Orang kaya itu tidak jujur"
+→ "Orang seperti kita memang begini"
+
+Dan kalimat-kalimat itu... masih berjalan di bawah sadarmu hari ini.
+
+Slide 3 — SOLUSI:
+Program yang mengganti kode sumber itu dari dalam.
+
+Bukan motivasi. Bukan semangat 3 hari.
+Transformasi yang menetap.
+
+Slide 4 — CTA:
+SADAR SEJATI — Program Transformasi Diri Terlengkap
+
+🔗 Link di bio untuk info lengkap.
+Atau DM "INFO" untuk preview gratis.
+
+---
+Caption:
+Kebanyakan orang berjuang bukan karena malas — tapi karena menjalankan program yang salah. 
+
+Program yang ditanam sejak kecil. Yang tidak pernah mereka pilih.
+
+Kabar baiknya: program bisa diganti. 💛
+
+Simpan post ini dan tag seseorang yang butuh membaca ini.
+
+#SadarSejati #TransformasiDiri #MentalKaya #PengembanganDiri #Motivasi #Mindset</div>
+        <div class="script-note">Tip: <em>Buat slide dengan screenshot kutipan-kutipan dari file HTML SADAR SEJATI — visualnya sudah siap dan sangat menarik untuk dijadikan konten.</em></div>
+      </div>
+    </div>
+
+    <!-- TIKTOK -->
+    <div class="tmpl-panel" id="tmpl-tiktok">
+      <div class="script-box">
+        <div class="script-label">
+          Skrip Video TikTok / Reels (60 detik)
+          <button class="script-copy-btn" onclick="copyScript(this)">Salin Teks</button>
+        </div>
+        <div class="script-content">[0–3 detik — HOOK KUAT, tatap kamera]
+"Tahukah kamu bahwa kamu sudah dihipnosis — sejak kecil — tanpa pernah sadar?"
+
+[3–10 detik — MASALAH]
+"Antara usia 0 sampai 7 tahun, otak kita seperti spons hypnotic. Semua yang kita dengar langsung masuk sebagai program permanen.
+
+Termasuk keyakinan tentang uang, tentang diri kita, dan tentang seberapa jauh kita bisa pergi dalam hidup."
+
+[10–30 detik — KONTEN NILAI]
+"Dan inilah yang lebih mengejutkan:
+
+70% pemenang lotere bangkrut kembali dalam 5 tahun.
+
+Bukan karena sial. Tapi karena mental mereka tidak berubah — hanya jumlah uangnya yang berubah.
+
+Uang mengikuti mental. Bukan sebaliknya.
+
+Itulah mengapa ada orang yang lahir miskin dan mati kaya — dan ada yang sebaliknya."
+
+[30–50 detik — SOLUSI]
+"Program SADAR SEJATI membahas ini tuntas.
+
+Dari neurosains pikiran bawah sadar, rahasia hipnosis yang kontradiktif, sampai sistem membangun mental kaya — dari kondisi apapun.
+
+Ini bukan motivasi. Ini transformasi yang menetap."
+
+[50–60 detik — CTA]
+"Link di bio untuk info lengkap.
+
+Atau komen 'SADAR' dan saya DM panduan gratisnya langsung ke kamu. 👇"</div>
+        <div class="script-note">Tip: <em>Rekam dengan pencahayaan baik dan latar yang bersih. Tambahkan teks overlay di layar untuk poin-poin utama. Video dengan hook kuat di 3 detik pertama mendapat rata-rata 3x lebih banyak tonton.</em></div>
+      </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="tmpl-panel" id="tmpl-email">
+      <div class="script-box">
+        <div class="script-label">
+          Template Email / Broadcast WhatsApp Channel
+          <button class="script-copy-btn" onclick="copyScript(this)">Salin Teks</button>
+        </div>
+        <div class="script-content">Subject: Mengapa 70% pemenang lotere bangkrut dalam 5 tahun
+
+---
+
+[Nama],
+
+Ada fakta yang tidak pernah diajarkan di sekolah manapun:
+
+70% orang yang memenangkan lotere besar — bangkrut kembali dalam 5 tahun.
+
+Bukan karena nasib buruk. Bukan karena ditipu.
+
+Tapi karena mereka mendapat uang baru dengan mental lama.
+
+Dan mental lama itu — tanpa disadari — bekerja keras untuk mengembalikan kondisi ke level yang "familiar."
+
+Inilah yang oleh para neurosaintis disebut <span class="highlight">financial thermostat</span> — termometer finansial bawah sadar yang selalu menjaga kamu di level yang dianggap "normal" oleh program lamamu.
+
+---
+
+Pertanyaannya: Berapa level "normal" termometer finansialmu saat ini?
+
+Dan lebih penting lagi: Bagaimana cara mengubahnya?
+
+Itulah yang dibahas tuntas dalam program SADAR SEJATI.
+
+Bukan sekadar motivasi. Tapi sistem penggantian program pikiran yang bekerja di level bawah sadar — tempat 95% dari semua tindakan dan keputusanmu dibuat.
+
+Di dalamnya kamu akan menemukan:
+→ Mengapa kondisimu hari ini adalah cermin dari program masa kecilmu
+→ Rahasia di balik hipnosis yang selama ini disembunyikan dari publik
+→ Cara membangun mental kaya — mulai dari kondisi apapun
+→ Sistem keuangan 6 toples yang bekerja bahkan dengan penghasilan kecil
+→ Rencana aksi 90 hari yang konkret dan terukur
+
+[TOMBOL: Ya, Saya Mau Mengubah Program Saya →]
+
+Program ini biasanya ada di training seharga Rp 2–5 juta.
+
+Hari ini tersedia dengan investasi Rp 297.000 — akses seumur hidup.
+
+Satu hal yang perlu saya tegaskan:
+
+Ini bukan untuk mereka yang mencari keajaiban instan. Ini untuk mereka yang serius dan siap bekerja — dengan arah yang benar.
+
+Kalau itu kamu, saya senang menyambut kamu.
+
+[LINK]
+
+Sampai di dalam,
+[Nama Kamu]
+
+P.S. Setiap hari yang berlalu dengan program lama yang sama adalah satu hari lagi yang dijauhkan dari versi hidupmu yang seharusnya. Ini saatnya.</div>
+        <div class="script-note">Tip: <em>Email dengan subject yang memicu rasa ingin tahu (bukan yang terlalu "jualan") mendapat open rate 2–3x lebih tinggi. Ganti [Nama Kamu] dengan nama personalmu dan tambahkan link platform yang sesuai.</em></div>
+      </div>
+    </div>
+
+    <!-- DM -->
+    <div class="tmpl-panel" id="tmpl-dm">
+      <div class="script-box">
+        <div class="script-label">
+          Template DM Penawaran Personal
+          <button class="script-copy-btn" onclick="copyScript(this)">Salin Teks</button>
+        </div>
+        <div class="script-content">DM Pertama (setelah ada interaksi / komentar):
+
+"Hei [Nama]! Makasih sudah komen di postingan saya 😊
+
+Saya lihat kamu relate banget sama topik [sebutkan topiknya].
+
+Kalau boleh saya tanya — apa satu hal yang paling ingin kamu ubah dari dirimu saat ini?"
+
+---
+
+DM Kedua (setelah mereka menjawab):
+
+"Wah terima kasih sudah sharing [Nama]. Itu benar-benar insightful.
+
+Kebetulan saya punya sesuatu yang mungkin langsung relevan dengan apa yang kamu ceritakan.
+
+Namanya SADAR SEJATI — program yang membahas [sebutkan yang relevan dengan jawaban mereka].
+
+Boleh saya kirimkan preview gratisnya? Tidak ada kewajiban apapun — kalau cocok lanjut, kalau tidak ya tidak apa-apa 🙏"
+
+---
+
+DM Ketiga (follow-up setelah mengirim preview):
+
+"Hei [Nama], sudah sempat buka preview yang saya kirim?
+
+Bagian mana yang paling relate sama situasimu sekarang?
+
+Saya bisa bantu jelaskan lebih lanjut kalau ada yang ingin didiskusikan 😊"
+
+---
+
+DM Closing (untuk yang sudah siap):
+
+"Kalau kamu memutuskan untuk lanjut, ini linknya: [LINK]
+
+Investasinya Rp 297.000 untuk akses seumur hidup ke seluruh program.
+
+Dan kalau dalam 7 hari pertama kamu merasa tidak cocok — saya kembalikan uangnya, tidak ada pertanyaan.
+
+Saya percaya pada program ini karena saya sendiri sudah merasakan hasilnya 🙏"</div>
+        <div class="script-note">Tip: <em>DM yang dimulai dengan pertanyaan (bukan penawaran langsung) mendapat respons 4–6x lebih tinggi. Bangun percakapan dulu — tawarkan belakangan. Orang membeli dari yang mereka percaya, bukan dari yang paling agresif menjual.</em></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="faq-section" id="faq">
+  <div class="faq-wrap">
+    <div class="sl">Pertanyaan yang Sering Ditanyakan</div>
+
+    <div class="faq-list">
+
+      <div class="faq-item open">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="fq-mark">Q</span>
+          <p class="fq-text">Apa bedanya SADAR SEJATI dengan buku motivasi biasa?</p>
+          <span class="fq-icon">▾</span>
+        </div>
+        <div class="faq-a">Buku motivasi memberi kamu inspirasi — yang biasanya hilang dalam 3 hari. <strong>SADAR SEJATI dirancang sebagai sistem</strong> — bukan konten yang dibaca sekali. Ada worksheet yang mengharuskan kamu menjawab jujur, ada ikrar yang kamu tanda tangani sendiri, dan ada rencana aksi konkret yang bisa langsung dijalankan. <em>Perbedaan antara informasi dan transformasi ada pada tindakan yang dipicu.</em></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="fq-mark">Q</span>
+          <p class="fq-text">Apakah ini cocok untuk saya yang sibuk dan tidak punya banyak waktu?</p>
+          <span class="fq-icon">▾</span>
+        </div>
+        <div class="faq-a">Justru untuk kamu. <strong>Program ini tidak mengharuskan kamu hadir di tempat tertentu pada waktu tertentu.</strong> Buka sesuai kecepatan kamu sendiri — satu modul per minggu pun sudah sangat efektif. <em>Yang penting bukan seberapa cepat — tapi seberapa dalam kamu menyentuh setiap materinya.</em></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="fq-mark">Q</span>
+          <p class="fq-text">Saya sudah ikut banyak seminar tapi tidak berubah. Mengapa ini berbeda?</p>
+          <span class="fq-icon">▾</span>
+        </div>
+        <div class="faq-a">Sebagian besar seminar bekerja di level pikiran sadar — menggunakan logika dan motivasi. <strong>SADAR SEJATI bekerja di level bawah sadar</strong> — melalui refleksi mendalam, pertanyaan yang tepat, teknik self-hypnosis, dan perubahan identitas. <em>Bukan karena seminar itu buruk — tapi karena perubahan sejati butuh pendekatan yang berbeda.</em></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="fq-mark">Q</span>
+          <p class="fq-text">Apakah ada garansi jika saya tidak puas?</p>
+          <span class="fq-icon">▾</span>
+        </div>
+        <div class="faq-a">Ya. <strong>Garansi kepuasan 7 hari</strong> — jika dalam 7 hari pertama kamu merasa program ini tidak memberi nilai apapun, hubungi kami dan uangmu dikembalikan penuh tanpa pertanyaan. <em>Kami percaya pada kualitas program ini — dan kami tidak ingin siapapun merasa terjebak.</em></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="fq-mark">Q</span>
+          <p class="fq-text">Apakah saya bisa menggunakan materi ini untuk pelatihan atau bisnis saya sendiri?</p>
+          <span class="fq-icon">▾</span>
+        </div>
+        <div class="faq-a">Ya — dengan lisensi yang sesuai. <strong>Paket standar untuk penggunaan pribadi.</strong> Untuk penggunaan komersial (pelatihan berbayar, kelas online, dll) tersedia lisensi fasilitator yang memungkinkan kamu menjalankan program ini sebagai bisnis kamu sendiri. <em>Hubungi kami untuk info lisensi fasilitator.</em></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="fq-mark">Q</span>
+          <p class="fq-text">Berapa lama hasil akan mulai terasa?</p>
+          <span class="fq-icon">▾</span>
+        </div>
+        <div class="faq-a">Banyak peserta melaporkan <strong>pergeseran perspektif yang signifikan bahkan dari modul pertama</strong> — saat mengerjakan worksheet "Cermin yang Jujur." Perubahan perilaku nyata biasanya mulai terasa di minggu 3–4. Dan perubahan mendalam yang menetap biasanya terlihat jelas di hari 90. <em>Tapi semuanya dimulai dari satu hal: mengerjakan worksheet-nya dengan jujur.</em></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section class="final-cta" id="final-cta">
+  <div class="fcta-bg"></div>
+  <div class="fcta-ring fr1"></div>
+  <div class="fcta-ring fr2"></div>
+  <div class="fcta-ring fr3"></div>
+
+  <div class="fcta-content">
+    <p class="fcta-pre">Satu Keputusan. Satu Langkah. Satu Hidup yang Berbeda.</p>
+
+    <h2 class="fcta-headline">
+      Kamu sudah membaca sampai di sini.<br>
+      Itu bukan kebetulan.<br>
+      <em>Ada sesuatu dalam dirimu</em> yang tahu
+      <strong>ini saatnya.</strong>
+    </h2>
+
+    <div class="fcta-price-box">
+      <p class="fcta-was">Nilai Program: Rp 2.500.000</p>
+      <div class="fcta-price">Rp 297.000</div>
+      <p class="fcta-note">Akses seumur hidup · 8 file lengkap · Garansi 7 hari</p>
+    </div>
+
+    <div style="display:block;margin-top:8px;">
+      <a class="fcta-btn" href="#">Saya Mau Berubah — Mulai Sekarang ✦</a>
+    </div>
+
+    <div class="fcta-guarantees">
+      <span class="fcta-g">Akses Langsung</span>
+      <span class="fcta-g">Garansi 7 Hari</span>
+      <span class="fcta-g">Sekali Bayar Seumur Hidup</span>
+      <span class="fcta-g">Bisa untuk Pelatihan</span>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">Sadar Sejati</div>
+  <p class="footer-copy">© 2025 SADAR SEJATI · Mengenal Diri, Memimpin Hidup · Semua Hak Dilindungi</p>
+</footer>
+
+<script>
+// Template tabs
+function switchTmpl(id){
+  document.querySelectorAll('.tmpl-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tmpl-panel').forEach(p=>p.classList.remove('active'));
+  const panels={'wa':'tmpl-wa','ig':'tmpl-ig','tiktok':'tmpl-tiktok','email':'tmpl-email','dm':'tmpl-dm'};
+  const tabs=['wa','ig','tiktok','email','dm'];
+  const idx=tabs.indexOf(id);
+  document.querySelectorAll('.tmpl-tab')[idx].classList.add('active');
+  document.getElementById(panels[id]).classList.add('active');
+}
+
+// Copy script
+function copyScript(btn){
+  const content=btn.closest('.script-box').querySelector('.script-content').innerText;
+  navigator.clipboard.writeText(content).then(()=>{
+    btn.textContent='✓ Tersalin!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Salin Teks';btn.classList.remove('copied');},2500);
+  }).catch(()=>{
+    btn.textContent='Salin Manual';
+    setTimeout(()=>{btn.textContent='Salin Teks';},2000);
+  });
+}
+
+// FAQ
+function toggleFaq(q){
+  const item=q.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+// Smooth nav
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const target=document.querySelector(this.getAttribute('href'));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+</script>
+</body>
+</html>
