@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SADAR SEJATI — Donasi Pembangunan Majelis</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#060504;
+  --soil:#100c06;
+  --earth:#1c1508;
+  --bark:#2a1e0a;
+  --gold:#c8922a;
+  --gold2:#e8b040;
+  --gold3:#f8cc60;
+  --leaf:#1e4a1e;
+  --leaf2:#2a6a2a;
+  --leaf3:#4a9a4a;
+  --cream:#f5edd8;
+  --cream2:#e0cca8;
+  --w80:rgba(245,237,216,0.80);
+  --w60:rgba(245,237,216,0.60);
+  --w35:rgba(245,237,216,0.35);
+  --w15:rgba(245,237,216,0.15);
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ink);
+  color:var(--cream);
+  font-family:'Newsreader',serif;
+  font-weight:300;
+  overflow-x:hidden;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:999;
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes glow{0%,100%{opacity:.4;}50%{opacity:.9;}}
+@keyframes fill-bar{from{width:0%;}to{width:var(--target-width);}}
+@keyframes shimmer{0%{left:-100%;}100%{left:200%;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes pulse-ring{0%,100%{transform:scale(1);opacity:.3;}50%{transform:scale(1.05);opacity:.7;}}
+@keyframes lantern{0%,100%{box-shadow:0 0 30px rgba(200,146,42,.2),0 0 60px rgba(200,146,42,.08);}
+  50%{box-shadow:0 0 50px rgba(200,146,42,.4),0 0 100px rgba(200,146,42,.15);}}
+
+/* ══════════════════════
+   HERO MAJELIS
+══════════════════════ */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:80px 32px;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 45%,#241800 0%,transparent 60%),
+    radial-gradient(ellipse 40% 30% at 20% 90%,#100a00 0%,transparent 50%),
+    radial-gradient(ellipse 35% 25% at 80% 10%,#0c0a00 0%,transparent 50%),
+    var(--ink);
+}
+
+/* Majelis silhouette pattern */
+.majelis-pattern{
+  position:absolute;bottom:0;left:0;right:0;height:200px;
+  background:linear-gradient(to top,rgba(200,146,42,.03),transparent);
+  pointer-events:none;
+}
+
+/* Lantern elements */
+.lantern{
+  position:absolute;
+  width:14px;height:22px;
+  border-radius:50% 50% 40% 40%;
+  background:radial-gradient(circle at 50% 40%,var(--gold3),var(--gold));
+  animation:lantern 3s ease-in-out infinite;
+}
+.lantern::after{
+  content:'';position:absolute;
+  bottom:-8px;left:50%;transform:translateX(-50%);
+  width:1px;height:8px;background:rgba(200,146,42,.4);
+}
+.l1{top:15%;left:12%;animation-delay:0s;opacity:.6;}
+.l2{top:22%;right:14%;animation-delay:1s;opacity:.5;}
+.l3{top:10%;left:35%;animation-delay:.5s;opacity:.4;width:10px;height:16px;}
+.l4{top:18%;right:38%;animation-delay:1.5s;opacity:.4;width:10px;height:16px;}
+.l5{top:8%;left:55%;animation-delay:.8s;opacity:.3;width:8px;height:14px;}
+
+/* ring decorations */
+.hero-ring{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  border:1px solid rgba(200,146,42,.06);
+  pointer-events:none;
+  animation:pulse-ring 5s ease-in-out infinite;
+}
+.hr1{width:240px;height:240px;border-color:rgba(200,146,42,.12);animation-delay:0s;}
+.hr2{width:440px;height:440px;animation-delay:1s;}
+.hr3{width:660px;height:660px;animation-delay:2s;border-color:rgba(200,146,42,.04);}
+
+.hero-content{position:relative;z-index:2;max-width:780px;}
+
+/* Arabic calligraphy style */
+.bismillah{
+  font-family:'DM Serif Display',serif;font-style:italic;
+  font-size:clamp(14px,2.5vw,20px);
+  color:var(--gold2);letter-spacing:.08em;
+  margin-bottom:20px;
+  opacity:0;animation:fadeUp .8s ease .2s forwards;
+}
+
+.hero-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(38px,9vw,90px);font-style:italic;
+  line-height:.95;margin-bottom:14px;
+  background:linear-gradient(160deg,var(--gold3) 0%,var(--gold2) 45%,var(--gold) 80%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  opacity:0;animation:fadeUp 1s ease .4s forwards;
+}
+
+.hero-title-2{
+  font-family:'Syne',sans-serif;font-size:clamp(12px,2.5vw,18px);
+  font-weight:700;letter-spacing:.25em;color:var(--w60);
+  text-transform:uppercase;margin-bottom:28px;
+  opacity:0;animation:fadeUp .8s ease .7s forwards;
+}
+
+.hero-divider{
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  margin:20px 0;
+  opacity:0;animation:fadeUp .6s ease .9s forwards;
+}
+.hero-divider::before,.hero-divider::after{
+  content:'';width:80px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(200,146,42,.4));
+}
+.hero-divider::after{background:linear-gradient(to left,transparent,rgba(200,146,42,.4));}
+.hd-gem{width:8px;height:8px;background:var(--gold2);transform:rotate(45deg);}
+
+.hero-sub{
+  font-family:'Newsreader',serif;font-style:italic;
+  font-size:clamp(15px,2.5vw,21px);color:var(--w60);
+  max-width:600px;margin:0 auto;line-height:1.75;
+  opacity:0;animation:fadeUp .8s ease 1.1s forwards;
+}
+.hero-sub em{color:var(--gold2);}
+
+/* free badge */
+.free-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 28px;
+  border:1px solid rgba(200,146,42,.3);
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.4em;color:var(--gold2);text-transform:uppercase;
+  margin:32px auto 0;
+  background:rgba(200,146,42,.06);
+  opacity:0;animation:fadeUp .7s ease 1.4s forwards;
+}
+.free-badge span{font-size:16px;}
+
+.scroll-cue{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;animation:fadeUp .6s ease 1.8s forwards;
+}
+.scroll-cue-text{font-family:'Syne',sans-serif;font-size:9px;letter-spacing:.4em;color:var(--w25);text-transform:uppercase;}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:glow 2s ease-in-out infinite;}
+
+/* ══════════════════════
+   LAYOUT
+══════════════════════ */
+.wrap{max-width:780px;margin:0 auto;padding:80px 32px;}
+.sl{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.5em;color:var(--gold);text-transform:uppercase;
+  margin-bottom:48px;display:flex;align-items:center;gap:14px;
+}
+.sl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(200,146,42,.5),transparent);}
+.sl.lf{color:var(--leaf3);}
+.sl.lf::after{background:linear-gradient(to right,rgba(74,154,74,.5),transparent);}
+
+.rule{width:100%;max-width:780px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:0 32px;}
+.rule::before,.rule::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(200,146,42,.15));}
+.rule::after{background:linear-gradient(to left,transparent,rgba(200,146,42,.15));}
+.rg{width:7px;height:7px;background:var(--gold2);transform:rotate(45deg);flex-shrink:0;}
+
+.body-p{font-size:16.5px;line-height:2;color:var(--w60);margin-bottom:24px;}
+.body-p em{color:var(--gold2);font-style:italic;}
+.body-p strong{color:var(--cream);font-weight:400;}
+.body-p .lf{color:var(--leaf3);}
+
+/* ══════════════════════
+   NIAT & KISAH
+══════════════════════ */
+.niat-section{
+  background:var(--soil);
+  border-top:1px solid rgba(200,146,42,.1);
+  border-bottom:1px solid rgba(200,146,42,.1);
+  padding:80px 32px;
+}
+.niat-wrap{max-width:780px;margin:0 auto;}
+
+.niat-quote{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(20px,4vw,36px);font-style:italic;
+  line-height:1.55;color:var(--cream);
+  padding:40px 44px 40px 56px;
+  border-left:3px solid var(--gold);
+  background:linear-gradient(90deg,rgba(200,146,42,.06),transparent 80%);
+  position:relative;margin-bottom:48px;
+}
+.niat-quote::before{
+  content:'\201C';
+  position:absolute;left:10px;top:14px;
+  font-size:80px;line-height:1;color:var(--gold);opacity:.25;
+  font-family:'DM Serif Display',serif;
+}
+.niat-quote em{color:var(--gold2);}
+.niat-quote footer{
+  margin-top:16px;font-size:14px;font-style:normal;
+  font-family:'Syne',sans-serif;letter-spacing:.1em;
+  color:rgba(200,146,42,.5);
+}
+
+/* ══════════════════════
+   PROGRESS DONASI
+══════════════════════ */
+.progress-section{padding:80px 32px;}
+.prog-wrap{max-width:780px;margin:0 auto;}
+
+.prog-box{
+  border:1px solid rgba(200,146,42,.2);
+  padding:48px 44px;
+  position:relative;
+  background:linear-gradient(135deg,rgba(200,146,42,.04),transparent 55%);
+}
+.prog-box::before,.prog-box::after{
+  content:'';position:absolute;
+  width:20px;height:20px;
+  border-color:var(--gold2);border-style:solid;opacity:.4;
+}
+.prog-box::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+.prog-box::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
+
+.prog-label{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;
+}
+
+.prog-amounts{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;
+}
+.prog-amt{text-align:center;}
+.prog-amt-label{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.35em;color:var(--w35);text-transform:uppercase;margin-bottom:8px;
+}
+.prog-amt-num{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(24px,5vw,42px);
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;
+}
+.prog-amt-num.target{color:var(--w35);-webkit-text-fill-color:var(--w35);background:none;}
+
+.prog-track{
+  width:100%;height:12px;
+  background:rgba(200,146,42,.08);
+  border:1px solid rgba(200,146,42,.1);
+  border-radius:6px;margin-bottom:12px;overflow:hidden;
+}
+.prog-fill{
+  height:100%;border-radius:6px;
+  background:linear-gradient(90deg,var(--gold),var(--gold3));
+  --target-width:34%;
+  width:0%;
+  animation:fill-bar 2s ease 1s forwards;
+  position:relative;overflow:hidden;
+}
+.prog-fill::after{
+  content:'';position:absolute;
+  top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  animation:shimmer 2s ease-in-out infinite;
+}
+.prog-pct{
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  color:var(--gold2);text-align:right;margin-bottom:20px;
+}
+.prog-donatur{
+  font-size:13px;color:var(--w35);font-style:italic;
+  text-align:center;padding-top:16px;
+  border-top:1px solid rgba(200,146,42,.08);
+}
+.prog-donatur em{color:var(--gold2);}
+
+/* ══════════════════════
+   APA YANG KAMU DAPAT
+   (GRATIS)
+══════════════════════ */
+.free-section{
+  background:var(--soil);
+  border-top:1px solid rgba(200,146,42,.1);
+  border-bottom:1px solid rgba(200,146,42,.1);
+  padding:80px 32px;
+}
+.free-wrap{max-width:780px;margin:0 auto;}
+
+.free-intro{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(20px,4vw,36px);font-style:italic;
+  line-height:1.5;color:var(--w60);margin-bottom:52px;
+}
+.free-intro strong{color:var(--cream);font-style:normal;font-weight:400;}
+
+.free-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;}
+.free-card{
+  background:var(--earth);padding:32px 24px;
+  border:1px solid rgba(200,146,42,.07);
+  transition:all .3s;
+}
+.free-card:hover{background:var(--bark);border-color:rgba(200,146,42,.2);}
+.fc-num{
+  font-family:'Syne',sans-serif;font-size:32px;font-weight:800;
+  color:rgba(200,146,42,.12);line-height:1;margin-bottom:10px;
+}
+.fc-title{
+  font-family:'DM Serif Display',serif;font-size:17px;
+  color:var(--cream);margin-bottom:8px;
+}
+.fc-desc{font-size:13px;line-height:1.75;color:var(--w35);}
+.fc-desc em{color:var(--gold2);font-style:italic;}
+
+/* ══════════════════════
+   DONASI — PAY WHAT YOU WANT
+══════════════════════ */
+.donasi-section{padding:80px 32px;}
+.donasi-wrap{max-width:780px;margin:0 auto;}
+
+.donasi-intro{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(22px,4.5vw,40px);font-style:italic;
+  line-height:1.45;color:var(--cream);
+  text-align:center;margin-bottom:16px;
+}
+.donasi-intro em{color:var(--gold2);}
+
+.donasi-sub{
+  text-align:center;font-size:15px;color:var(--w45);
+  margin-bottom:52px;font-style:italic;line-height:1.7;
+}
+.donasi-sub em{color:var(--gold2);}
+
+/* amount pills */
+.amount-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:2px;margin-bottom:24px;
+}
+.amount-pill{
+  padding:20px 12px;text-align:center;
+  background:var(--soil);
+  border:1px solid rgba(200,146,42,.1);
+  cursor:pointer;transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.amount-pill:hover{border-color:rgba(200,146,42,.35);background:var(--earth);}
+.amount-pill.selected{
+  border-color:var(--gold2);
+  background:rgba(200,146,42,.08);
+}
+.amount-pill.selected::before{
+  content:'✦';position:absolute;top:6px;right:8px;
+  font-size:8px;color:var(--gold2);
+}
+.ap-amount{
+  font-family:'Syne',sans-serif;font-size:clamp(14px,2.5vw,20px);font-weight:800;
+  color:var(--cream);margin-bottom:4px;
+  line-height:1;
+}
+.amount-pill.selected .ap-amount{color:var(--gold2);}
+.ap-label{font-size:11px;color:var(--w35);font-style:italic;}
+.ap-label em{color:var(--gold2);font-style:italic;}
+
+/* custom amount */
+.custom-amount{
+  border:1px solid rgba(200,146,42,.15);
+  padding:20px 24px;
+  display:flex;align-items:center;gap:16px;
+  background:var(--soil);margin-bottom:32px;
+}
+.ca-label{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.3em;color:var(--gold);text-transform:uppercase;
+  white-space:nowrap;
+}
+.ca-prefix{
+  font-family:'Syne',sans-serif;font-size:16px;font-weight:700;
+  color:var(--gold2);
+}
+.ca-input{
+  flex:1;background:transparent;border:none;outline:none;
+  font-family:'DM Serif Display',serif;font-size:clamp(20px,4vw,32px);
+  color:var(--cream);font-style:italic;
+  placeholder-color:var(--w15);
+}
+.ca-input::placeholder{color:var(--w15);}
+
+/* nama donatur */
+.donatur-form{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  margin-bottom:24px;
+}
+.form-field{
+  background:var(--soil);
+  border:1px solid rgba(200,146,42,.1);
+  padding:18px 20px;
+  display:flex;flex-direction:column;gap:6px;
+}
+.form-field label{
+  font-family:'Syne',sans-serif;font-size:8.5px;font-weight:700;
+  letter-spacing:.35em;color:rgba(200,146,42,.4);text-transform:uppercase;
+}
+.form-field input,.form-field select{
+  background:transparent;border:none;outline:none;
+  font-family:'Newsreader',serif;font-size:15px;font-style:italic;
+  color:var(--cream);
+}
+.form-field input::placeholder{color:var(--w15);}
+.form-field select{color:var(--cream);}
+.form-field select option{background:var(--soil);color:var(--cream);}
+
+/* rekening cards */
+.rekening-section{
+  display:flex;flex-direction:column;gap:2px;
+  margin-bottom:24px;
+}
+
+.rek-card{
+  display:grid;grid-template-columns:56px 1fr auto;
+  align-items:center;gap:0;
+  background:var(--soil);
+  border:1px solid rgba(200,146,42,.12);
+  overflow:hidden;transition:all .3s;
+}
+.rek-card:hover{border-color:rgba(200,146,42,.3);}
+
+.rek-icon{
+  background:rgba(200,146,42,.06);
+  border-right:1px solid rgba(200,146,42,.1);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px 0;font-size:22px;
+}
+.rek-body{padding:18px 20px;}
+.rek-bank{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:4px;
+}
+.rek-name{font-size:14px;color:var(--cream);margin-bottom:4px;}
+.rek-num{
+  font-family:'Syne',sans-serif;font-size:clamp(14px,2.5vw,18px);font-weight:700;
+  color:var(--gold2);letter-spacing:.05em;
+}
+.rek-copy{
+  padding:0 20px;text-align:center;
+}
+.copy-btn{
+  padding:10px 18px;
+  border:1px solid rgba(200,146,42,.25);
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.25em;color:rgba(200,146,42,.5);
+  cursor:pointer;background:transparent;transition:all .3s;
+  text-transform:uppercase;white-space:nowrap;
+}
+.copy-btn:hover{border-color:var(--gold);color:var(--gold);}
+.copy-btn.copied{border-color:var(--leaf3);color:var(--leaf3);}
+
+/* konfirmasi donasi */
+.konfirm-box{
+  background:rgba(74,154,74,.05);
+  border:1px solid rgba(74,154,74,.15);
+  padding:20px 24px;
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:32px;
+}
+.kb-icon{font-size:24px;flex-shrink:0;}
+.kb-text{font-size:13.5px;color:var(--w60);line-height:1.65;}
+.kb-text em{color:var(--leaf3);font-style:italic;}
+.kb-text a{color:var(--gold2);text-decoration:none;}
+.kb-text a:hover{text-decoration:underline;}
+
+/* doa button */
+.doa-btn{
+  width:100%;padding:22px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--ink);
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+  letter-spacing:.25em;text-transform:uppercase;
+  border:none;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.doa-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(200,146,42,.3);}
+.doa-btn::after{
+  content:'';position:absolute;
+  top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  animation:shimmer 2.5s ease-in-out infinite;
+}
+
+.doa-note{
+  text-align:center;margin-top:14px;
+  font-size:12px;color:var(--w25);font-style:italic;
+}
+
+/* ══════════════════════
+   TRANSPARANSI
+══════════════════════ */
+.transparan-section{
+  background:var(--soil);
+  border-top:1px solid rgba(200,146,42,.1);
+  border-bottom:1px solid rgba(200,146,42,.1);
+  padding:80px 32px;
+}
+.trans-wrap{max-width:780px;margin:0 auto;}
+
+.trans-intro{
+  font-size:15px;color:var(--w60);max-width:580px;margin-bottom:52px;line-height:1.85;
+}
+.trans-intro em{color:var(--gold2);font-style:italic;}
+
+.budget-table{border-collapse:collapse;width:100%;}
+.bt-header{
+  display:grid;grid-template-columns:1fr 120px 120px;
+  padding:14px 20px;
+  border-bottom:2px solid rgba(200,146,42,.2);
+}
+.bth{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.4em;color:var(--gold);text-transform:uppercase;
+}
+.bth.right{text-align:right;}
+
+.bt-row{
+  display:grid;grid-template-columns:1fr 120px 120px;
+  padding:16px 20px;
+  border-bottom:1px solid rgba(200,146,42,.06);
+  transition:background .3s;
+}
+.bt-row:hover{background:rgba(200,146,42,.03);}
+.bt-row.total-row{
+  border-top:2px solid rgba(200,146,42,.2);border-bottom:none;
+  background:rgba(200,146,42,.04);margin-top:2px;
+}
+
+.btd{font-size:14px;color:var(--w60);display:flex;align-items:center;gap:8px;}
+.btd .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.btd.right{text-align:right;display:block;}
+.btd.amount{
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  color:var(--gold2);text-align:right;display:block;
+}
+.btd.raised{
+  font-family:'Syne',sans-serif;font-size:13px;
+  color:var(--leaf3);text-align:right;display:block;
+}
+.bt-row.total-row .btd{
+  font-family:'DM Serif Display',serif;font-size:16px;
+  color:var(--cream);font-style:italic;
+}
+.bt-row.total-row .btd.amount{
+  font-size:16px;color:var(--gold2);
+}
+
+/* ══════════════════════
+   DONATUR WALL
+══════════════════════ */
+.wall-section{padding:80px 32px;}
+.wall-wrap{max-width:780px;margin:0 auto;}
+
+.wall-grid{
+  display:flex;flex-wrap:wrap;gap:2px;
+  margin-top:48px;
+}
+.wall-item{
+  padding:14px 20px;
+  background:var(--soil);
+  border:1px solid rgba(200,146,42,.07);
+  transition:all .3s;
+  cursor:default;
+}
+.wall-item:hover{border-color:rgba(200,146,42,.2);background:var(--earth);}
+.wi-name{
+  font-family:'DM Serif Display',serif;font-size:15px;
+  color:var(--cream);margin-bottom:2px;
+}
+.wi-amount{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.1em;color:var(--gold2);
+}
+.wi-kota{font-size:11px;color:var(--w25);font-style:italic;}
+
+.wall-anon{
+  padding:14px 20px;
+  background:rgba(200,146,42,.03);
+  border:1px dashed rgba(200,146,42,.12);
+  display:flex;align-items:center;gap:12px;
+  font-size:13px;color:var(--w25);font-style:italic;
+}
+
+/* ══════════════════════
+   DOA PENUTUP
+══════════════════════ */
+.doa-section{
+  min-height:70vh;display:flex;align-items:center;justify-content:center;
+  padding:100px 32px;position:relative;overflow:hidden;text-align:center;
+}
+.doa-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 70% at 50% 50%,#1e1200 0%,transparent 62%),
+    var(--ink);
+}
+.doa-rings{position:absolute;top:50%;left:50%;pointer-events:none;}
+.doa-ring{
+  position:absolute;top:0;left:0;
+  transform:translate(-50%,-50%);
+  border-radius:50%;border:1px solid rgba(200,146,42,.06);
+  animation:pulse-ring 5s ease-in-out infinite;
+}
+.dr1{width:200px;height:200px;border-color:rgba(200,146,42,.12);}
+.dr2{width:400px;height:400px;animation-delay:1s;}
+.dr3{width:620px;height:620px;animation-delay:2s;border-color:rgba(200,146,42,.03);}
+
+.doa-content{position:relative;z-index:2;max-width:680px;}
+
+.doa-pre{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;
+}
+.doa-arabic{
+  font-family:'DM Serif Display',serif;font-style:italic;
+  font-size:clamp(16px,3.5vw,28px);color:var(--gold2);
+  margin-bottom:16px;letter-spacing:.05em;
+}
+.doa-text{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(20px,4.5vw,44px);font-style:italic;
+  line-height:1.45;color:var(--cream);margin-bottom:32px;
+}
+.doa-text em{color:var(--gold2);}
+.doa-text strong{
+  font-style:normal;display:block;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.doa-divider{
+  display:flex;align-items:center;justify-content:center;gap:16px;margin:28px 0;
+}
+.doa-divider::before,.doa-divider::after{
+  content:'';width:80px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(200,146,42,.4));
+}
+.doa-divider::after{background:linear-gradient(to left,transparent,rgba(200,146,42,.4));}
+.dd-gem{width:8px;height:8px;background:var(--gold2);transform:rotate(45deg);}
+
+.doa-closing{
+  font-size:clamp(14px,2vw,17px);line-height:1.9;color:var(--w60);
+}
+.doa-closing em{color:var(--gold2);font-style:italic;}
+.doa-closing .lf{color:var(--leaf3);}
+
+/* ══════════════════════
+   FOOTER
+══════════════════════ */
+.footer{border-top:1px solid rgba(200,146,42,.08);padding:40px 32px;text-align:center;}
+.footer-logo{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(20px,4vw,34px);font-style:italic;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:8px;
+}
+.footer-niat{font-size:13px;color:var(--w35);font-style:italic;margin-bottom:16px;}
+.footer-copy{
+  font-family:'Syne',sans-serif;font-size:9px;letter-spacing:.3em;
+  color:rgba(200,146,42,.15);text-transform:uppercase;
+}
+
+/* ══ TOAST NOTIF ══ */
+.toast{
+  position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--soil);border:1px solid rgba(200,146,42,.3);
+  padding:16px 32px;
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.25em;color:var(--gold2);text-transform:uppercase;
+  transition:transform .4s ease;z-index:9999;
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:640px){
+  .donatur-form{grid-template-columns:1fr;}
+  .prog-amounts{grid-template-columns:1fr;}
+  .amount-grid{grid-template-columns:repeat(3,1fr);}
+  .rek-card{grid-template-columns:44px 1fr;}
+  .rek-copy{display:none;}
+  .bt-header,.bt-row{grid-template-columns:1fr 100px;}
+  .bt-row>*:nth-child(3),.bt-header>*:nth-child(3){display:none;}
+  .niat-quote{padding:28px 24px 28px 40px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LANTERNS ══ -->
+<div class="lantern l1"></div>
+<div class="lantern l2"></div>
+<div class="lantern l3"></div>
+<div class="lantern l4"></div>
+<div class="lantern l5"></div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="majelis-pattern"></div>
+  <div class="hero-ring hr1"></div>
+  <div class="hero-ring hr2"></div>
+  <div class="hero-ring hr3"></div>
+
+  <div class="hero-content">
+    <p class="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+    <h1 class="hero-title">SADAR SEJATI</h1>
+    <p class="hero-title-2">Ilmu untuk Semua · Majelis untuk Umat</p>
+    <div class="hero-divider"><div class="hd-gem"></div></div>
+    <p class="hero-sub">
+      Program transformasi diri ini <em>gratis untuk dibaca siapapun.</em><br>
+      Jika ilmu ini bermanfaat bagimu —<br>
+      berikan berapa yang tergerak dari hatimu<br>
+      untuk membangun <em>majelis tempat ilmu ini terus hidup.</em>
+    </p>
+    <div class="free-badge"><span>🎁</span> Baca Gratis · Donasi Ikhlas</div>
+  </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    <span class="scroll-cue-text">Baca dulu</span>
+  </div>
+</section>
+
+<div class="rule"><div class="rg"></div></div>
+
+<!-- ══ PEMBUKA ══ -->
+<div class="wrap">
+  <div class="sl">Tentang Program Ini</div>
+  <p class="body-p">
+    SADAR SEJATI lahir dari satu keyakinan sederhana:
+    <em>ilmu yang mengubah hidup seharusnya bisa diakses oleh semua orang</em> —
+    bukan hanya mereka yang mampu membayar jutaan rupiah untuk seminar.
+  </p>
+  <p class="body-p">
+    Karena itu, semua yang ada dalam program ini —
+    7 modul transformasi diri, worksheet refleksi mendalam, bab bonus hipnosis,
+    hingga panduan membangun mental kaya —
+    <strong>bisa kamu baca, pelajari, dan praktikkan secara gratis.</strong>
+  </p>
+  <p class="body-p">
+    Jika setelah membaca kamu merasakan manfaatnya —
+    jika ada satu kalimat yang membuat hidupmu sedikit lebih terang —
+    kami mengundangmu untuk <span class="lf">berdonasi ikhlas sesuai kemampuan dan keikhlasan hatimu</span>
+    untuk membantu mewujudkan majelis fisik tempat ilmu ini terus diajarkan dan dikembangkan.
+  </p>
+</div>
+
+<!-- ══ NIAT ══ -->
+<section class="niat-section">
+  <div class="niat-wrap">
+    <div class="sl">Niat & Kisah di Balik Program Ini</div>
+
+    <blockquote class="niat-quote">
+      Majelis bukan sekadar bangunan.<br>
+      Ia adalah tempat di mana <em>hati yang gelisah menemukan ketenangan,</em><br>
+      pikiran yang bingung menemukan arah,<br>
+      dan jiwa yang lelah menemukan <em>kekuatan untuk kembali.</em>
+      <footer>— Niat Pembangunan Majelis Sadar Sejati</footer>
+    </blockquote>
+
+    <p class="body-p">
+      Program SADAR SEJATI dibuat sebagai jembatan —
+      antara ilmu yang sudah ada dan mereka yang membutuhkannya.
+      Di balik setiap kata, setiap pertanyaan refleksi, dan setiap teknik yang diajarkan,
+      ada harapan bahwa <em>satu orang yang terbangun akan menerangi orang-orang di sekitarnya.</em>
+    </p>
+    <p class="body-p">
+      Mimpi kami adalah sederhana namun bermakna:
+      sebuah majelis fisik di <strong>Gunungguruh, Sukabumi</strong> —
+      tempat program seperti ini bisa dijalankan secara rutin,
+      gratis bagi masyarakat yang membutuhkan,
+      dan menjadi <span class="lf">pusat pemberdayaan komunitas yang berkelanjutan.</span>
+    </p>
+    <p class="body-p">
+      Setiap rupiah yang kamu berikan bukan sekadar donasi bangunan.
+      Ia adalah <em>investasi kebaikan yang pahalanya terus mengalir</em>
+      selama majelis itu berdiri dan ilmu terus diajarkan di dalamnya.
+      Inilah yang para ulama sebut <strong>amal jariyah.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ══ PROGRESS ══ -->
+<section class="progress-section">
+  <div class="prog-wrap">
+    <div class="sl">Progress Pembangunan Majelis</div>
+
+    <div class="prog-box">
+      <p class="prog-label">Status Dana · Diperbarui Secara Berkala</p>
+
+      <div class="prog-amounts">
+        <div class="prog-amt">
+          <p class="prog-amt-label">Terkumpul</p>
+          <div class="prog-amt-num" id="terkumpul">Rp 0</div>
+        </div>
+        <div class="prog-amt">
+          <p class="prog-amt-label">Target</p>
+          <div class="prog-amt-num target">Rp 85.000.000</div>
+        </div>
+      </div>
+
+      <div class="prog-track">
+        <div class="prog-fill" style="--target-width:0%;"></div>
+      </div>
+      <p class="prog-pct" id="progPct">0% — Mari kita mulai bersama</p>
+
+      <p class="prog-donatur">
+        Program baru diluncurkan. <em>Jadilah donatur pertama yang meletakkan batu pertama.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="rule"><div class="rg"></div></div>
+
+<!-- ══ APA YANG KAMU DAPAT GRATIS ══ -->
+<section class="free-section">
+  <div class="free-wrap">
+    <div class="sl">Yang Bisa Kamu Baca — Sepenuhnya Gratis</div>
+
+    <p class="free-intro">
+      Tidak perlu mendaftar. Tidak perlu membayar dulu.
+      <strong>Baca semuanya — baru putuskan berapa yang ingin kamu berikan.</strong>
+    </p>
+
+    <div class="free-grid">
+      <div class="free-card">
+        <div class="fc-num">01</div>
+        <div class="fc-title">Cover & Narasi Pembuka</div>
+        <div class="fc-desc">Fondasi program. Akronim SADAR SEJATI, manifesto, dan narasi yang <em>langsung menyentuh hati.</em></div>
+      </div>
+      <div class="free-card">
+        <div class="fc-num">02</div>
+        <div class="fc-title">7 Modul Pelatihan</div>
+        <div class="fc-desc">Dari mengenal diri hingga menjadi cahaya bagi sesama. <em>Panduan fasilitator termasuk.</em></div>
+      </div>
+      <div class="free-card">
+        <div class="fc-num">03</div>
+        <div class="fc-title">Worksheet Refleksi</div>
+        <div class="fc-desc">7 lembar kerja mendalam dengan pertanyaan yang <em>menggerakkan perubahan nyata.</em></div>
+      </div>
+      <div class="free-card">
+        <div class="fc-num">04</div>
+        <div class="fc-title">Sertifikat & Penutup</div>
+        <div class="fc-desc">Sertifikat yang bisa dicetak, surat penutup yang menyentuh, <em>dan panduan 90 hari.</em></div>
+      </div>
+      <div class="free-card">
+        <div class="fc-num">B1</div>
+        <div class="fc-title">Bonus Hipnosis</div>
+        <div class="fc-desc">Rahasia di balik hipnosis yang kontradiktif — <em>materi eksklusif yang langka.</em></div>
+      </div>
+      <div class="free-card">
+        <div class="fc-num">X1</div>
+        <div class="fc-title">X-TRA Mental Kaya</div>
+        <div class="fc-desc">Dari mental miskin ke mental kaya — <em>tuntas, ilmiah, dan langsung bisa diterapkan.</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DONASI ══ -->
+<section class="donasi-section" id="donasi">
+  <div class="donasi-wrap">
+    <div class="sl">Donasi Ikhlas — Sesuai Harga di Hatimu</div>
+
+    <h2 class="donasi-intro">
+      Ilmu ini nilainya <em>tidak ternilai.</em><br>
+      Berikan sesuai yang tergerak dari hatimu.
+    </h2>
+    <p class="donasi-sub">
+      Tidak ada jumlah yang terlalu kecil.<br>
+      <em>Seribu rupiah yang ikhlas lebih berharga dari sejuta yang terpaksa.</em>
+    </p>
+
+    <!-- PILIHAN NOMINAL -->
+    <div class="amount-grid" id="amountGrid">
+      <div class="amount-pill" onclick="selectAmount(this,'10000')">
+        <div class="ap-amount">Rp 10rb</div>
+        <div class="ap-label">Secangkir teh</div>
+      </div>
+      <div class="amount-pill" onclick="selectAmount(this,'25000')">
+        <div class="ap-amount">Rp 25rb</div>
+        <div class="ap-label">Sebungkus makan</div>
+      </div>
+      <div class="amount-pill" onclick="selectAmount(this,'50000')">
+        <div class="ap-amount">Rp 50rb</div>
+        <div class="ap-label">Satu buku bagus</div>
+      </div>
+      <div class="amount-pill" onclick="selectAmount(this,'100000')">
+        <div class="ap-amount">Rp 100rb</div>
+        <div class="ap-label">Satu sesi pelatihan</div>
+      </div>
+      <div class="amount-pill" onclick="selectAmount(this,'250000')">
+        <div class="ap-amount">Rp 250rb</div>
+        <div class="ap-label">Satu bata majelis</div>
+      </div>
+      <div class="amount-pill" onclick="selectAmount(this,'500000')">
+        <div class="ap-amount">Rp 500rb</div>
+        <div class="ap-label">Fondasi sudut</div>
+      </div>
+      <div class="amount-pill" onclick="selectAmount(this,'1000000')">
+        <div class="ap-amount">Rp 1jt</div>
+        <div class="ap-label">Satu tiang majelis</div>
+      </div>
+      <div class="amount-pill" onclick="selectAmount(this,'5000000')">
+        <div class="ap-amount">Rp 5jt</div>
+        <div class="ap-label">Satu ruang belajar</div>
+      </div>
+    </div>
+
+    <!-- NOMINAL SENDIRI -->
+    <div class="custom-amount">
+      <span class="ca-label">Nominal Lain</span>
+      <span class="ca-prefix">Rp</span>
+      <input class="ca-input" type="number" id="customAmount" placeholder="Ketik nominal…" 
+             oninput="clearPillSelection()" min="1000">
+    </div>
+
+    <!-- FORM DONATUR -->
+    <div class="donatur-form">
+      <div class="form-field">
+        <label>Nama (opsional)</label>
+        <input type="text" id="donaturName" placeholder="Nama atau inisialmu…">
+      </div>
+      <div class="form-field">
+        <label>Kota</label>
+        <input type="text" id="donaturKota" placeholder="Kota asal…">
+      </div>
+    </div>
+
+    <!-- REKENING -->
+    <div class="rekening-section">
+
+      <div class="rek-card">
+        <div class="rek-icon">🏦</div>
+        <div class="rek-body">
+          <p class="rek-bank">Bank BJB (Bank Jabar Banten)</p>
+          <p class="rek-name">HUDRI — Donasi Majelis Sadar Sejati</p>
+          <p class="rek-num" id="rek1">0160405831100</p>
+        </div>
+        <div class="rek-copy">
+          <button class="copy-btn" onclick="copyRek('rek1',this)">Salin</button>
+        </div>
+      </div>
+
+      <div class="rek-card">
+        <div class="rek-icon">💚</div>
+        <div class="rek-body">
+          <p class="rek-bank">GoPay</p>
+          <p class="rek-name">HUDRI — Donasi Majelis Sadar Sejati</p>
+          <p class="rek-num" id="rek2">083871666136</p>
+        </div>
+        <div class="rek-copy">
+          <button class="copy-btn" onclick="copyRek('rek2',this)">Salin</button>
+        </div>
+      </div>
+
+      <div class="rek-card">
+        <div class="rek-icon">💜</div>
+        <div class="rek-body">
+          <p class="rek-bank">OVO</p>
+          <p class="rek-name">HUDRI — Donasi Majelis Sadar Sejati</p>
+          <p class="rek-num" id="rek3">083871666136</p>
+        </div>
+        <div class="rek-copy">
+          <button class="copy-btn" onclick="copyRek('rek3',this)">Salin</button>
+        </div>
+      </div>
+
+      <div class="rek-card">
+        <div class="rek-icon">❤️</div>
+        <div class="rek-body">
+          <p class="rek-bank">LinkAja</p>
+          <p class="rek-name">HUDRI — Donasi Majelis Sadar Sejati</p>
+          <p class="rek-num" id="rek4">083871666136</p>
+        </div>
+        <div class="rek-copy">
+          <button class="copy-btn" onclick="copyRek('rek4',this)">Salin</button>
+        </div>
+      </div>
+
+      <div class="rek-card">
+        <div class="rek-icon">🧡</div>
+        <div class="rek-body">
+          <p class="rek-bank">ShopeePay</p>
+          <p class="rek-name">HUDRI — Donasi Majelis Sadar Sejati</p>
+          <p class="rek-num" id="rek5">083871666136</p>
+        </div>
+        <div class="rek-copy">
+          <button class="copy-btn" onclick="copyRek('rek5',this)">Salin</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- KONFIRMASI -->
+    <div class="konfirm-box">
+      <div class="kb-icon">💬</div>
+      <div class="kb-text">
+        Setelah transfer, konfirmasi via WhatsApp ke
+        <a href="https://wa.me/6283871666136" target="_blank">
+          <em>0838 7166 6136</em>
+        </a>
+        dengan format: <em>Nama · Nominal · Bank · Kota</em><br>
+        Namamu akan tercatat di Dinding Donatur dengan penuh syukur dan doa. 🤲
+      </div>
+    </div>
+
+    <!-- DOA BUTTON -->
+    <button class="doa-btn" onclick="doaDonasi()">
+      🤲 &nbsp; Saya Sudah Transfer — Catat Donasinya
+    </button>
+    <p class="doa-note">
+      Setiap donasi akan dikonfirmasi dan dilaporkan secara transparan.<br>
+      Jazakallahu khairan — semoga Allah melipatgandakan kebaikanmu.
+    </p>
+  </div>
+</section>
+
+<!-- ══ TRANSPARANSI ANGGARAN ══ -->
+<section class="transparan-section">
+  <div class="trans-wrap">
+    <div class="sl lf">Transparansi Anggaran — Tidak Ada yang Disembunyikan</div>
+
+    <p class="trans-intro">
+      Ini adalah rincian rencana penggunaan dana.
+      <em>Setiap rupiah yang masuk akan dilaporkan secara terbuka</em>
+      dan bisa dicek oleh siapapun yang berdonasi.
+    </p>
+
+    <div class="bt-header">
+      <span class="bth">Kebutuhan</span>
+      <span class="bth right">Estimasi</span>
+      <span class="bth right">Terkumpul</span>
+    </div>
+
+    <div class="bt-row">
+      <span class="btd"><div class="dot" style="background:var(--gold2);"></div>Pondasi & Struktur Bangunan</span>
+      <span class="btd amount">Rp 25.000.000</span>
+      <span class="btd raised">Rp 0</span>
+    </div>
+    <div class="bt-row">
+      <span class="btd"><div class="dot" style="background:var(--gold);"></div>Dinding & Atap</span>
+      <span class="btd amount">Rp 20.000.000</span>
+      <span class="btd raised">Rp 0</span>
+    </div>
+    <div class="bt-row">
+      <span class="btd"><div class="dot" style="background:var(--leaf3);"></div>Lantai & Finishing</span>
+      <span class="btd amount">Rp 15.000.000</span>
+      <span class="btd raised">Rp 0</span>
+    </div>
+    <div class="bt-row">
+      <span class="btd"><div class="dot" style="background:#7abcf0;"></div>Instalasi Listrik & Air</span>
+      <span class="btd amount">Rp 8.000.000</span>
+      <span class="btd raised">Rp 0</span>
+    </div>
+    <div class="bt-row">
+      <span class="btd"><div class="dot" style="background:#b08ee0;"></div>Perlengkapan Majelis (karpet, sound, papan tulis)</span>
+      <span class="btd amount">Rp 10.000.000</span>
+      <span class="btd raised">Rp 0</span>
+    </div>
+    <div class="bt-row">
+      <span class="btd"><div class="dot" style="background:var(--cream2);"></div>Biaya Tak Terduga (10%)</span>
+      <span class="btd amount">Rp 7.000.000</span>
+      <span class="btd raised">Rp 0</span>
+    </div>
+    <div class="bt-row total-row">
+      <span class="btd">Total Kebutuhan</span>
+      <span class="btd amount">Rp 85.000.000</span>
+      <span class="btd raised">Rp 0</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DINDING DONATUR ══ -->
+<section class="wall-section">
+  <div class="wall-wrap">
+    <div class="sl">Dinding Donatur — Mereka yang Meletakkan Batu Pertama</div>
+    <p style="font-size:14px;color:var(--w35);font-style:italic;margin-bottom:0;line-height:1.8;">
+      Nama-nama ini akan selalu terukir dalam doa dan catatan kebaikan majelis ini.
+    </p>
+
+    <div class="wall-grid" id="donaturWall">
+      <!-- Placeholder sebelum ada donatur -->
+      <div class="wall-anon">
+        🌟 Jadilah yang pertama meletakkan batu fondasi majelis ini...
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DOA PENUTUP ══ -->
+<section class="doa-section">
+  <div class="doa-bg"></div>
+  <div class="doa-rings">
+    <div class="doa-ring dr1"></div>
+    <div class="doa-ring dr2"></div>
+    <div class="doa-ring dr3"></div>
+  </div>
+
+  <div class="doa-content">
+    <p class="doa-pre">Doa Kami untuk Setiap Donatur</p>
+    <p class="doa-arabic">اللَّهُمَّ بَارِكْ فِيهِمْ</p>
+    <h2 class="doa-text">
+      Semoga Allah memberkahi<br>
+      setiap tetes keikhlasan yang<br>
+      <em>kamu tuangkan hari ini.</em>
+      <strong>Aamiin.</strong>
+    </h2>
+
+    <div class="doa-divider"><div class="dd-gem"></div></div>
+
+    <p class="doa-closing">
+      Majelis yang kamu bantu wujudkan ini<br>
+      akan menjadi tempat <em>ratusan — bahkan ribuan</em> orang<br>
+      menemukan diri mereka, memperbaiki hidup mereka,<br>
+      dan menerangi orang-orang di sekitar mereka.<br><br>
+      <span class="lf">Pahalamu mengalir selama ilmu itu diajarkan.</span><br>
+      Itu adalah hadiah terbesar yang bisa diberikan seorang manusia:<br>
+      <em>kebaikan yang tidak berhenti saat nyawa berhenti.</em>
+    </p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">SADAR SEJATI</div>
+  <p class="footer-niat">Ilmu untuk Semua · Majelis untuk Umat · Keberkahan untuk Semua yang Terlibat</p>
+  <p class="footer-copy">Donasi Pembangunan Majelis · Gunungguruh, Sukabumi · Jawa Barat</p>
+</footer>
+
+<!-- ══ TOAST ══ -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Pilih nominal
+let selectedAmount = 0;
+function selectAmount(pill, val){
+  document.querySelectorAll('.amount-pill').forEach(p=>p.classList.remove('selected'));
+  pill.classList.add('selected');
+  selectedAmount = parseInt(val);
+  document.getElementById('customAmount').value = '';
+}
+function clearPillSelection(){
+  document.querySelectorAll('.amount-pill').forEach(p=>p.classList.remove('selected'));
+  selectedAmount = 0;
+}
+
+// ── Copy rekening
+function copyRek(id, btn){
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent = '✓ Tersalin';
+    btn.classList.add('copied');
+    showToast('Nomor rekening tersalin! ✓');
+    setTimeout(()=>{btn.textContent='Salin';btn.classList.remove('copied');},2500);
+  });
+}
+
+// ── Toast
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ── Donasi submit (simulasi — sambungkan ke backend/WA)
+function doaDonasi(){
+  const custom = document.getElementById('customAmount').value;
+  const amount = selectedAmount || parseInt(custom) || 0;
+  const name   = document.getElementById('donaturName').value.trim() || 'Hamba Allah';
+  const kota   = document.getElementById('donaturKota').value.trim() || '—';
+
+  if(amount < 1000){
+    showToast('Masukkan nominal donasi terlebih dahulu 🙏');
+    document.getElementById('customAmount').focus();
+    return;
+  }
+
+  // Format nominal
+  const fmt = new Intl.NumberFormat('id-ID').format(amount);
+
+  // Buka WA konfirmasi
+  const msg = encodeURIComponent(
+    `Assalamu'alaikum,\n\nSaya ingin mengkonfirmasi donasi pembangunan Majelis SADAR SEJATI:\n\n` +
+    `📛 Nama: ${name}\n` +
+    `🏙️ Kota: ${kota}\n` +
+    `💰 Nominal: Rp ${fmt}\n\n` +
+    `Semoga bermanfaat dan menjadi amal jariyah. Aamiin 🤲`
+  );
+  window.open(`https://wa.me/6283871666136?text=${msg}`, '_blank');
+
+  // Tambah ke dinding donatur (simulasi)
+  addToDonaturWall(name, fmt, kota);
+  showToast(`Jazakallahu khairan, ${name}! 🤲`);
+}
+
+// ── Tambah ke dinding donatur
+function addToDonaturWall(name, amount, kota){
+  const wall = document.getElementById('donaturWall');
+  // Hapus placeholder jika ada
+  const anon = wall.querySelector('.wall-anon');
+  if(anon) anon.remove();
+
+  const item = document.createElement('div');
+  item.className = 'wall-item';
+  item.innerHTML = `
+    <div class="wi-name">${name}</div>
+    <div class="wi-amount">Rp ${amount}</div>
+    <div class="wi-kota">${kota}</div>
+  `;
+  wall.insertBefore(item, wall.firstChild);
+}
+
+// ── Progress bar animate on scroll
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const fill = entry.target.querySelector('.prog-fill');
+      if(fill){
+        // Ganti nilai ini sesuai data donasi real
+        const pct = 0; // mulai dari 0, update manual
+        fill.style.setProperty('--target-width', pct + '%');
+        fill.style.width = pct + '%';
+      }
+    }
+  });
+},{threshold:0.3});
+
+document.querySelectorAll('.prog-box').forEach(el=>observer.observe(el));
+
+// ── Format rupiah
+function formatRupiah(num){
+  return new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(num);
+}
+</script>
+</body>
+</html>
