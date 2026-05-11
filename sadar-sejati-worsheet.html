@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SADAR SEJATI — Worksheet Refleksi Lengkap</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --black:#080706; --deep:#110f0c; --warm:#1c1810; --card:#161210;
+  --gold:#b8883a; --gold2:#d4a855; --gold3:#f0c878;
+  --ivory:#f2e8d8; --ivory2:#c8b898;
+  --w60:rgba(242,232,216,0.60); --w35:rgba(242,232,216,0.35); --w15:rgba(242,232,216,0.15);
+}
+html { scroll-behavior: smooth; }
+body { background:var(--black); color:var(--ivory); font-family:'Lato',sans-serif; font-weight:300; overflow-x:hidden; }
+body::after {
+  content:''; position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:1000;
+}
+
+/* HERO */
+.hero {
+  min-height:55vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; padding:80px 32px;
+  position:relative; overflow:hidden;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 55% 70% at 50% 50%, #231606 0%, var(--black) 68%);
+}
+.hero-rings {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:500px; height:500px; pointer-events:none;
+}
+.hr {
+  position:absolute; border-radius:50%;
+  border:1px solid rgba(184,136,58,0.08);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+}
+.hr:nth-child(1){width:120px;height:120px;border-color:rgba(184,136,58,0.25);}
+.hr:nth-child(2){width:220px;height:220px;}
+.hr:nth-child(3){width:340px;height:340px;}
+.hr:nth-child(4){width:460px;height:460px;}
+
+.hero-content { position:relative; z-index:2; }
+.hero-pre {
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.55em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:24px;
+  opacity:0; animation:fadeUp 0.7s ease 0.2s forwards;
+}
+.hero-title {
+  font-family:'Cinzel',serif;
+  font-size:clamp(40px,9vw,88px); font-weight:700; line-height:1;
+  background:linear-gradient(160deg,var(--gold3),var(--gold2) 45%,var(--gold));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  opacity:0; animation:fadeUp 0.9s ease 0.4s forwards; margin-bottom:16px;
+}
+.hero-sub {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(15px,2.5vw,22px); font-style:italic; font-weight:300;
+  color:var(--w60);
+  opacity:0; animation:fadeUp 0.7s ease 0.7s forwards;
+}
+.hero-note {
+  margin-top:28px; font-size:13px; color:var(--w35);
+  opacity:0; animation:fadeUp 0.6s ease 1s forwards;
+  font-style:italic;
+}
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+
+/* PROGRESS BAR */
+.progress-bar {
+  position:sticky; top:0; z-index:50;
+  background:rgba(8,7,6,0.95); backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(184,136,58,0.12);
+  padding:14px 32px;
+}
+.progress-inner {
+  max-width:780px; margin:0 auto;
+  display:flex; align-items:center; gap:16px;
+}
+.progress-label {
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.4em;
+  color:var(--gold); white-space:nowrap;
+}
+.progress-track {
+  flex:1; height:2px; background:rgba(184,136,58,0.12); border-radius:1px;
+}
+.progress-fill {
+  height:100%; background:linear-gradient(to right, var(--gold2), var(--gold3));
+  border-radius:1px; transition:width 0.4s ease;
+  width:0%;
+}
+.progress-pct {
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.2em;
+  color:rgba(184,136,58,0.5); min-width:32px; text-align:right;
+}
+
+/* WORKSHEET WRAPPER */
+.ws-wrap { max-width:780px; margin:0 auto; padding:0 32px; }
+
+/* MODULE DIVIDER */
+.mod-divider {
+  display:flex; align-items:center; gap:20px;
+  padding:72px 32px 48px;
+  max-width:780px; margin:0 auto;
+}
+.mod-divider-line { flex:1; height:1px; background:linear-gradient(to right,transparent,rgba(184,136,58,0.25)); }
+.mod-divider-line.rev { background:linear-gradient(to left,transparent,rgba(184,136,58,0.25)); }
+.mod-label-wrap { text-align:center; flex-shrink:0; }
+.mod-num-big {
+  font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.5em;
+  color:var(--gold); text-transform:uppercase; display:block; margin-bottom:6px;
+}
+.mod-name-big {
+  font-family:'Playfair Display',serif; font-size:clamp(18px,3.5vw,28px); font-weight:700;
+  color:var(--ivory);
+}
+
+/* WORKSHEET CARD */
+.ws-card {
+  border:1px solid rgba(184,136,58,0.15);
+  background:linear-gradient(135deg,rgba(184,136,58,0.03) 0%,transparent 60%);
+  padding:48px 44px;
+  margin-bottom:40px;
+  position:relative;
+}
+.ws-card::before, .ws-card::after {
+  content:''; position:absolute;
+  width:18px; height:18px;
+  border-color:var(--gold); border-style:solid; opacity:0.4;
+}
+.ws-card::before { top:-1px; left:-1px; border-width:2px 0 0 2px; }
+.ws-card::after  { bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
+
+.ws-card-title {
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.45em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:36px;
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(184,136,58,0.12);
+}
+
+/* QUESTION */
+.q-block { margin-bottom:40px; }
+.q-block:last-child { margin-bottom:0; }
+
+.q-num {
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.4em;
+  color:rgba(184,136,58,0.5); margin-bottom:10px; display:block;
+}
+.q-text {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(16px,2.8vw,22px); font-weight:400;
+  color:var(--ivory); line-height:1.5;
+  margin-bottom:10px;
+  padding-left:18px;
+  border-left:2px solid rgba(184,136,58,0.25);
+}
+.q-text em { color:var(--gold2); font-style:italic; }
+
+.q-hint {
+  font-size:12.5px; color:var(--w35); font-style:italic;
+  margin-bottom:16px; margin-left:18px; line-height:1.65;
+}
+
+/* WRITE AREA */
+.write-area {
+  margin-top:16px;
+  border-bottom:1px solid rgba(184,136,58,0.1);
+}
+.write-line {
+  height:44px;
+  border-bottom:1px dashed rgba(184,136,58,0.08);
+}
+.write-line:last-child { border-bottom:none; }
+
+/* SCALE / RATING */
+.scale-wrap {
+  display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;
+}
+.scale-item {
+  flex:1; min-width:36px;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+}
+.scale-box {
+  width:100%; aspect-ratio:1;
+  border:1px solid rgba(184,136,58,0.25);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cinzel',serif; font-size:14px; font-weight:600;
+  color:rgba(184,136,58,0.4);
+  transition:all 0.2s; cursor:pointer;
+}
+.scale-box:hover { background:rgba(184,136,58,0.1); color:var(--gold2); border-color:var(--gold2); }
+.scale-label { font-size:10px; color:var(--w35); text-align:center; }
+
+/* CHECKLIST */
+.check-list { list-style:none; margin-top:16px; }
+.check-list li {
+  display:flex; align-items:center; gap:14px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(184,136,58,0.06);
+  font-size:14px; color:var(--w60); line-height:1.5;
+  cursor:pointer; transition:color 0.2s;
+}
+.check-list li:last-child { border-bottom:none; }
+.check-list li:hover { color:var(--ivory); }
+.check-box {
+  width:20px; height:20px; border:1px solid rgba(184,136,58,0.3);
+  flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s;
+}
+.check-list li:hover .check-box { border-color:var(--gold2); }
+
+/* IKRAR BOX */
+.ikrar-box {
+  border:1px solid rgba(184,136,58,0.3);
+  padding:48px 44px;
+  text-align:center;
+  position:relative;
+  background:radial-gradient(ellipse 70% 70% at 50% 50%, rgba(184,136,58,0.05), transparent);
+  margin-bottom:40px;
+}
+.ikrar-box::before, .ikrar-box::after {
+  content:''; position:absolute;
+  width:24px; height:24px;
+  border-color:var(--gold2); border-style:solid; opacity:0.6;
+}
+.ikrar-box::before { top:-1px; left:-1px; border-width:2px 0 0 2px; }
+.ikrar-box::after  { bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
+
+.ikrar-pre {
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.5em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:24px;
+}
+.ikrar-text {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(17px,3vw,26px); font-style:italic; font-weight:400;
+  line-height:1.65; color:var(--ivory); margin-bottom:32px;
+}
+.ikrar-text em { color:var(--gold2); }
+.ikrar-text strong { font-weight:700; font-style:normal; }
+
+.sign-area {
+  display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:40px;
+}
+.sign-field { text-align:center; }
+.sign-line {
+  width:100%; height:1px; background:rgba(184,136,58,0.3); margin-bottom:10px;
+}
+.sign-label { font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.35em; color:var(--w35); }
+
+/* SUMMARY WHEEL */
+.wheel-section {
+  background:var(--warm); border-top:1px solid rgba(184,136,58,0.12);
+  border-bottom:1px solid rgba(184,136,58,0.12);
+  padding:80px 32px;
+}
+.wheel-wrap { max-width:780px; margin:0 auto; }
+
+.wheel-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:2px; margin-top:52px;
+}
+.wheel-card {
+  background:var(--card); padding:32px 28px;
+  border:1px solid rgba(184,136,58,0.07);
+  transition:all 0.3s;
+}
+.wheel-card:hover { background:#1e1810; border-color:rgba(184,136,58,0.2); }
+.wheel-area {
+  font-family:'Playfair Display',serif; font-size:16px; font-weight:700;
+  color:var(--ivory); margin-bottom:16px;
+}
+.wheel-score-row {
+  display:flex; align-items:center; gap:8px; margin-bottom:6px;
+}
+.wheel-dot {
+  width:10px; height:10px; border-radius:50%; background:rgba(184,136,58,0.2);
+  border:1px solid rgba(184,136,58,0.3); flex-shrink:0; cursor:pointer;
+  transition:background 0.2s;
+}
+.wheel-dot:hover { background:var(--gold2); }
+.wheel-dot.filled { background:var(--gold2); border-color:var(--gold3); }
+.wheel-num { font-family:'Cinzel',serif; font-size:10px; color:var(--w35); }
+.wheel-desc { font-size:12px; color:var(--w35); margin-top:10px; font-style:italic; }
+
+/* LABEL */
+.section-label {
+  font-family:'Cinzel',serif; font-size:9.5px; letter-spacing:0.5em;
+  color:var(--gold); text-transform:uppercase;
+  margin-bottom:48px;
+  display:flex; align-items:center; gap:14px;
+}
+.section-label::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(to right,rgba(184,136,58,0.5),transparent);
+}
+
+.gold-rule {
+  width:100%; max-width:780px; margin:0 auto;
+  display:flex; align-items:center; gap:16px; padding:0 32px;
+}
+.gold-rule::before,.gold-rule::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(to right,transparent,rgba(184,136,58,0.3));
+}
+.gold-rule::after { background:linear-gradient(to left,transparent,rgba(184,136,58,0.3)); }
+.gr-gem { width:7px; height:7px; background:var(--gold2); transform:rotate(45deg); flex-shrink:0; }
+
+/* FOOTER */
+.footer { border-top:1px solid rgba(184,136,58,0.08); padding:36px 32px; text-align:center; }
+.footer p { font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.3em; color:rgba(184,136,58,0.25); }
+
+@media(max-width:560px){
+  .ws-card{padding:32px 24px;}
+  .ikrar-box{padding:36px 24px;}
+  .sign-area{grid-template-columns:1fr;}
+  .scale-wrap{gap:4px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-rings">
+    <div class="hr"></div><div class="hr"></div>
+    <div class="hr"></div><div class="hr"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-pre">Bagian Ketiga · Refleksi Mendalam</p>
+    <h1 class="hero-title">WORKSHEET<br>SADAR SEJATI</h1>
+    <p class="hero-sub">Tujuh Lembar Kerja — Satu untuk Setiap Perjalanan Batin</p>
+    <p class="hero-note">Ambil pena. Duduk dengan tenang. Jujurlah hanya kepada dirimu sendiri.</p>
+  </div>
+</section>
+
+<!-- PROGRESS -->
+<div class="progress-bar">
+  <div class="progress-inner">
+    <span class="progress-label">Progress Refleksi</span>
+    <div class="progress-track"><div class="progress-fill" id="pFill"></div></div>
+    <span class="progress-pct" id="pPct">0%</span>
+  </div>
+</div>
+
+<div class="gold-rule" style="margin-top:0;padding-top:0;"><div class="gr-gem"></div></div>
+
+<!-- ══════════ MODUL 1 ══════════ -->
+<div class="mod-divider">
+  <div class="mod-divider-line"></div>
+  <div class="mod-label-wrap">
+    <span class="mod-num-big">Modul 01</span>
+    <div class="mod-name-big">Cermin yang Jujur</div>
+  </div>
+  <div class="mod-divider-line rev"></div>
+</div>
+
+<div class="ws-wrap">
+  <div class="ws-card">
+    <p class="ws-card-title">Siapa Aku — Tanpa Topeng, Tanpa Sensor</p>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 01 · 04</span>
+      <p class="q-text">Jika hidupku hari ini adalah sebuah buku, apa judulnya — dan apakah itu judul yang aku <em>inginkan</em>?</p>
+      <p class="q-hint">Tulislah secara spontan. Kebenaran pertama yang muncul biasanya yang paling jujur.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 02 · 04</span>
+      <p class="q-text">Di area mana hidupku paling "tertidur"? Apa yang terjadi jika aku terus <em>membiarkannya</em>?</p>
+      <p class="q-hint">Nilai setiap area hidupmu (1–10) lalu pilih satu yang paling mendesak.</p>
+      <div class="scale-wrap" id="scale1">
+        <div class="scale-item"><div class="scale-box">1</div><span class="scale-label">Karir</span></div>
+        <div class="scale-item"><div class="scale-box">2</div><span class="scale-label">Hubungan</span></div>
+        <div class="scale-item"><div class="scale-box">3</div><span class="scale-label">Kesehatan</span></div>
+        <div class="scale-item"><div class="scale-box">4</div><span class="scale-label">Keuangan</span></div>
+        <div class="scale-item"><div class="scale-box">5</div><span class="scale-label">Spiritual</span></div>
+        <div class="scale-item"><div class="scale-box">6</div><span class="scale-label">Kontribusi</span></div>
+      </div>
+      <div class="write-area" style="margin-top:20px;"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 03 · 04</span>
+      <p class="q-text">Apa satu hal yang sudah lama ingin aku lakukan tapi selalu kutunda — dan apa <em>penyebab sesungguhnya</em>?</p>
+      <p class="q-hint">Bedakan: alasan (masuk akal) vs. penyebab sejati (ketakutan apa di baliknya?).</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 04 · 04</span>
+      <p class="q-text">Jika versi terbaikku lima tahun ke depan bisa berbicara padaku sekarang — apa yang akan ia katakan?</p>
+      <p class="q-hint">Tulislah kata-katanya langsung, seolah ia sedang berbicara kepadamu saat ini.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODUL 2 ══════════ -->
+<div class="mod-divider">
+  <div class="mod-divider-line"></div>
+  <div class="mod-label-wrap">
+    <span class="mod-num-big">Modul 02</span>
+    <div class="mod-name-big">Suara di Balik Kebisingan</div>
+  </div>
+  <div class="mod-divider-line rev"></div>
+</div>
+
+<div class="ws-wrap">
+  <div class="ws-card">
+    <p class="ws-card-title">Mendengar Suara Batin yang Paling Jujur</p>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 01 · 03</span>
+      <p class="q-text">Kapan terakhir kali aku benar-benar <em>diam</em> — tanpa gadget, tanpa gangguan — hanya bersama diriku sendiri?</p>
+      <p class="q-hint">Apa yang aku rasakan saat itu? Nyaman, takut, atau kosong?</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 02 · 03</span>
+      <p class="q-text">Ada keputusan besar yang selama ini aku <em>tahu jawabannya</em> tapi belum berani melakukannya — apa itu?</p>
+      <p class="q-hint">Intuisimu sudah tahu. Tulislah tanpa mempertimbangkan konsekuensinya dulu.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 03 · 03</span>
+      <p class="q-text">Suara siapa yang paling sering mempengaruhi keputusanku — suaraku sendiri, atau suara <em>orang lain</em>?</p>
+      <p class="q-hint">Sebutkan minimal tiga "suara eksternal" yang sering kamu ikuti, dan apakah itu benar-benar selaras dengan nilai-nilaimu.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODUL 3 ══════════ -->
+<div class="mod-divider">
+  <div class="mod-divider-line"></div>
+  <div class="mod-label-wrap">
+    <span class="mod-num-big">Modul 03</span>
+    <div class="mod-name-big">Luka yang Mengajar</div>
+  </div>
+  <div class="mod-divider-line rev"></div>
+</div>
+
+<div class="ws-wrap">
+  <div class="ws-card">
+    <p class="ws-card-title">Mengubah Setiap Luka Menjadi Bahan Bakar</p>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 01 · 03</span>
+      <p class="q-text">Apa peristiwa terberat dalam hidupku — dan apa <em>pelajaran tersembunyi</em> yang ia berikan?</p>
+      <p class="q-hint">Ini mungkin menyakitkan untuk ditulis. Itu pertanda kamu sedang menyentuh sesuatu yang penting.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 02 · 03</span>
+      <p class="q-text">Siapa yang perlu aku maafkan — termasuk <em>diriku sendiri</em> — agar aku bisa melangkah lebih bebas?</p>
+      <p class="q-hint">Memaafkan bukan berarti menyetujui. Memaafkan berarti melepaskan beban yang selama ini kamu bawa sendiri.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 03 · 03</span>
+      <p class="q-text">Jika masa lalumu tidak bisa diubah — tapi <em>cara pandangmu terhadapnya</em> bisa — bagaimana kamu akan melihatnya sekarang?</p>
+      <p class="q-hint">Tulislah narasi baru tentang peristiwa itu. Bukan menyangkal kenyataan, tapi menemukan makna di baliknya.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODUL 4 ══════════ -->
+<div class="mod-divider">
+  <div class="mod-divider-line"></div>
+  <div class="mod-label-wrap">
+    <span class="mod-num-big">Modul 04</span>
+    <div class="mod-name-big">Arsitektur Pikiran</div>
+  </div>
+  <div class="mod-divider-line rev"></div>
+</div>
+
+<div class="ws-wrap">
+  <div class="ws-card">
+    <p class="ws-card-title">Membongkar dan Membangun Ulang Sistem Berpikir</p>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 01 · 03</span>
+      <p class="q-text">Sebutkan <em>tiga keyakinan pembatas</em> yang paling sering menghentikanmu — dan dari mana mereka berasal?</p>
+      <p class="q-hint">Contoh: "Saya tidak cukup pintar", "Orang seperti saya tidak bisa sukses", "Nanti saja kalau sudah siap".</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 02 · 03</span>
+      <p class="q-text">Untuk setiap keyakinan di atas — apa <em>bukti nyata</em> yang membuktikan keyakinan itu salah?</p>
+      <p class="q-hint">Pikiranmu pandai berbohong. Data dan fakta yang kamu alami sendiri lebih jujur dari keyakinan yang kamu warisi.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 03 · 03</span>
+      <p class="q-text">Tuliskan <em>tiga keyakinan baru</em> yang ingin kamu tanam untuk menggantikannya — dalam kalimat yang kuat dan personal.</p>
+      <p class="q-hint">Mulai dengan "Saya adalah…" atau "Saya mampu…" — pastikan kamu merasakannya, bukan sekadar mengucapkannya.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODUL 5 ══════════ -->
+<div class="mod-divider">
+  <div class="mod-divider-line"></div>
+  <div class="mod-label-wrap">
+    <span class="mod-num-big">Modul 05</span>
+    <div class="mod-name-big">Kompas Hidup</div>
+  </div>
+  <div class="mod-divider-line rev"></div>
+</div>
+
+<div class="ws-wrap">
+  <div class="ws-card">
+    <p class="ws-card-title">Menemukan Arah — Merancang Tujuan Sejati</p>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 01 · 04</span>
+      <p class="q-text">Jika uang bukan masalah dan opini orang tidak ada — apa yang akan aku <em>lakukan setiap hari</em>?</p>
+      <p class="q-hint">Di sinilah petunjuk passionmu bersembunyi. Tulislah tanpa filter ekonomi atau sosial.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 02 · 04</span>
+      <p class="q-text">Apa <em>satu kalimat misi hidupku</em> — yang menggambarkan mengapa aku hadir di dunia ini?</p>
+      <p class="q-hint">Gunakan format: "Saya hadir untuk [tindakan] bagi [siapa] sehingga [dampak]."</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 03 · 04</span>
+      <p class="q-text">Seperti apa hidupku yang ideal — dalam <em>5 tahun ke depan</em>? Deskripsikan sedetail mungkin.</p>
+      <p class="q-hint">Di mana kamu tinggal? Apa yang kamu kerjakan? Siapa orang-orang di sekitarmu? Bagaimana perasaanmu setiap pagi?</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 04 · 04</span>
+      <p class="q-text">Apa <em>tiga langkah konkret</em> yang bisa aku mulai dalam 90 hari ke depan menuju visi itu?</p>
+      <p class="q-hint">Pastikan setiap langkah spesifik, realistis, dan bisa diukur. Bukan impian — tapi tindakan.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODUL 6 ══════════ -->
+<div class="mod-divider">
+  <div class="mod-divider-line"></div>
+  <div class="mod-label-wrap">
+    <span class="mod-num-big">Modul 06</span>
+    <div class="mod-name-big">Disiplin Sebagai Kasih Sayang</div>
+  </div>
+  <div class="mod-divider-line rev"></div>
+</div>
+
+<div class="ws-wrap">
+  <div class="ws-card">
+    <p class="ws-card-title">Membangun Sistem Hidup yang Konsisten</p>
+
+    <div class="q-block">
+      <span class="q-num">Centang kebiasaan yang sudah kamu miliki</span>
+      <p class="q-text">Audit <em>kebiasaan harianmu</em> — mana yang mendukung tujuanmu, mana yang menghambat?</p>
+      <ul class="check-list" id="cl1">
+        <li onclick="toggleCheck(this)"><div class="check-box"></div> Bangun pagi dengan niat yang jelas</li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div> Berolahraga minimal 3x seminggu</li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div> Membaca atau belajar setiap hari</li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div> Menulis jurnal atau refleksi harian</li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div> Merencanakan hari sebelum memulai</li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div> Tidur cukup dan berkualitas</li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div> Menghindari media sosial di pagi hari</li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div> Mengevaluasi hari sebelum tidur</li>
+      </ul>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan Refleksi</span>
+      <p class="q-text">Kebiasaan apa yang, jika aku lakukan <em>secara konsisten selama 90 hari</em>, akan mengubah hidupku paling signifikan?</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Komitmen Tertulis</span>
+      <p class="q-text">Aku berkomitmen untuk memulai kebiasaan ini:</p>
+      <p class="q-hint">Tulis dengan tangan. Kebiasaan apa, kapan, di mana, dan bagaimana kamu mengukurnya.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODUL 7 ══════════ -->
+<div class="mod-divider">
+  <div class="mod-divider-line"></div>
+  <div class="mod-label-wrap">
+    <span class="mod-num-big">Modul 07</span>
+    <div class="mod-name-big">Cahaya yang Menyebar</div>
+  </div>
+  <div class="mod-divider-line rev"></div>
+</div>
+
+<div class="ws-wrap">
+  <div class="ws-card">
+    <p class="ws-card-title">Mewarisi Cahaya — Dampak bagi Sesama</p>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 01 · 03</span>
+      <p class="q-text">Siapa <em>satu orang</em> dalam hidupku yang bisa langsung merasakan dampak positif dari pertumbuhanku?</p>
+      <p class="q-hint">Apa yang akan berubah dalam hubunganmu dengannya jika kamu menjadi versi terbaikmu?</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 02 · 03</span>
+      <p class="q-text">Apa <em>warisan</em> yang ingin aku tinggalkan — bukan kekayaan materi, tapi jejak yang akan dikenang?</p>
+      <p class="q-hint">Saat kamu tidak ada lagi, apa yang ingin orang-orang katakan tentang hidupmu?</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="q-block">
+      <span class="q-num">Pertanyaan 03 · 03</span>
+      <p class="q-text">Apa <em>satu aksi konkret</em> yang akan aku lakukan minggu ini untuk memberikan dampak positif bagi orang lain?</p>
+      <p class="q-hint">Tidak perlu besar. Satu aksi yang tulus selalu lebih bertenaga dari seribu rencana yang belum dimulai.</p>
+      <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ RODA KEHIDUPAN ══════════ -->
+<section class="wheel-section">
+  <div class="wheel-wrap">
+    <div class="section-label">Roda Kehidupan · Self-Assessment</div>
+    <p style="font-size:14px;color:var(--w60);margin-bottom:0;max-width:560px;">
+      Klik titik-titik untuk menilai setiap area hidupmu saat ini (1 = rendah, 10 = tinggi). 
+      Jadikan ini sebagai baseline perjalananmu.
+    </p>
+
+    <div class="wheel-grid">
+      <div class="wheel-card">
+        <div class="wheel-area">🎯 Karir & Tujuan</div>
+        <div class="wheel-score-row" id="w1"></div>
+        <div class="wheel-desc">Seberapa puas kamu dengan arah dan makna pekerjaanmu?</div>
+      </div>
+      <div class="wheel-card">
+        <div class="wheel-area">❤️ Hubungan</div>
+        <div class="wheel-score-row" id="w2"></div>
+        <div class="wheel-desc">Kualitas hubunganmu dengan keluarga, pasangan, dan sahabat.</div>
+      </div>
+      <div class="wheel-card">
+        <div class="wheel-area">💪 Kesehatan</div>
+        <div class="wheel-score-row" id="w3"></div>
+        <div class="wheel-desc">Energi, kondisi fisik, dan kesehatan mentalmu hari-hari ini.</div>
+      </div>
+      <div class="wheel-card">
+        <div class="wheel-area">💰 Keuangan</div>
+        <div class="wheel-score-row" id="w4"></div>
+        <div class="wheel-desc">Seberapa aman dan bebas kondisi keuanganmu saat ini?</div>
+      </div>
+      <div class="wheel-card">
+        <div class="wheel-area">🌿 Spiritualitas</div>
+        <div class="wheel-score-row" id="w5"></div>
+        <div class="wheel-desc">Koneksi dengan nilai-nilai, keyakinan, dan ketenangan batinmu.</div>
+      </div>
+      <div class="wheel-card">
+        <div class="wheel-area">🌍 Kontribusi</div>
+        <div class="wheel-score-row" id="w6"></div>
+        <div class="wheel-desc">Seberapa besar dampak positif yang kamu berikan bagi sekitarmu?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ IKRAR PESERTA ══════════ -->
+<div class="ws-wrap" style="padding-top:72px; padding-bottom:20px;">
+  <div class="section-label">Ikrar Peserta</div>
+</div>
+
+<div class="ws-wrap" style="padding-top:0;">
+  <div class="ikrar-box">
+    <p class="ikrar-pre">Dengan Sepenuh Hati, Aku Bersaksi</p>
+    <p class="ikrar-text">
+      Hari ini, aku memilih untuk berhenti bersembunyi dari diriku sendiri.<br><br>
+      Aku memilih untuk <em>melihat dengan jujur</em>, <em>merasakan dengan berani</em>,<br>
+      dan <em>melangkah dengan penuh kesadaran.</em><br><br>
+      Aku tahu perjalanan ini tidak selalu mudah.<br>
+      Ada hari-hari ketika aku akan goyah, ragu, atau lelah.<br>
+      Tapi aku memilih untuk <strong>kembali</strong> — selalu kembali —<br>
+      kepada nilai-nilai yang aku yakini dan versi terbaik yang aku impikan.<br><br>
+      Karena aku percaya:<br>
+      <em>Kesadaran adalah hadiah terbesar yang bisa aku berikan kepada diriku sendiri —<br>
+      dan kepada dunia di sekitarku.</em>
+    </p>
+
+    <div class="sign-area">
+      <div class="sign-field">
+        <div class="sign-line"></div>
+        <p class="sign-label">Nama Peserta</p>
+      </div>
+      <div class="sign-field">
+        <div class="sign-line"></div>
+        <p class="sign-label">Tanggal & Tempat</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:780px;margin:0 auto;padding:40px 32px 100px;text-align:center;">
+  <p style="font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,28px);font-style:italic;color:var(--w60);line-height:1.6;">
+    "Perjalananmu belum selesai.<br>
+    Tapi kamu sudah <span style="color:var(--gold2);">jauh lebih sadar</span> dari saat kamu memulai."
+  </p>
+</div>
+
+<footer class="footer">
+  <p>SADAR SEJATI · Worksheet Refleksi · Bagian Ketiga dari Empat</p>
+</footer>
+
+<script>
+// Progress bar
+function updateProgress() {
+  const writeAreas = document.querySelectorAll('.write-area');
+  let filled = 0;
+  writeAreas.forEach(a => {
+    if (a.dataset.filled === '1') filled++;
+  });
+  const checks = document.querySelectorAll('.check-list li.checked').length;
+  const total = writeAreas.length + 8;
+  const pct = Math.round(((filled + checks) / total) * 100);
+  document.getElementById('pFill').style.width = pct + '%';
+  document.getElementById('pPct').textContent = pct + '%';
+}
+
+// Click write areas to mark
+document.querySelectorAll('.write-area').forEach(a => {
+  a.addEventListener('click', function() {
+    this.dataset.filled = this.dataset.filled === '1' ? '0' : '1';
+    this.style.borderColor = this.dataset.filled === '1' ? 'rgba(184,136,58,0.4)' : '';
+    updateProgress();
+  });
+});
+
+// Checklist
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  const box = el.querySelector('.check-box');
+  if (el.classList.contains('checked')) {
+    box.innerHTML = '<span style="color:var(--gold2);font-size:12px;">✓</span>';
+    box.style.borderColor = 'var(--gold2)';
+    box.style.background = 'rgba(184,136,58,0.1)';
+    el.style.color = 'var(--ivory)';
+  } else {
+    box.innerHTML = '';
+    box.style.borderColor = '';
+    box.style.background = '';
+    el.style.color = '';
+  }
+  updateProgress();
+}
+
+// Wheel dots
+function buildWheel(id, n) {
+  const row = document.getElementById(id);
+  for (let i = 1; i <= n; i++) {
+    const d = document.createElement('div');
+    d.className = 'wheel-dot';
+    d.title = i;
+    d.onclick = function() {
+      const dots = row.querySelectorAll('.wheel-dot');
+      const idx = Array.from(dots).indexOf(this);
+      dots.forEach((dd, j) => {
+        if (j <= idx) dd.classList.add('filled');
+        else dd.classList.remove('filled');
+      });
+    };
+    row.appendChild(d);
+  }
+  const num = document.createElement('span');
+  num.className = 'wheel-num';
+  num.textContent = '/ 10';
+  row.appendChild(num);
+}
+['w1','w2','w3','w4','w5','w6'].forEach(id => buildWheel(id, 10));
+</script>
+</body>
+</html>
