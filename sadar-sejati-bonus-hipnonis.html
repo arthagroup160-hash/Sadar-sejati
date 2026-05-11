@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SADAR SEJATI — Bab Bonus: Rahasia di Balik Hipnosis</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#060508;--deep:#0e0b12;--warm:#18141e;--card:#14111a;
+  --purple:#6b3fa0;--purple2:#8b5cc8;--purple3:#b08ee0;
+  --gold:#b8883a;--gold2:#d4a855;--gold3:#f0c878;
+  --ivory:#f2e8f8;--ivory2:#c8b8d8;
+  --w60:rgba(242,232,248,0.60);--w35:rgba(242,232,248,0.35);--w15:rgba(242,232,248,0.15);
+  --ember:#3a1a5a;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--ivory);font-family:'Lato',sans-serif;font-weight:300;overflow-x:hidden;}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1000;
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes floatRing{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.4;}50%{transform:translate(-50%,-50%) scale(1.04);opacity:.8;}}
+@keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(107,63,160,0.3);}50%{box-shadow:0 0 60px rgba(107,63,160,0.6),0 0 100px rgba(107,63,160,0.2);}}
+@keyframes drift{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-12px) rotate(3deg);}100%{transform:translateY(0) rotate(0deg);}}
+@keyframes scanline{0%{top:-10%;}100%{top:110%;}}
+
+/* ══════════════════════════
+   COVER — DARK MYSTICAL
+══════════════════════════ */
+.cover{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:80px 32px;
+  position:relative;overflow:hidden;
+}
+.cover-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 65% at 50% 45%,#1e0a3a 0%,transparent 60%),
+    radial-gradient(ellipse 35% 40% at 10% 90%,#0e0520 0%,transparent 55%),
+    radial-gradient(ellipse 30% 30% at 90% 5%,#0e0520 0%,transparent 50%),
+    #060508;
+}
+
+/* Hypnotic spiral */
+.spiral-wrap{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:600px;height:600px;
+  pointer-events:none;
+}
+.sp-ring{
+  position:absolute;border-radius:50%;
+  top:50%;left:50%;
+  border-style:solid;
+  animation:floatRing 6s ease-in-out infinite;
+}
+.sp-ring:nth-child(1){width:80px;height:80px;border-width:1px;border-color:rgba(107,63,160,.6);animation-delay:0s;}
+.sp-ring:nth-child(2){width:160px;height:160px;border-width:1px;border-color:rgba(107,63,160,.4);animation-delay:.3s;}
+.sp-ring:nth-child(3){width:260px;height:260px;border-width:1px;border-color:rgba(107,63,160,.25);animation-delay:.6s;}
+.sp-ring:nth-child(4){width:380px;height:380px;border-width:1px;border-color:rgba(107,63,160,.15);animation-delay:.9s;}
+.sp-ring:nth-child(5){width:520px;height:520px;border-width:1px;border-color:rgba(107,63,160,.08);animation-delay:1.2s;}
+
+/* cross diagonals */
+.sp-cross{
+  position:absolute;top:50%;left:50%;
+  background:rgba(107,63,160,.06);
+  transform-origin:center center;
+}
+.sp-cross.h{width:600px;height:1px;transform:translate(-50%,-50%);}
+.sp-cross.v{width:1px;height:600px;transform:translate(-50%,-50%);}
+.sp-cross.d1{width:600px;height:1px;transform:translate(-50%,-50%) rotate(45deg);}
+.sp-cross.d2{width:600px;height:1px;transform:translate(-50%,-50%) rotate(-45deg);}
+
+.center-eye{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:28px;height:28px;border-radius:50%;
+  background:radial-gradient(circle,var(--purple2),var(--purple));
+  animation:pulse 3s ease-in-out infinite;
+  z-index:2;
+}
+
+/* scanline effect */
+.scanline{
+  position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(to right,transparent,rgba(107,63,160,.15),transparent);
+  animation:scanline 8s linear infinite;
+  pointer-events:none;
+}
+
+.cover-content{position:relative;z-index:3;max-width:800px;}
+
+.bonus-badge{
+  display:inline-block;
+  padding:8px 24px;
+  border:1px solid rgba(107,63,160,.5);
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.5em;
+  color:var(--purple3);text-transform:uppercase;
+  margin-bottom:32px;
+  background:rgba(107,63,160,.08);
+  opacity:0;animation:fadeUp .7s ease .2s forwards;
+}
+
+.cover-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(13px,3vw,22px);font-weight:600;
+  letter-spacing:.2em;color:var(--ivory2);
+  margin-bottom:16px;
+  opacity:0;animation:fadeUp .8s ease .4s forwards;
+}
+
+.cover-main{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,7vw,72px);font-weight:900;
+  line-height:1.05;
+  background:linear-gradient(160deg,#e0c8f8 0%,var(--purple3) 40%,var(--purple2) 70%,#4a2080 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:10px;
+  opacity:0;animation:fadeUp 1s ease .6s forwards;
+}
+
+.cover-main-2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,6vw,62px);font-weight:900;font-style:italic;
+  line-height:1.05;
+  background:linear-gradient(160deg,var(--gold3),var(--gold2) 50%,var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:28px;
+  opacity:0;animation:fadeUp .9s ease .8s forwards;
+}
+
+.cover-divider{
+  display:flex;align-items:center;gap:16px;
+  justify-content:center;margin:20px 0 24px;
+  opacity:0;animation:fadeUp .6s ease 1s forwards;
+}
+.cover-divider::before,.cover-divider::after{
+  content:'';flex:1;max-width:100px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(107,63,160,.6));
+}
+.cover-divider::after{background:linear-gradient(to left,transparent,rgba(107,63,160,.6));}
+.cd-gem{width:7px;height:7px;background:var(--purple2);transform:rotate(45deg);}
+
+.cover-sub{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(14px,2.5vw,20px);font-style:italic;
+  color:var(--w60);max-width:560px;margin:0 auto;line-height:1.65;
+  opacity:0;animation:fadeUp .7s ease 1.2s forwards;
+}
+.cover-sub em{color:var(--purple3);}
+
+/* scroll */
+.scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;animation:fadeUp .6s ease 2s forwards;
+}
+.scroll-hint span{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:rgba(107,63,160,.5);}
+.scroll-bar{
+  width:1px;height:48px;
+  background:linear-gradient(to bottom,var(--purple2),transparent);
+  animation:scanline 2.5s ease-in-out infinite;
+  position:relative;
+}
+
+/* ══════════════════════════
+   LAYOUT
+══════════════════════════ */
+.wrap{max-width:780px;margin:0 auto;padding:80px 32px;}
+.section-label{
+  font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.5em;
+  color:var(--purple2);text-transform:uppercase;
+  margin-bottom:48px;
+  display:flex;align-items:center;gap:14px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(107,63,160,.5),transparent);}
+
+.gold-rule{
+  width:100%;max-width:780px;margin:0 auto;
+  display:flex;align-items:center;gap:16px;padding:0 32px;
+}
+.gold-rule::before,.gold-rule::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(to right,transparent,rgba(107,63,160,.25));
+}
+.gold-rule::after{background:linear-gradient(to left,transparent,rgba(107,63,160,.25));}
+.gr-gem{width:7px;height:7px;background:var(--purple2);transform:rotate(45deg);flex-shrink:0;}
+
+/* ── OPENING QUOTE ── */
+.open-quote{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,4vw,36px);font-weight:400;font-style:italic;
+  line-height:1.55;color:var(--ivory);
+  padding:40px 40px 40px 56px;
+  border-left:2px solid var(--purple2);
+  background:linear-gradient(90deg,rgba(107,63,160,.07),transparent 80%);
+  position:relative;margin-bottom:52px;
+}
+.open-quote::before{
+  content:'\201C';
+  position:absolute;left:12px;top:16px;
+  font-size:72px;line-height:1;
+  color:var(--purple2);opacity:.4;
+  font-family:'Playfair Display',serif;
+}
+.open-quote em{color:var(--purple3);}
+
+/* ── BODY TEXT ── */
+.body-p{font-size:16.5px;line-height:1.95;color:var(--w60);margin-bottom:28px;}
+.body-p strong{color:var(--ivory);font-weight:400;}
+.body-p em{color:var(--purple3);font-style:italic;}
+.body-p .gold{color:var(--gold2);}
+
+/* ── CONTRADICTION CARDS ── */
+.contra-section{
+  background:linear-gradient(180deg,var(--deep) 0%,var(--warm) 50%,var(--deep) 100%);
+  border-top:1px solid rgba(107,63,160,.15);
+  border-bottom:1px solid rgba(107,63,160,.15);
+  padding:90px 32px;
+}
+.contra-wrap{max-width:780px;margin:0 auto;}
+
+.contra-grid{display:flex;flex-direction:column;gap:2px;margin-top:52px;}
+
+.contra-card{
+  display:grid;grid-template-columns:1fr 56px 1fr;
+  align-items:stretch;gap:0;
+  background:var(--card);
+  border:1px solid rgba(107,63,160,.1);
+  overflow:hidden;
+  transition:border-color .3s;
+}
+.contra-card:hover{border-color:rgba(107,63,160,.3);}
+
+.contra-side{padding:36px 32px;}
+.contra-side.left{
+  border-right:1px solid rgba(107,63,160,.1);
+  background:linear-gradient(135deg,rgba(107,63,160,.06),transparent 70%);
+}
+.contra-side.right{
+  background:linear-gradient(225deg,rgba(184,136,58,.05),transparent 70%);
+}
+
+.contra-label{
+  font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.45em;
+  text-transform:uppercase;margin-bottom:12px;
+}
+.contra-label.myth{color:rgba(239,68,68,.5);}
+.contra-label.truth{color:var(--gold2);}
+
+.contra-stmt{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(15px,2.5vw,20px);font-weight:700;
+  line-height:1.4;color:var(--ivory);margin-bottom:10px;
+}
+.contra-stmt.myth-txt{color:rgba(242,232,248,.5);}
+
+.contra-desc{font-size:13.5px;line-height:1.75;color:var(--w35);}
+.contra-desc em{color:var(--purple3);font-style:italic;}
+.contra-desc .gold{color:var(--gold2);}
+
+.contra-mid{
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(107,63,160,.06);
+  border-left:1px solid rgba(107,63,160,.1);
+  border-right:1px solid rgba(107,63,160,.1);
+}
+.contra-vs{
+  font-family:'Cinzel',serif;font-size:11px;font-weight:700;
+  color:rgba(107,63,160,.4);letter-spacing:.1em;writing-mode:vertical-lr;
+  text-transform:uppercase;
+}
+
+/* ── MIND LAYERS ── */
+.layers-section{padding:90px 32px;}
+.layers-wrap{max-width:780px;margin:0 auto;}
+
+.layer-stack{
+  display:flex;flex-direction:column;gap:3px;
+  margin-top:52px;position:relative;
+}
+.layer-stack::before{
+  content:'';
+  position:absolute;left:40px;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,rgba(107,63,160,.4),rgba(184,136,58,.4));
+}
+
+.layer-item{
+  display:grid;grid-template-columns:80px 1fr;
+  gap:0;align-items:stretch;
+  background:var(--card);
+  border:1px solid rgba(107,63,160,.08);
+  overflow:hidden;
+  transition:all .3s;
+}
+.layer-item:hover{border-color:rgba(107,63,160,.3);background:#18141e;}
+
+.layer-depth{
+  background:rgba(107,63,160,.07);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:24px 8px;
+  border-right:1px solid rgba(107,63,160,.1);
+  gap:8px;
+}
+.layer-pct{
+  font-family:'Cinzel',serif;font-size:11px;font-weight:700;
+  color:var(--purple2);letter-spacing:.05em;
+}
+.layer-bar{
+  width:3px;flex:1;min-height:30px;
+  background:linear-gradient(to bottom,var(--purple2),var(--purple));
+  border-radius:2px;opacity:.4;
+}
+
+.layer-content{padding:28px 28px;}
+.layer-name{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:700;
+  color:var(--ivory);margin-bottom:6px;
+}
+.layer-role{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;
+  color:var(--purple2);text-transform:uppercase;margin-bottom:12px;
+}
+.layer-desc{font-size:13.5px;line-height:1.75;color:var(--w60);}
+.layer-desc em{color:var(--purple3);font-style:italic;}
+.layer-desc .gold{color:var(--gold2);}
+
+/* ── REVEAL BOXES ── */
+.reveal-section{
+  background:var(--warm);
+  border-top:1px solid rgba(107,63,160,.12);
+  border-bottom:1px solid rgba(107,63,160,.12);
+  padding:90px 32px;
+}
+.reveal-wrap{max-width:780px;margin:0 auto;}
+
+.reveal-grid{display:flex;flex-direction:column;gap:24px;margin-top:52px;}
+
+.reveal-box{
+  border:1px solid rgba(107,63,160,.15);
+  overflow:hidden;
+  background:var(--card);
+}
+
+.reveal-q{
+  padding:28px 32px;
+  display:flex;align-items:center;gap:20px;
+  cursor:pointer;
+  transition:background .3s;
+}
+.reveal-q:hover{background:rgba(107,63,160,.06);}
+
+.rq-num{
+  font-family:'Cinzel',serif;font-size:22px;font-weight:700;
+  color:rgba(107,63,160,.3);flex-shrink:0;line-height:1;
+  min-width:36px;
+}
+.rq-text{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(16px,2.5vw,22px);font-weight:700;
+  color:var(--ivory);flex:1;line-height:1.3;
+}
+.rq-icon{
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid rgba(107,63,160,.3);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--purple2);font-size:14px;flex-shrink:0;
+  transition:transform .3s,background .3s;
+}
+.reveal-box.open .rq-icon{transform:rotate(180deg);background:rgba(107,63,160,.15);}
+
+.reveal-ans{
+  display:none;
+  padding:0 32px 32px 88px;
+  border-top:1px solid rgba(107,63,160,.08);
+}
+.reveal-box.open .reveal-ans{display:block;padding-top:28px;}
+
+.reveal-ans p{
+  font-size:15px;line-height:1.9;color:var(--w60);margin-bottom:16px;
+}
+.reveal-ans p:last-child{margin-bottom:0;}
+.reveal-ans strong{color:var(--ivory);font-weight:400;}
+.reveal-ans em{color:var(--purple3);font-style:italic;}
+.reveal-ans .gold{color:var(--gold2);}
+.reveal-ans .highlight-box{
+  border-left:2px solid var(--purple2);
+  padding:16px 20px;margin:16px 0;
+  background:rgba(107,63,160,.06);
+  font-style:italic;color:var(--ivory2);font-size:14.5px;line-height:1.7;
+}
+
+/* ── THE PARADOX ── */
+.paradox-section{
+  padding:100px 32px;
+  position:relative;overflow:hidden;
+}
+.paradox-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 70% at 50% 50%,#1a0a30 0%,var(--black) 68%);
+}
+.paradox-wrap{max-width:780px;margin:0 auto;position:relative;z-index:2;}
+
+.paradox-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(28px,6vw,56px);font-weight:900;
+  background:linear-gradient(160deg,#e0c8f8,var(--purple3) 50%,var(--purple2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:16px;text-align:center;
+}
+.paradox-sub{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(15px,2.5vw,22px);font-style:italic;
+  color:var(--w60);text-align:center;margin-bottom:60px;
+}
+.paradox-sub em{color:var(--gold2);}
+
+.paradox-list{list-style:none;}
+.paradox-list li{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(17px,2.8vw,26px);
+  line-height:1.55;
+  padding:22px 0 22px 24px;
+  border-left:2px solid transparent;
+  color:rgba(242,232,248,.22);
+  cursor:default;
+  transition:all .4s;
+  border-bottom:1px solid rgba(107,63,160,.06);
+}
+.paradox-list li:last-child{border-bottom:none;}
+.paradox-list li:hover{
+  color:var(--ivory);
+  border-left-color:var(--purple2);
+  padding-left:32px;
+  background:linear-gradient(90deg,rgba(107,63,160,.06),transparent 70%);
+}
+.paradox-list li em{color:var(--purple3);font-style:italic;}
+.paradox-list li .gold{color:var(--gold2);}
+
+/* ── TEKNIK ── */
+.teknik-section{
+  background:var(--deep);
+  border-top:1px solid rgba(107,63,160,.12);
+  border-bottom:1px solid rgba(107,63,160,.12);
+  padding:90px 32px;
+}
+.teknik-wrap{max-width:780px;margin:0 auto;}
+
+.teknik-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:2px;margin-top:52px;
+}
+.teknik-card{
+  background:var(--warm);padding:40px 28px;
+  border:1px solid rgba(107,63,160,.08);
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.teknik-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(107,63,160,.06),transparent 60%);
+  opacity:0;transition:opacity .3s;
+}
+.teknik-card:hover{border-color:rgba(107,63,160,.3);}
+.teknik-card:hover::before{opacity:1;}
+
+.teknik-num{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;
+  color:rgba(107,63,160,.4);text-transform:uppercase;margin-bottom:14px;
+}
+.teknik-name{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:700;
+  color:var(--ivory);margin-bottom:10px;
+}
+.teknik-desc{font-size:13px;line-height:1.75;color:var(--w60);}
+.teknik-desc em{color:var(--purple3);font-style:italic;}
+.teknik-desc .gold{color:var(--gold2);}
+
+.teknik-step{
+  margin-top:16px;padding-top:16px;
+  border-top:1px solid rgba(107,63,160,.1);
+  font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.3em;
+  color:rgba(107,63,160,.4);
+}
+
+/* ── ETIKA BOX ── */
+.etika-box{
+  border:1px solid rgba(239,68,68,.2);
+  padding:40px 40px;
+  background:linear-gradient(135deg,rgba(139,26,26,.08),transparent 60%);
+  margin-top:60px;margin-bottom:0;
+  position:relative;
+}
+.etika-box::before{
+  content:'⚠';
+  position:absolute;top:32px;right:32px;
+  font-size:20px;opacity:.3;
+}
+.etika-label{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.45em;
+  color:rgba(239,68,68,.5);margin-bottom:16px;
+}
+.etika-title{
+  font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);font-weight:700;
+  color:var(--ivory);margin-bottom:20px;
+}
+.etika-body{font-size:14.5px;line-height:1.85;color:var(--w60);}
+.etika-body em{color:rgba(239,68,68,.6);font-style:italic;}
+.etika-body strong{color:var(--ivory);font-weight:400;}
+
+/* ── FINAL REVEAL ── */
+.final-section{
+  min-height:80vh;display:flex;
+  align-items:center;justify-content:center;
+  padding:100px 32px;position:relative;overflow:hidden;
+}
+.final-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 75% at 50% 50%,#200840 0%,var(--black) 65%),
+    radial-gradient(ellipse 30% 30% at 50% 50%,rgba(107,63,160,.15),transparent 70%);
+}
+.final-content{position:relative;z-index:2;text-align:center;max-width:700px;}
+
+.final-reveal-label{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.55em;
+  color:var(--purple2);text-transform:uppercase;margin-bottom:32px;
+}
+.final-reveal-text{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,4.5vw,44px);font-weight:400;font-style:italic;
+  line-height:1.5;color:var(--ivory);margin-bottom:40px;
+}
+.final-reveal-text em{color:var(--purple3);}
+.final-reveal-text strong{
+  font-weight:900;font-style:normal;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.final-divider{
+  display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:32px;
+}
+.final-divider::before,.final-divider::after{
+  content:'';width:80px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(107,63,160,.5));
+}
+.final-divider::after{background:linear-gradient(to left,transparent,rgba(107,63,160,.5));}
+.fd-gem{width:7px;height:7px;background:var(--purple2);transform:rotate(45deg);}
+
+.final-attr{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;
+  color:rgba(107,63,160,.4);text-transform:uppercase;
+  margin-bottom:48px;
+}
+
+.back-btn{
+  display:inline-block;padding:18px 52px;
+  border:1px solid rgba(107,63,160,.4);color:var(--purple3);
+  font-family:'Cinzel',serif;font-size:10px;font-weight:600;
+  letter-spacing:.35em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;
+  position:relative;overflow:hidden;background:transparent;
+  transition:color .4s;
+}
+.back-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  transform:translateX(-101%);
+  transition:transform .45s cubic-bezier(.4,0,.2,1);z-index:-1;
+}
+.back-btn:hover{color:var(--ivory);}
+.back-btn:hover::before{transform:translateX(0);}
+
+/* ── FOOTER ── */
+.footer{border-top:1px solid rgba(107,63,160,.08);padding:36px 32px;text-align:center;}
+.footer p{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;color:rgba(107,63,160,.25);}
+
+@media(max-width:640px){
+  .contra-card{grid-template-columns:1fr;}
+  .contra-mid{display:none;}
+  .contra-side.left{border-right:none;border-bottom:1px solid rgba(107,63,160,.1);}
+  .reveal-ans{padding-left:32px;}
+  .layer-item{grid-template-columns:60px 1fr;}
+  .etika-box{padding:32px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<section class="cover">
+  <div class="cover-bg"></div>
+  <div class="scanline"></div>
+
+  <div class="spiral-wrap">
+    <div class="sp-ring"></div><div class="sp-ring"></div>
+    <div class="sp-ring"></div><div class="sp-ring"></div><div class="sp-ring"></div>
+    <div class="sp-cross h"></div><div class="sp-cross v"></div>
+    <div class="sp-cross d1"></div><div class="sp-cross d2"></div>
+    <div class="center-eye"></div>
+  </div>
+
+  <div class="cover-content">
+    <div class="bonus-badge">✦ Bab Bonus Eksklusif ✦</div>
+    <p class="cover-title">SADAR SEJATI</p>
+    <h1 class="cover-main">Rahasia di Balik</h1>
+    <h1 class="cover-main-2">Hipnosis yang Kontradiktif</h1>
+    <div class="cover-divider"><div class="cd-gem"></div></div>
+    <p class="cover-sub">
+      Yang selama ini kamu takuti justru adalah kunci terbesarmu.<br>
+      Yang kamu anggap <em>mengontrol</em> ternyata adalah pintu menuju <em>kebebasan sejati.</em>
+    </p>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-bar"></div>
+    <span>Masuki</span>
+  </div>
+</section>
+
+<div class="gold-rule"><div class="gr-gem"></div></div>
+
+<!-- ═══ PEMBUKA ═══ -->
+<div class="wrap">
+  <div class="section-label">Pembuka</div>
+
+  <blockquote class="open-quote">
+    Paradoks terbesar hipnosis adalah ini:<br>
+    semakin kamu takut <em>"dikendalikan"</em> — semakin kamu sudah <em>dikendalikan.</em><br>
+    Dan semakin kamu belajar memahaminya — semakin kamu <em>terbebas.</em>
+  </blockquote>
+
+  <p class="body-p">
+    Kata "hipnosis" membuat kebanyakan orang membayangkan seorang pria misterius
+    mengayunkan jam dengan mata menyipit, lalu seseorang tiba-tiba menggonggong seperti anjing di atas panggung.
+    Gambaran itu menarik untuk hiburan — tapi <strong>sangat jauh dari kenyataan.</strong>
+  </p>
+
+  <p class="body-p">
+    Kenyataannya jauh lebih mengejutkan. Dan jauh lebih relevan dengan hidupmu setiap hari.
+    Karena yang tidak diajarkan di sekolah manapun adalah ini:
+    <em>kamu sudah dalam kondisi hipnosis sebagian besar hidupmu</em> —
+    tanpa pernah menyadarinya.
+  </p>
+
+  <p class="body-p">
+    Bab ini bukan tentang menghipnosis orang lain. Ini tentang sesuatu yang jauh lebih penting:
+    <strong>menyadari hipnosis yang sudah bekerja pada dirimu sendiri</strong> —
+    dan menggunakannya sebagai alat transformasi yang paling kuat yang pernah ada.
+  </p>
+</div>
+
+<!-- ═══ KONTRADIKSI ═══ -->
+<section class="contra-section">
+  <div class="contra-wrap">
+    <div class="section-label">Mitos vs Kebenaran</div>
+    <p style="font-size:15px;color:var(--w60);max-width:560px;margin-bottom:0;line-height:1.8;">
+      Enam kontradiksi terbesar tentang hipnosis yang — jika kamu pahami — akan mengubah cara pandangmu tentang <em>pikiran, kesadaran, dan kebebasan.</em>
+    </p>
+
+    <div class="contra-grid">
+
+      <div class="contra-card">
+        <div class="contra-side left">
+          <p class="contra-label myth">✗ Mitos</p>
+          <p class="contra-stmt myth-txt">Hipnosis berarti kamu tidak sadar dan dikendalikan orang lain</p>
+          <p class="contra-desc">Banyak yang percaya bahwa dalam hipnosis seseorang "mati suri" dan pasrah sepenuhnya kepada sang hipnotis.</p>
+        </div>
+        <div class="contra-mid"><span class="contra-vs">vs</span></div>
+        <div class="contra-side right">
+          <p class="contra-label truth">✓ Kebenaran</p>
+          <p class="contra-stmt">Hipnosis adalah kondisi fokus yang <em>sangat tinggi</em> — kamu justru lebih sadar</p>
+          <p class="contra-desc">Secara ilmiah, hipnosis adalah kondisi <em>heightened suggestibility</em> — pikiranmu sangat fokus dan terbuka. <span class="gold">Kamu tidak bisa dihipnosis untuk melakukan sesuatu yang berlawanan dengan nilai dasarmu.</span></p>
+        </div>
+      </div>
+
+      <div class="contra-card">
+        <div class="contra-side left">
+          <p class="contra-label myth">✗ Mitos</p>
+          <p class="contra-stmt myth-txt">Hanya orang lemah atau mudah terpengaruh yang bisa dihipnosis</p>
+          <p class="contra-desc">Ada anggapan bahwa orang cerdas dan berpendirian kuat tidak bisa masuk ke kondisi hipnosis.</p>
+        </div>
+        <div class="contra-mid"><span class="contra-vs">vs</span></div>
+        <div class="contra-side right">
+          <p class="contra-label truth">✓ Kebenaran</p>
+          <p class="contra-stmt">Orang yang <em>paling cerdas dan imajinatif</em> justru paling mudah dihipnosis</p>
+          <p class="contra-desc">Kemampuan hipnosis berkorelasi dengan <em>kecerdasan, kreativitas, dan kemampuan fokus.</em> <span class="gold">Semakin kamu bisa membayangkan sesuatu dengan jelas, semakin dalam kamu bisa masuk.</span></p>
+        </div>
+      </div>
+
+      <div class="contra-card">
+        <div class="contra-side left">
+          <p class="contra-label myth">✗ Mitos</p>
+          <p class="contra-stmt myth-txt">Hipnosis adalah sesuatu yang dilakukan orang lain kepadamu</p>
+          <p class="contra-desc">Hipnosis selalu digambarkan sebagai proses satu arah: hipnotis aktif, subjek pasif.</p>
+        </div>
+        <div class="contra-mid"><span class="contra-vs">vs</span></div>
+        <div class="contra-side right">
+          <p class="contra-label truth">✓ Kebenaran</p>
+          <p class="contra-stmt">Semua hipnosis pada dasarnya adalah <em>self-hypnosis</em></p>
+          <p class="contra-desc">Hipnotis hanya memfasilitasi. <span class="gold">Kamu sendiri yang memilih untuk masuk ke kondisi itu.</span> Artinya: kamu sudah melakukannya setiap hari — saat melamun, terpaku di layar, atau larut dalam musik.</p>
+        </div>
+      </div>
+
+      <div class="contra-card">
+        <div class="contra-side left">
+          <p class="contra-label myth">✗ Mitos</p>
+          <p class="contra-stmt myth-txt">Hipnosis hanya bekerja pada orang yang percaya</p>
+          <p class="contra-desc">Banyak yang beranggapan bahwa skeptis tidak bisa dihipnosis dan hasilnya tidak akan efektif.</p>
+        </div>
+        <div class="contra-mid"><span class="contra-vs">vs</span></div>
+        <div class="contra-side right">
+          <p class="contra-label truth">✓ Kebenaran</p>
+          <p class="contra-stmt">Iklan, propaganda, dan rutinitas harian bekerja dengan <em>mekanisme yang sama persis</em></p>
+          <p class="contra-desc">Otak tidak membedakan antara hipnosis formal dan pengulangan sugesti sehari-hari. <em>Periklanan adalah hipnosis massal</em> yang bekerja bahkan pada orang yang "tidak percaya" hipnosis.</p>
+        </div>
+      </div>
+
+      <div class="contra-card">
+        <div class="contra-side left">
+          <p class="contra-label myth">✗ Mitos</p>
+          <p class="contra-stmt myth-txt">Hipnosis bisa membuat seseorang mengingat masa lalu dengan sempurna</p>
+          <p class="contra-desc">Film dan novel sering menggambarkan hipnosis sebagai cara ajaib membuka memori tersembunyi.</p>
+        </div>
+        <div class="contra-mid"><span class="contra-vs">vs</span></div>
+        <div class="contra-side right">
+          <p class="contra-label truth">✓ Kebenaran</p>
+          <p class="contra-stmt">Hipnosis justru <em>meningkatkan risiko memori palsu</em> yang terasa sangat nyata</p>
+          <p class="contra-desc">Dalam kondisi hipnosis, pikiran sangat sugestif. <span class="gold">Pertanyaan yang salah bisa menanam "kenangan" yang belum pernah terjadi</span> — dan terasa benar-benar nyata bagi subjeknya.</p>
+        </div>
+      </div>
+
+      <div class="contra-card">
+        <div class="contra-side left">
+          <p class="contra-label myth">✗ Mitos</p>
+          <p class="contra-stmt myth-txt">Kondisi hipnosis adalah kondisi yang tidak normal dan berbahaya</p>
+          <p class="contra-desc">Banyak yang menghindari hipnosis karena dianggap sesuatu yang asing dan tidak alami.</p>
+        </div>
+        <div class="contra-mid"><span class="contra-vs">vs</span></div>
+        <div class="contra-side right">
+          <p class="contra-label truth">✓ Kebenaran</p>
+          <p class="contra-stmt">Kamu masuk ke kondisi <em>seperti hipnosis rata-rata 70–80% waktumu</em> saat terjaga</p>
+          <p class="contra-desc">Saat mengemudi di jalan yang familiar, menonton layar, membaca buku — <em>pikiranmu masuk ke mode autopilot.</em> <span class="gold">Inilah kondisi hipnosis alami yang terjadi terus-menerus.</span></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LAPISAN PIKIRAN ═══ -->
+<section class="layers-section">
+  <div class="layers-wrap">
+    <div class="section-label">Peta Pikiran Manusia</div>
+    <p style="font-size:15px;color:var(--w60);max-width:580px;margin-bottom:0;line-height:1.8;">
+      Untuk memahami mengapa hipnosis bekerja — dan mengapa kamu <em>sudah sering berada di dalamnya</em> — kamu perlu memahami lapisan pikiran manusia.
+    </p>
+
+    <div class="layer-stack">
+
+      <div class="layer-item">
+        <div class="layer-depth">
+          <span class="layer-pct">5%</span>
+          <div class="layer-bar" style="background:linear-gradient(to bottom,#e0c8f8,var(--purple3));"></div>
+        </div>
+        <div class="layer-content">
+          <div class="layer-name">Pikiran Sadar</div>
+          <div class="layer-role">Kesadaran Aktif · Beta Wave</div>
+          <div class="layer-desc">
+            Hanya <em>5% dari kapasitas pikiranmu</em> yang bekerja secara sadar — logika, analisis, keputusan yang dipertimbangkan.
+            Ini yang kamu gunakan saat membaca kalimat ini. Tapi ia sangat terbatas dan mudah lelah.
+            <span class="gold">Inilah mengapa "niat" saja tidak cukup untuk mengubah perilaku.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer-item">
+        <div class="layer-depth">
+          <span class="layer-pct">95%</span>
+          <div class="layer-bar" style="background:linear-gradient(to bottom,var(--purple2),var(--purple));"></div>
+        </div>
+        <div class="layer-content">
+          <div class="layer-name">Pikiran Bawah Sadar</div>
+          <div class="layer-role">Gudang Program · Theta &amp; Delta Wave</div>
+          <div class="layer-desc">
+            <strong>95% dari semua tindakan, reaksi, kebiasaan, dan emosi</strong> dikendalikan dari sini.
+            Ini adalah sistem operasi yang menjalankan hidupmu secara otomatis.
+            <em>Semua keyakinan, trauma, kebiasaan, dan identitas dirimu tersimpan di lapisan ini.</em>
+            Hipnosis adalah gerbang langsung ke lapisan ini.
+          </div>
+        </div>
+      </div>
+
+      <div class="layer-item">
+        <div class="layer-depth">
+          <span class="layer-pct">∞</span>
+          <div class="layer-bar" style="background:linear-gradient(to bottom,var(--gold2),var(--gold));"></div>
+        </div>
+        <div class="layer-content">
+          <div class="layer-name">Pikiran Super-Sadar</div>
+          <div class="layer-role">Intuisi Sejati · Gamma &amp; Beyond</div>
+          <div class="layer-desc">
+            Lapisan ketiga yang sering diabaikan ilmu pengetahuan barat tapi diakui oleh tradisi kebijaksanaan timur.
+            <em>Intuisi, inspirasi tiba-tiba, dan momen "aha"</em> berasal dari sini.
+            <span class="gold">Kesadaran sejati adalah ketika ketiga lapisan ini bekerja selaras — bukan saling bertarung.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PERTANYAAN TERLARANG ═══ -->
+<section class="reveal-section">
+  <div class="reveal-wrap">
+    <div class="section-label">Pertanyaan yang Jarang Diajukan</div>
+
+    <div class="reveal-grid">
+
+      <div class="reveal-box">
+        <div class="reveal-q" onclick="toggleReveal(this)">
+          <span class="rq-num">01</span>
+          <p class="rq-text">Jika hipnosis sudah terjadi secara alami — siapa yang selama ini "menghipnosis" kamu?</p>
+          <div class="rq-icon">▾</div>
+        </div>
+        <div class="reveal-ans">
+          <p>Ini adalah pertanyaan yang mengubah segalanya. Jika kondisi seperti hipnosis terjadi secara alami saat kita dalam mode autopilot — maka <strong>siapa atau apa yang memasukkan "program" ke dalam pikiran bawah sadarmu selama ini?</strong></p>
+          <div class="highlight-box">Orang tuamu, saat berulang kali berkata "kamu tidak akan bisa". Guru yang mengatakan "kamu bukan anak pintar". Media yang terus menanamkan standar kecantikan dan kesuksesan. Lingkungan yang mengulang-ulang bahwa "orang seperti kita memang begini".</div>
+          <p>Semua itu masuk bukan melalui argumen dan logika — tapi melalui <em>pengulangan emosional yang kuat.</em> Persis seperti sugesti hipnosis. Dan sekarang semuanya berjalan secara otomatis sebagai "keyakinanmu sendiri". <span class="gold">Tapi apakah itu benar-benar keyakinanmu?</span></p>
+        </div>
+      </div>
+
+      <div class="reveal-box">
+        <div class="reveal-q" onclick="toggleReveal(this)">
+          <span class="rq-num">02</span>
+          <p class="rq-text">Mengapa orang yang tahu rokok berbahaya tetap merokok — dan apa hubungannya dengan hipnosis?</p>
+          <div class="rq-icon">▾</div>
+        </div>
+        <div class="reveal-ans">
+          <p>Ini adalah bukti paling nyata dari pertarungan antara pikiran sadar dan bawah sadar. <strong>Pikiran sadar tahu rokok berbahaya.</strong> Tapi pikiran bawah sadar menyimpan program yang lebih kuat: "merokok = rileks", "merokok = identitas sosialku", "merokok = mengatasi stres".</p>
+          <p>Program bawah sadar <em>selalu mengalahkan niat sadar.</em> Itulah mengapa:</p>
+          <div class="highlight-box">Orang yang diet ketat justru makan berlebihan di malam hari. Orang yang ingin hemat justru impulsif belanja. Orang yang ingin berubah justru kembali ke pola lama — karena bawah sadar masih menjalankan program yang lama.</div>
+          <p>Hipnosis terapeutik bekerja bukan dengan memberi tahu pikiran sadar — tapi dengan <span class="gold">mengganti program di bawah sadar langsung dari sumbernya.</span></p>
+        </div>
+      </div>
+
+      <div class="reveal-box">
+        <div class="reveal-q" onclick="toggleReveal(this)">
+          <span class="rq-num">03</span>
+          <p class="rq-text">Apa perbedaan antara afirmasi yang tidak bekerja dan yang benar-benar mengubah hidup?</p>
+          <div class="rq-icon">▾</div>
+        </div>
+        <div class="reveal-ans">
+          <p>Banyak orang gagal dengan afirmasi karena melakukannya di <em>kondisi gelombang beta yang penuh resistensi.</em> Saat kamu berkata "Saya kaya" — pikiran sadar langsung merespons: "Bohong. Rekening kosong." Dan sugesti ditolak.</p>
+          <div class="highlight-box">Afirmasi yang bekerja disampaikan saat otak berada di gelombang alpha atau theta — kondisi relaks mendalam, baru bangun tidur, atau tepat sebelum tidur. Inilah saat pintu bawah sadar terbuka lebar.</div>
+          <p>Inilah <strong>rahasia di balik doa subuh dan dzikir malam</strong> yang diajarkan berbagai tradisi spiritual. Waktu-waktu itu bukan kebetulan — itu adalah saat otak paling reseptif terhadap sugesti positif. <span class="gold">Orang bijak zaman dulu sudah tahu neurosains ini ribuan tahun sebelum sains menemukannya.</span></p>
+        </div>
+      </div>
+
+      <div class="reveal-box">
+        <div class="reveal-q" onclick="toggleReveal(this)">
+          <span class="rq-num">04</span>
+          <p class="rq-text">Bagaimana seorang anak kecil yang dibesarkan dalam kemiskinan bisa memiliki mentalitas kelimpahan — dan sebaliknya?</p>
+          <div class="rq-icon">▾</div>
+        </div>
+        <div class="reveal-ans">
+          <p>Antara usia 0–7 tahun, otak manusia beroperasi dominan dalam gelombang <em>theta dan delta</em> — kondisi yang identik dengan kondisi hipnosis mendalam. Ini bukan kebetulan.</p>
+          <p>Pada usia itu, anak-anak tidak memiliki "filter kritis". <strong>Semua yang mereka lihat, dengar, dan rasakan langsung masuk ke bawah sadar sebagai program permanen.</strong></p>
+          <div class="highlight-box">Anak yang sering mendengar "uang itu susah dicari" — akan menemukan uang susah dicari. Anak yang melihat orang tuanya selalu takut dengan risiko — akan takut mengambil peluang. Bukan karena takdir. Tapi karena program itu sudah tertanam dalam.</div>
+          <p>Kabar baiknya: <em>program yang ditanam bisa diganti.</em> <span class="gold">Itulah inti dari seluruh perjalanan SADAR SEJATI ini — membongkar program lama dan menulis ulang kode sumber hidupmu.</span></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PARADOKS INTI ═══ -->
+<section class="paradox-section">
+  <div class="paradox-bg"></div>
+  <div class="paradox-wrap">
+    <div class="section-label" style="justify-content:center;margin-bottom:40px;">
+      <div style="width:40px;height:1px;background:rgba(107,63,160,.5);"></div>
+      &nbsp; Paradoks Inti &nbsp;
+      <div style="width:40px;height:1px;background:rgba(107,63,160,.5);"></div>
+    </div>
+    <h2 class="paradox-title">Kontradiksi yang Membebaskan</h2>
+    <p class="paradox-sub">Hover setiap baris untuk merasakannya secara penuh</p>
+
+    <ul class="paradox-list">
+      <li>Semakin keras kamu berusaha <em>tidak memikirkan sesuatu</em> — semakin <em>besar ia menguasai pikiranmu.</em></li>
+      <li>Hipnosis bukan tentang <em>kehilangan kontrol</em> — tapi tentang <span class="gold">menemukan kontrol yang lebih dalam.</span></li>
+      <li>Orang yang paling mudah disugesti bukan yang lemah — tapi yang paling <em>imajinatif dan empatik.</em></li>
+      <li>Kamu tidak bisa <em>memaksa dirimu berubah</em> — tapi kamu bisa <span class="gold">meyakinkan bawah sadarmu untuk berubah.</span></li>
+      <li>Kondisi relaks total justru menghasilkan <em>fokus dan kapasitas</em> yang jauh lebih besar dari kerja keras.</li>
+      <li>Sugesti yang paling kuat bukan yang keras dan berulang — tapi yang disampaikan <em>dengan emosi yang tepat, di waktu yang tepat.</em></li>
+      <li>Memahami bagaimana kamu "diprogram" bukan untuk menjadi paranoid — tapi untuk akhirnya menjadi <span class="gold">penulis program hidupmu sendiri.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ TEKNIK PRAKTIS ═══ -->
+<section class="teknik-section">
+  <div class="teknik-wrap">
+    <div class="section-label">Teknik Praktis untuk Dirimu Sendiri</div>
+    <p style="font-size:15px;color:var(--w60);max-width:580px;margin-bottom:0;line-height:1.8;">
+      Bukan sihir. Bukan ilmu gelap. Ini adalah teknik berbasis neurosains yang bisa kamu gunakan <em>mulai malam ini</em> untuk mulai menulis ulang program pikiranmu.
+    </p>
+
+    <div class="teknik-grid">
+
+      <div class="teknik-card">
+        <p class="teknik-num">Teknik 01</p>
+        <div class="teknik-name">The Hypnagogic Window</div>
+        <div class="teknik-desc">
+          Tepat saat kamu <em>setengah tidur — sebelum benar-benar terlelap</em> — otak berada di gelombang theta. Inilah "jendela emas" untuk sugesti.
+          <div style="margin-top:12px;"><span class="gold">Caranya:</span> Ulangi pernyataan positif yang kamu inginkan dengan suara lembut atau dalam hati, sambil membayangkan hasilnya sudah terwujud. Lakukan setiap malam selama 21 hari.</div>
+        </div>
+        <div class="teknik-step">⏱ 10 menit sebelum tidur</div>
+      </div>
+
+      <div class="teknik-card">
+        <p class="teknik-num">Teknik 02</p>
+        <div class="teknik-name">Emotional Anchoring</div>
+        <div class="teknik-desc">
+          Bawah sadar tidak merespons kata-kata — ia merespons <em>emosi yang menyertai kata-kata.</em>
+          Sugesti tanpa emosi adalah surat tanpa prangko — tidak akan sampai.
+          <div style="margin-top:12px;"><span class="gold">Caranya:</span> Saat berafirmasi, bangkitkan dulu perasaan seolah hal yang kamu inginkan sudah nyata. Rasakan rasa syukurnya, kebahagiaannya, kelegaannya — baru ucapkan afirmasinya.</div>
+        </div>
+        <div class="teknik-step">⚡ Kunci: rasa, bukan kata</div>
+      </div>
+
+      <div class="teknik-card">
+        <p class="teknik-num">Teknik 03</p>
+        <div class="teknik-name">Pattern Interrupt</div>
+        <div class="teknik-desc">
+          Setiap kebiasaan buruk memiliki "pemicu" — situasi, tempat, atau emosi yang mengaktifkan program lama.
+          <em>Memutus pola itu sebelum program berjalan</em> adalah cara paling efektif mengubah kebiasaan.
+          <div style="margin-top:12px;"><span class="gold">Caranya:</span> Identifikasi pemicunya. Saat pemicu muncul, lakukan tindakan fisik yang mengejutkan — tepuk tangan, berdiri tiba-tiba, atau ubah postur — untuk memutus jalur saraf lama.</div>
+        </div>
+        <div class="teknik-step">🔄 Putus sebelum otomatis</div>
+      </div>
+
+      <div class="teknik-card">
+        <p class="teknik-num">Teknik 04</p>
+        <div class="teknik-name">Vivid Future Visualization</div>
+        <div class="teknik-desc">
+          Otak tidak bisa membedakan antara pengalaman nyata dan yang <em>dibayangkan dengan sangat detail.</em>
+          Atlet olimpiade menggunakan ini. Eksekutif puncak menggunakannya.
+          <div style="margin-top:12px;"><span class="gold">Caranya:</span> Setiap pagi, habiskan 5 menit membayangkan versi terbaikmu dalam kondisi alpha (relaks, mata tertutup). Bayangkan sedetail mungkin: apa yang kamu lihat, dengar, rasakan. Otak akan mulai membangun jalan menuju ke sana.</div>
+        </div>
+        <div class="teknik-step">🌅 5 menit setiap pagi</div>
+      </div>
+
+      <div class="teknik-card">
+        <p class="teknik-num">Teknik 05</p>
+        <div class="teknik-name">Reframing Naratif Mendalam</div>
+        <div class="teknik-desc">
+          Bawah sadar beroperasi dalam <em>cerita dan metafora</em> — bukan fakta logis.
+          Mengubah cerita yang kamu pegang tentang dirimu adalah bentuk self-hypnosis yang paling kuat.
+          <div style="margin-top:12px;"><span class="gold">Caranya:</span> Ambil satu keyakinan pembatas. Tulis ulang sebagai cerita yang berbeda — dengan dirimu sebagai protagonis yang belajar, bukan korban yang menderita. Baca ulang cerita baru itu setiap hari selama sebulan.</div>
+        </div>
+        <div class="teknik-step">📖 Tulis ulang kisahmu</div>
+      </div>
+
+      <div class="teknik-card">
+        <p class="teknik-num">Teknik 06</p>
+        <div class="teknik-name">The Mirror Technique</div>
+        <div class="teknik-desc">
+          Menatap mata sendiri di cermin <em>mengaktifkan respons bawah sadar yang sangat kuat</em> — jauh lebih kuat dari sekadar membaca atau mendengar afirmasi.
+          <div style="margin-top:12px;"><span class="gold">Caranya:</span> Berdiri di depan cermin, tatap matamu sendiri, dan ucapkan afirmasimu dengan penuh keyakinan dan perasaan. Rasakan canggung di awal — itu tanda resistensi yang sedang ditembus. Lakukan 2 menit setiap hari.</div>
+        </div>
+        <div class="teknik-step">👁 Tatap dirimu sendiri</div>
+      </div>
+
+    </div>
+
+    <!-- ETIKA -->
+    <div class="etika-box">
+      <p class="etika-label">⚠ Peringatan Etis · Wajib Dibaca</p>
+      <h3 class="etika-title">Tentang Menghipnosis Orang Lain</h3>
+      <p class="etika-body">
+        Semua teknik di atas adalah untuk <strong>dirimu sendiri</strong> — sebagai alat pertumbuhan dan penyembuhan.
+        Pemahaman tentang sugesti dan hipnosis bisa disalahgunakan untuk
+        <em>memanipulasi, mempengaruhi, dan mengeksploitasi orang lain</em> tanpa sepengetahuan mereka.
+        <br><br>
+        <strong>Itulah garis merah yang tidak boleh dilewati.</strong>
+        Orang yang benar-benar memahami hipnosis secara mendalam justru yang paling tidak ingin menggunakannya untuk memanipulasi — karena mereka tahu betapa rentannya pikiran manusia dan betapa besarnya tanggung jawab yang datang bersama pengetahuan ini.
+        <br><br>
+        <em>Kesadaran sejati selalu mengarah pada pemberdayaan, bukan pengendalian. Pada kebebasan, bukan ketergantungan. Pada terang, bukan kegelapan.</em>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ FINAL REVEAL ═══ -->
+<section class="final-section">
+  <div class="final-bg"></div>
+  <div class="final-content">
+    <p class="final-reveal-label">Rahasia Terbesar</p>
+
+    <p class="final-reveal-text">
+      Hipnosis yang paling berbahaya<br>
+      bukan yang dilakukan oleh orang lain kepadamu.<br><br>
+      Hipnosis yang paling berbahaya adalah<br>
+      <em>cerita yang sudah bertahun-tahun</em><br>
+      kamu ceritakan kepada <strong>dirimu sendiri.</strong>
+    </p>
+
+    <div class="final-divider"><div class="fd-gem"></div></div>
+
+    <p class="final-attr">Dan kesadaran sejati dimulai saat kamu berani menulis ulang cerita itu.</p>
+
+    <br><br>
+
+    <a class="back-btn" href="#">← Kembali ke Program Utama</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>SADAR SEJATI · Bab Bonus: Rahasia di Balik Hipnosis yang Kontradiktif · Eksklusif</p>
+</footer>
+
+<script>
+function toggleReveal(btn) {
+  const box = btn.closest('.reveal-box');
+  box.classList.toggle('open');
+}
+</script>
+</body>
+</html>
