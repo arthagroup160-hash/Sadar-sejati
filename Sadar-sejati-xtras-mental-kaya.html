@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SADAR SEJATI — X-TRA BONUS: Mental Miskin vs Mental Kaya</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#0a0804;
+  --soil:#1a1208;
+  --earth:#2a1e10;
+  --bark:#3a2a18;
+  --gold:#c8922a;
+  --gold2:#e8b040;
+  --gold3:#f8cc60;
+  --leaf:#2a5a2a;
+  --leaf2:#3a7a3a;
+  --leaf3:#5aaa5a;
+  --sky:#1a3a5a;
+  --sky2:#2a5a8a;
+  --cream:#f5edd8;
+  --cream2:#e8d8b8;
+  --w70:rgba(245,237,216,0.70);
+  --w45:rgba(245,237,216,0.45);
+  --w25:rgba(245,237,216,0.25);
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ink);
+  color:var(--cream);
+  font-family:'Newsreader',serif;
+  font-weight:300;
+  overflow-x:hidden;
+  cursor:default;
+}
+
+/* grain */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1000;
+}
+
+/* ═══════════ KEYFRAMES ═══════════ */
+@keyframes rise{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes grow{0%,100%{transform:scaleY(.9);}50%{transform:scaleY(1.1);}}
+@keyframes drift{0%,100%{transform:translateX(0);}50%{transform:translateX(8px);}}
+@keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
+@keyframes pulse-gold{0%,100%{box-shadow:0 0 0 0 rgba(200,146,42,0);}50%{box-shadow:0 0 0 8px rgba(200,146,42,0.08);}}
+@keyframes counter{from{opacity:0;transform:scale(.8);}to{opacity:1;transform:scale(1);}}
+
+/* ═══════════ COVER ═══════════ */
+.cover{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:80px 32px;
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.cover-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 60%,#1a0c00 0%,transparent 55%),
+    radial-gradient(ellipse 60% 70% at 75% 30%,#001a0a 0%,transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 100%,#1a1000 0%,transparent 50%),
+    #0a0804;
+}
+
+/* two-world visual */
+.world-split{
+  position:absolute;inset:0;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.world-poor{
+  background:linear-gradient(135deg,rgba(20,10,0,.4),transparent);
+  border-right:1px solid rgba(200,146,42,.06);
+}
+.world-rich{
+  background:linear-gradient(225deg,rgba(0,20,5,.4),transparent);
+}
+
+/* floating coins */
+.coin{
+  position:absolute;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold2);opacity:0;
+  animation:float-coin 6s ease-in-out infinite;
+}
+@keyframes float-coin{
+  0%{opacity:0;transform:translateY(0);}
+  20%{opacity:.4;}
+  80%{opacity:.15;}
+  100%{opacity:0;transform:translateY(-80px);}
+}
+
+.cover-content{position:relative;z-index:3;}
+
+.xtra-badge{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:10px 28px;
+  border:1px solid rgba(200,146,42,.4);
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.5em;color:var(--gold2);text-transform:uppercase;
+  margin-bottom:36px;
+  background:rgba(200,146,42,.06);
+  opacity:0;animation:rise .7s ease .2s forwards;
+}
+.xtra-badge span{width:4px;height:4px;background:var(--gold2);transform:rotate(45deg);}
+
+.cover-kicker{
+  font-family:'Syne',sans-serif;font-size:clamp(11px,2vw,14px);
+  font-weight:600;letter-spacing:.3em;color:var(--w45);
+  text-transform:uppercase;margin-bottom:20px;
+  opacity:0;animation:rise .7s ease .4s forwards;
+}
+
+.cover-h1{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(44px,10vw,100px);font-style:italic;
+  line-height:.95;letter-spacing:-.01em;
+  margin-bottom:12px;
+  opacity:0;animation:rise 1s ease .6s forwards;
+}
+.cover-h1 .poor{
+  display:block;
+  background:linear-gradient(160deg,#8a6030 0%,#6a4020 60%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.cover-h1 .vs-text{
+  display:block;
+  font-family:'Syne',sans-serif;font-size:clamp(14px,2.5vw,22px);
+  font-style:normal;font-weight:800;letter-spacing:.5em;
+  color:var(--w25);margin:10px 0;
+}
+.cover-h1 .rich{
+  display:block;
+  background:linear-gradient(160deg,var(--gold3) 0%,var(--gold2) 45%,var(--gold) 80%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.cover-sub{
+  font-family:'Newsreader',serif;
+  font-size:clamp(15px,2.5vw,22px);font-style:italic;
+  color:var(--w70);max-width:580px;margin:28px auto 0;line-height:1.65;
+  opacity:0;animation:rise .8s ease 1s forwards;
+}
+.cover-sub em{color:var(--gold2);}
+
+.scroll-cue{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;animation:rise .6s ease 1.8s forwards;
+}
+.scroll-cue span{font-family:'Syne',sans-serif;font-size:9px;letter-spacing:.4em;color:var(--w25);text-transform:uppercase;}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--gold),transparent);animation:grow 2s ease-in-out infinite;}
+
+/* ═══════════ LAYOUT UTILS ═══════════ */
+.section{max-width:800px;margin:0 auto;padding:90px 32px;}
+.sl{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.5em;color:var(--gold);text-transform:uppercase;
+  margin-bottom:52px;display:flex;align-items:center;gap:16px;
+}
+.sl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(200,146,42,.5),transparent);}
+.sl.leaf-sl{color:var(--leaf3);}
+.sl.leaf-sl::after{background:linear-gradient(to right,rgba(90,170,90,.5),transparent);}
+.sl.sky-sl{color:#7abcf0;}
+.sl.sky-sl::after{background:linear-gradient(to right,rgba(90,160,220,.5),transparent);}
+
+.rule{width:100%;max-width:800px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:0 32px;}
+.rule::before,.rule::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(200,146,42,.2));}
+.rule::after{background:linear-gradient(to left,transparent,rgba(200,146,42,.2));}
+.rg{width:7px;height:7px;background:var(--gold2);transform:rotate(45deg);flex-shrink:0;}
+
+.body-p{font-size:17px;line-height:2;color:var(--w70);margin-bottom:28px;}
+.body-p strong{color:var(--cream);font-weight:400;}
+.body-p em{color:var(--gold2);font-style:italic;}
+.body-p .lf{color:var(--leaf3);}
+
+.big-q{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(22px,4.5vw,42px);font-style:italic;
+  line-height:1.4;color:var(--cream);
+  padding:40px 40px 40px 56px;
+  border-left:3px solid var(--gold);
+  background:linear-gradient(90deg,rgba(200,146,42,.06),transparent 80%);
+  position:relative;margin-bottom:52px;
+}
+.big-q::before{
+  content:'\201C';position:absolute;left:10px;top:14px;
+  font-size:80px;line-height:1;color:var(--gold);opacity:.3;
+}
+.big-q em{color:var(--gold2);}
+
+/* ═══════════ THE SPLIT — TWO WORLDS ═══════════ */
+.split-section{
+  background:var(--soil);
+  border-top:1px solid rgba(200,146,42,.12);
+  border-bottom:1px solid rgba(200,146,42,.12);
+  padding:90px 0;overflow:hidden;
+}
+.split-wrap{max-width:800px;margin:0 auto;padding:0 32px;}
+
+.dna-grid{
+  display:grid;grid-template-columns:1fr 48px 1fr;
+  gap:0;margin-top:52px;
+}
+
+.dna-col{}
+.dna-header{
+  padding:28px 24px;
+  text-align:center;
+  border-bottom:1px solid rgba(200,146,42,.1);
+  margin-bottom:0;
+}
+.dna-header.poor-h{background:linear-gradient(180deg,rgba(80,40,10,.2),transparent);}
+.dna-header.rich-h{background:linear-gradient(180deg,rgba(40,120,40,.08),transparent);}
+.dna-icon{font-size:32px;margin-bottom:10px;}
+.dna-label{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.4em;text-transform:uppercase;
+}
+.poor-label{color:#8a6040;}
+.rich-label{color:var(--leaf3);}
+
+.dna-rows{}
+.dna-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid rgba(200,146,42,.06);
+}
+.dna-row:last-child{border-bottom:none;}
+
+.dna-cell{
+  padding:22px 24px;font-size:14px;line-height:1.75;
+  transition:background .3s;
+}
+.dna-cell:hover{background:rgba(200,146,42,.03);}
+.dna-cell.poor-cell{
+  color:rgba(245,237,216,.45);
+  border-right:none;
+  font-style:italic;
+}
+.dna-cell.poor-cell::before{content:'— ';color:#6a4020;font-style:normal;}
+.dna-cell.rich-cell{
+  color:var(--w70);
+  padding-left:28px;
+}
+.dna-cell.rich-cell::before{content:'✦ ';color:var(--gold2);font-size:10px;}
+
+.dna-center{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;position:relative;
+}
+.dna-center::before{
+  content:'';position:absolute;top:0;bottom:0;left:50%;width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(200,146,42,.4),transparent);
+}
+.dna-node{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold);opacity:.4;
+  position:relative;z-index:1;
+}
+
+/* ═══════════ SCIENCE — HOW IT HAPPENS ═══════════ */
+.science-section{padding:90px 32px;}
+.sci-wrap{max-width:800px;margin:0 auto;}
+
+.timeline{display:flex;flex-direction:column;gap:0;position:relative;}
+.timeline::before{
+  content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--gold) 0%,var(--leaf2) 50%,var(--sky2) 100%);
+  opacity:.3;
+}
+
+.tl-item{
+  display:grid;grid-template-columns:56px 1fr;
+  gap:0;padding-bottom:48px;
+}
+.tl-item:last-child{padding-bottom:0;}
+
+.tl-marker{
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:4px;
+}
+.tl-dot{
+  width:14px;height:14px;border-radius:50%;
+  border:2px solid var(--gold);background:var(--ink);
+  position:relative;z-index:2;flex-shrink:0;
+  transition:background .3s;animation:pulse-gold 3s ease-in-out infinite;
+}
+.tl-item:hover .tl-dot{background:var(--gold);}
+
+.tl-body{padding:0 0 0 20px;}
+.tl-age{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.45em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;
+}
+.tl-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(18px,3.5vw,28px);
+  color:var(--cream);margin-bottom:12px;line-height:1.2;
+}
+.tl-content{font-size:14.5px;line-height:1.9;color:var(--w70);}
+.tl-content em{color:var(--gold2);font-style:italic;}
+.tl-content strong{color:var(--cream);font-weight:400;}
+.tl-content .lf{color:var(--leaf3);}
+.tl-content .sky{color:#7abcf0;}
+
+.tl-box{
+  margin-top:16px;padding:16px 20px;
+  border-left:2px solid rgba(200,146,42,.35);
+  background:rgba(200,146,42,.04);
+  font-size:13.5px;line-height:1.75;
+  color:var(--gold2);font-style:italic;
+}
+
+/* ═══════════ THE 12 SIGNATURES ═══════════ */
+.sig-section{
+  background:var(--soil);
+  border-top:1px solid rgba(200,146,42,.12);
+  border-bottom:1px solid rgba(200,146,42,.12);
+  padding:90px 32px;
+}
+.sig-wrap{max-width:800px;margin:0 auto;}
+
+.sig-tabs{display:flex;gap:2px;margin-bottom:2px;}
+.sig-tab{
+  flex:1;padding:14px 8px;text-align:center;
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.25em;text-transform:uppercase;cursor:pointer;
+  transition:all .3s;border:1px solid transparent;
+}
+.sig-tab.poor-tab{color:#6a4020;background:rgba(80,40,10,.2);}
+.sig-tab.poor-tab.active,.sig-tab.poor-tab:hover{background:rgba(80,40,10,.5);border-color:rgba(120,60,20,.3);color:#aa7040;}
+.sig-tab.rich-tab{color:var(--leaf2);background:rgba(40,80,40,.1);}
+.sig-tab.rich-tab.active,.sig-tab.rich-tab:hover{background:rgba(40,80,40,.25);border-color:rgba(60,120,60,.3);color:var(--leaf3);}
+
+.sig-panel{display:none;}
+.sig-panel.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;}
+
+.sig-card{
+  padding:28px 24px;
+  border:1px solid rgba(200,146,42,.07);
+  transition:all .3s;
+}
+.sig-card.poor-card{background:rgba(50,25,5,.3);}
+.sig-card.poor-card:hover{background:rgba(70,35,8,.4);border-color:rgba(120,60,20,.2);}
+.sig-card.rich-card{background:rgba(20,50,20,.2);}
+.sig-card.rich-card:hover{background:rgba(30,70,30,.3);border-color:rgba(60,120,60,.2);}
+
+.sc-num{
+  font-family:'Syne',sans-serif;font-size:28px;font-weight:800;
+  opacity:.15;line-height:1;margin-bottom:10px;
+}
+.sc-num.poor-n{color:#8a5020;}
+.sc-num.rich-n{color:var(--leaf3);}
+
+.sc-title{
+  font-family:'DM Serif Display',serif;font-size:17px;
+  color:var(--cream);margin-bottom:8px;
+}
+.sc-desc{font-size:13px;line-height:1.75;color:var(--w45);}
+.sc-desc em{font-style:italic;}
+.sc-desc.poor-d em{color:#aa7040;}
+.sc-desc.rich-d em{color:var(--leaf3);}
+
+/* ═══════════ THE TRANSFORMATION ═══════════ */
+.transform-section{padding:90px 32px;}
+.tf-wrap{max-width:800px;margin:0 auto;}
+
+/* progress meter */
+.meter-intro{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(20px,4vw,36px);font-style:italic;
+  line-height:1.5;color:var(--w70);
+  margin-bottom:60px;padding-bottom:40px;
+  border-bottom:1px solid rgba(200,146,42,.1);
+}
+.meter-intro strong{color:var(--cream);font-style:normal;font-weight:400;}
+
+/* 7 tahap transformasi */
+.stages{display:flex;flex-direction:column;gap:3px;}
+
+.stage{
+  display:grid;grid-template-columns:80px 1fr;
+  background:var(--earth);
+  border:1px solid rgba(200,146,42,.07);
+  overflow:hidden;transition:border-color .3s;
+}
+.stage:hover{border-color:rgba(200,146,42,.25);}
+
+.stage-num-col{
+  background:rgba(200,146,42,.05);
+  border-right:1px solid rgba(200,146,42,.08);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px 8px;
+}
+.stage-num{
+  font-family:'Syne',sans-serif;font-size:32px;font-weight:800;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;
+}
+
+.stage-body{padding:28px 32px;}
+.stage-phase{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;
+}
+.stage-name{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(18px,3vw,26px);color:var(--cream);margin-bottom:10px;
+}
+.stage-desc{font-size:14px;line-height:1.85;color:var(--w70);}
+.stage-desc em{color:var(--gold2);font-style:italic;}
+.stage-desc strong{color:var(--cream);font-weight:400;}
+.stage-desc .lf{color:var(--leaf3);}
+
+.stage-action{
+  display:inline-block;margin-top:14px;
+  padding:8px 20px;
+  border:1px solid rgba(200,146,42,.25);
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.3em;color:var(--gold);text-transform:uppercase;
+}
+
+/* ═══════════ DAILY PROTOCOL ═══════════ */
+.protocol-section{
+  background:var(--soil);
+  border-top:1px solid rgba(200,146,42,.12);
+  border-bottom:1px solid rgba(200,146,42,.12);
+  padding:90px 32px;
+}
+.proto-wrap{max-width:800px;margin:0 auto;}
+
+.proto-intro{
+  font-size:15px;line-height:1.9;color:var(--w70);
+  max-width:600px;margin-bottom:60px;
+}
+.proto-intro em{color:var(--gold2);font-style:italic;}
+
+/* time blocks */
+.time-blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2px;}
+.time-block{
+  background:var(--earth);padding:36px 24px;
+  border:1px solid rgba(200,146,42,.07);
+  position:relative;overflow:hidden;
+  transition:all .3s;
+}
+.time-block::before{
+  content:attr(data-time);
+  position:absolute;top:16px;right:16px;
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.3em;color:var(--w25);text-transform:uppercase;
+}
+.time-block:hover{border-color:rgba(200,146,42,.25);background:var(--bark);}
+
+.tb-icon{font-size:24px;margin-bottom:16px;}
+.tb-time-label{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;
+}
+.tb-name{
+  font-family:'DM Serif Display',serif;font-size:18px;
+  color:var(--cream);margin-bottom:10px;
+}
+.tb-desc{font-size:13px;line-height:1.75;color:var(--w45);}
+.tb-desc em{color:var(--gold2);font-style:italic;}
+
+/* ═══════════ MANTRAS ═══════════ */
+.mantra-section{padding:90px 32px;position:relative;overflow:hidden;}
+.mantra-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 70% at 50% 50%,#1a1000 0%,var(--ink) 65%);
+}
+.mantra-wrap{max-width:800px;margin:0 auto;position:relative;z-index:2;}
+
+.mantra-intro{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(18px,3.5vw,32px);font-style:italic;
+  line-height:1.55;color:var(--w70);
+  margin-bottom:60px;text-align:center;
+}
+.mantra-intro em{color:var(--gold2);}
+
+.mantra-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+
+.mantra-pair{
+  border:1px solid rgba(200,146,42,.1);
+  overflow:hidden;
+  transition:border-color .3s;
+}
+.mantra-pair:hover{border-color:rgba(200,146,42,.3);}
+
+.mantra-old{
+  padding:24px 28px;
+  background:rgba(80,40,10,.2);
+  border-bottom:1px solid rgba(200,146,42,.08);
+}
+.mantra-old p{
+  font-family:'Newsreader',serif;font-size:14px;font-style:italic;
+  color:rgba(245,237,216,.35);line-height:1.6;
+}
+.mantra-old::before{
+  content:'Lama:';
+  font-family:'Syne',sans-serif;font-size:8.5px;font-weight:700;
+  letter-spacing:.4em;color:#6a4020;text-transform:uppercase;
+  display:block;margin-bottom:8px;
+}
+
+.mantra-new{padding:24px 28px;background:rgba(20,50,15,.2);}
+.mantra-new p{
+  font-family:'DM Serif Display',serif;font-size:16px;
+  color:var(--leaf3);line-height:1.55;
+}
+.mantra-new::before{
+  content:'Baru:';
+  font-family:'Syne',sans-serif;font-size:8.5px;font-weight:700;
+  letter-spacing:.4em;color:var(--leaf2);text-transform:uppercase;
+  display:block;margin-bottom:8px;
+}
+
+/* ═══════════ WEALTH SIGNALS ═══════════ */
+.signals-section{
+  background:var(--soil);
+  border-top:1px solid rgba(200,146,42,.12);
+  border-bottom:1px solid rgba(200,146,42,.12);
+  padding:90px 32px;
+}
+.sig2-wrap{max-width:800px;margin:0 auto;}
+
+.signal-list{display:flex;flex-direction:column;gap:2px;margin-top:52px;}
+
+.signal-item{
+  display:grid;grid-template-columns:1fr auto;
+  align-items:center;
+  background:var(--earth);
+  border:1px solid rgba(200,146,42,.07);
+  padding:24px 32px;gap:20px;
+  transition:all .3s;cursor:default;
+  position:relative;overflow:hidden;
+}
+.signal-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--gold),var(--leaf2));
+  transform:scaleY(0);transform-origin:bottom;transition:transform .4s;
+}
+.signal-item:hover{background:var(--bark);border-color:rgba(200,146,42,.2);}
+.signal-item:hover::before{transform:scaleY(1);}
+
+.si-text{font-size:15px;line-height:1.7;color:var(--w70);}
+.si-text strong{color:var(--cream);font-weight:400;}
+.si-text em{color:var(--gold2);font-style:italic;}
+
+.si-check{
+  width:36px;height:36px;border:1px solid rgba(200,146,42,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:rgba(200,146,42,.3);flex-shrink:0;
+  transition:all .3s;cursor:pointer;
+}
+.signal-item:hover .si-check,.si-check.done{
+  border-color:var(--gold2);color:var(--gold2);
+  background:rgba(200,146,42,.08);
+}
+
+/* ═══════════ WORKSHEET ═══════════ */
+.ws-section{padding:90px 32px;}
+.ws-wrap{max-width:800px;margin:0 auto;}
+
+.ws-card{
+  border:1px solid rgba(200,146,42,.18);
+  padding:52px 48px;position:relative;
+  background:linear-gradient(135deg,rgba(200,146,42,.04),transparent 55%);
+  margin-bottom:32px;
+}
+.ws-card::before,.ws-card::after{
+  content:'';position:absolute;
+  width:20px;height:20px;border-color:var(--gold2);border-style:solid;opacity:.4;
+}
+.ws-card::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+.ws-card::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
+
+.ws-title{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.45em;color:var(--gold);text-transform:uppercase;
+  margin-bottom:36px;padding-bottom:16px;
+  border-bottom:1px solid rgba(200,146,42,.12);
+}
+.q-block{margin-bottom:40px;}
+.q-block:last-child{margin-bottom:0;}
+.q-num{
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.4em;color:rgba(200,146,42,.45);margin-bottom:10px;display:block;
+}
+.q-text{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(17px,3vw,24px);font-style:italic;
+  color:var(--cream);line-height:1.5;margin-bottom:10px;
+  padding-left:18px;border-left:2px solid rgba(200,146,42,.25);
+}
+.q-text em{color:var(--gold2);}
+.q-hint{font-size:12.5px;color:var(--w45);font-style:italic;margin-bottom:16px;margin-left:18px;line-height:1.65;}
+.write-area{margin-top:16px;}
+.write-line{height:46px;border-bottom:1px dashed rgba(200,146,42,.08);}
+
+/* ═══════════ GRAND FINALE ═══════════ */
+.finale{
+  min-height:90vh;display:flex;align-items:center;justify-content:center;
+  padding:100px 32px;position:relative;overflow:hidden;text-align:center;
+}
+.finale-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 70% at 35% 50%,#1a0c00 0%,transparent 55%),
+    radial-gradient(ellipse 55% 70% at 65% 50%,#001a05 0%,transparent 55%),
+    var(--ink);
+}
+.finale-content{position:relative;z-index:2;max-width:720px;}
+
+.finale-pre{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:36px;
+}
+.finale-text{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(28px,6vw,60px);font-style:italic;
+  line-height:1.35;color:var(--cream);margin-bottom:40px;
+}
+.finale-text em{color:var(--gold2);}
+.finale-text strong{
+  font-style:normal;display:block;
+  background:linear-gradient(160deg,var(--gold3),var(--gold2) 50%,var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  font-size:1.15em;line-height:1;margin:10px 0;
+}
+
+.finale-divider{
+  display:flex;align-items:center;justify-content:center;gap:16px;margin:40px 0;
+}
+.finale-divider::before,.finale-divider::after{
+  content:'';width:80px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(200,146,42,.5));
+}
+.finale-divider::after{background:linear-gradient(to left,transparent,rgba(200,146,42,.5));}
+.fd-gem{width:8px;height:8px;background:var(--gold2);transform:rotate(45deg);}
+
+.finale-body{
+  font-size:clamp(14px,2vw,18px);line-height:1.9;
+  color:var(--w70);margin-bottom:48px;
+}
+.finale-body em{color:var(--gold2);font-style:italic;}
+.finale-body .lf{color:var(--leaf3);}
+
+.finale-seal{
+  display:inline-block;
+  padding:22px 60px;
+  border:1px solid rgba(200,146,42,.35);
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.4em;color:var(--gold2);text-transform:uppercase;
+  background:linear-gradient(135deg,rgba(200,146,42,.06),transparent);
+  cursor:default;
+  position:relative;overflow:hidden;
+}
+.finale-seal::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(200,146,42,.08),transparent);
+  transform:translateX(-100%);
+  animation:shimmer 3s ease-in-out infinite;
+  background-size:200% auto;
+}
+
+/* ═══ FOOTER ═══ */
+.footer{border-top:1px solid rgba(200,146,42,.08);padding:40px 32px;text-align:center;}
+.footer-logo{
+  font-family:'DM Serif Display',serif;font-size:clamp(20px,4vw,34px);font-style:italic;
+  background:linear-gradient(160deg,var(--gold3),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:8px;
+}
+.footer-copy{font-family:'Syne',sans-serif;font-size:9px;font-weight:600;letter-spacing:.3em;color:rgba(200,146,42,.2);text-transform:uppercase;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:640px){
+  .dna-grid{grid-template-columns:1fr;}
+  .dna-center{display:none;}
+  .mantra-grid{grid-template-columns:1fr;}
+  .stage{grid-template-columns:60px 1fr;}
+  .stage-num{font-size:24px;}
+  .ws-card{padding:36px 24px;}
+  .sig-tabs{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<section class="cover">
+  <div class="cover-bg"></div>
+  <div class="world-split"><div class="world-poor"></div><div class="world-rich"></div></div>
+
+  <!-- floating coins -->
+  <div class="coin" style="right:30%;top:70%;animation-delay:0s;animation-duration:5s;"></div>
+  <div class="coin" style="right:25%;top:60%;animation-delay:1.5s;animation-duration:7s;"></div>
+  <div class="coin" style="right:35%;top:75%;animation-delay:3s;animation-duration:6s;"></div>
+  <div class="coin" style="right:28%;top:65%;animation-delay:4.5s;animation-duration:5.5s;"></div>
+
+  <div class="cover-content">
+    <div class="xtra-badge"><span></span> X-TRA BONUS EKSKLUSIF <span></span></div>
+    <p class="cover-kicker">SADAR SEJATI · Bab Paling Kontroversial</p>
+
+    <h1 class="cover-h1">
+      <span class="poor">Mental Miskin</span>
+      <span class="vs-text">— vs —</span>
+      <span class="rich">Mental Kaya</span>
+    </h1>
+
+    <p class="cover-sub">
+      Bagaimana anak yang lahir dalam kemiskinan bisa kaya —<br>
+      dan anak yang lahir dalam kekayaan bisa <em>mewarisi kemiskinan.</em><br>
+      Dan cara mengubah semuanya — <em>mulai hari ini.</em>
+    </p>
+  </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    <span>Buka Matamu</span>
+  </div>
+</section>
+
+<div class="rule"><div class="rg"></div></div>
+
+<!-- ═══ PEMBUKA ═══ -->
+<div class="section">
+  <div class="sl">Pertanyaan Terbesar</div>
+
+  <blockquote class="big-q">
+    Mengapa dua orang yang tumbuh dalam kemiskinan yang sama —
+    satu bisa keluar dan membangun kekayaan,
+    sementara yang lain tetap terjebak <em>bahkan ketika ada peluang di depan matanya?</em>
+  </blockquote>
+
+  <p class="body-p">
+    Jawabannya bukan nasib. Bukan keberuntungan. Bukan pula seberapa keras mereka bekerja.
+    Jawabannya ada di sesuatu yang jauh lebih dalam —
+    <em>program tak kasat mata yang berjalan di bawah sadar mereka</em> dan menentukan
+    bagaimana mereka melihat uang, peluang, diri mereka sendiri, dan dunia.
+  </p>
+
+  <p class="body-p">
+    Program itu punya nama: <strong>Mentalitas.</strong> Dan mentalitas bukan sekadar "cara berpikir positif."
+    Ia adalah sistem operasi lengkap — keyakinan, emosi, kebiasaan, dan identitas —
+    yang <em>diprogram jauh sebelum kamu cukup dewasa untuk memilih.</em>
+  </p>
+
+  <p class="body-p">
+    Kabar baiknya: <span class="lf">program bisa ditulis ulang.</span>
+    Berapapun usiamu. Dari kondisi apapun kamu berangkat.
+    Tapi pertama — kamu harus berani menatap programmu yang lama dengan jujur.
+  </p>
+</div>
+
+<!-- ═══ TWO WORLDS — DNA COMPARISON ═══ -->
+<section class="split-section">
+  <div class="split-wrap">
+    <div class="sl">DNA Dua Mentalitas</div>
+    <p style="font-size:15px;color:var(--w70);max-width:580px;margin-bottom:0;line-height:1.85;">
+      Ini bukan tentang orang baik vs orang jahat. Ini tentang dua sistem operasi berbeda
+      yang menghasilkan <em>hasil yang berbeda secara konsisten</em> —
+      tidak peduli berapa banyak uang yang dimiliki seseorang saat ini.
+    </p>
+
+    <div class="dna-grid">
+      <div class="dna-col">
+        <div class="dna-header poor-h">
+          <div class="dna-icon">🌑</div>
+          <p class="dna-label poor-label">Mental Miskin / Kelangkaan</p>
+        </div>
+      </div>
+      <div class="dna-center">
+        <div class="dna-node"></div><div class="dna-node"></div><div class="dna-node"></div>
+        <div class="dna-node"></div><div class="dna-node"></div><div class="dna-node"></div>
+        <div class="dna-node"></div><div class="dna-node"></div><div class="dna-node"></div>
+        <div class="dna-node"></div><div class="dna-node"></div><div class="dna-node"></div>
+      </div>
+      <div class="dna-col">
+        <div class="dna-header rich-h">
+          <div class="dna-icon">🌕</div>
+          <p class="dna-label rich-label">Mental Kaya / Kelimpahan</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dna-rows">
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">"Uang itu susah dicari dan gampang habis"</div>
+        <div class="dna-cell rich-cell">"Uang adalah alat yang bisa tumbuh jika dikelola dengan cerdas"</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">Melihat orang kaya dengan rasa iri atau curiga</div>
+        <div class="dna-cell rich-cell">Melihat orang kaya sebagai bukti bahwa itu mungkin, dan belajar dari mereka</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">Berpikir zero-sum: "kalau kamu menang, aku kalah"</div>
+        <div class="dna-cell rich-cell">Berpikir value-creation: "bagaimana kita bisa sama-sama menang lebih besar"</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">Menghindari pembicaraan tentang uang — terasa tabu atau malu</div>
+        <div class="dna-cell rich-cell">Belajar bahasa uang: investasi, aset, arus kas, leverage</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">Uang habis begitu dapat — konsumsi impulsif</div>
+        <div class="dna-cell rich-cell">Uang diputar — beli aset, baru konsumsi dari hasilnya</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">"Orang kaya itu beruntung / punya koneksi / curang"</div>
+        <div class="dna-cell rich-cell">"Apa yang bisa aku pelajari dari perjalanan mereka?"</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">Takut gagal → tidak bertindak → tidak berubah</div>
+        <div class="dna-cell rich-cell">Gagal = data → belajar → coba lagi dengan lebih cerdas</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">Identitas: "Saya memang orang susah, sudah takdir"</div>
+        <div class="dna-cell rich-cell">Identitas: "Saya sedang dalam perjalanan membangun kekayaan saya"</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">Menyalahkan pemerintah, ekonomi, atau orang lain</div>
+        <div class="dna-cell rich-cell">Mencari solusi dalam lingkaran yang bisa dikontrol sendiri</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">Comfort zone: menghindari ketidaknyamanan</div>
+        <div class="dna-cell rich-cell">Growth zone: mencari ketidaknyamanan yang bermakna</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">Jangka pendek: kepuasan sekarang mengalahkan masa depan</div>
+        <div class="dna-cell rich-cell">Jangka panjang: bersedia menunda kepuasan untuk hasil yang lebih besar</div>
+      </div>
+      <div class="dna-row">
+        <div class="dna-cell poor-cell">"Uang bisa menghancurkan orang" → merasa tidak layak kaya</div>
+        <div class="dna-cell rich-cell">"Uang memperkuat karakter yang sudah ada — maka aku bangun karakterku dulu"</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ BAGAIMANA TERJADI ═══ -->
+<section class="science-section">
+  <div class="sci-wrap">
+    <div class="sl">Bagaimana Program Ini Tertanam — Secara Ilmiah</div>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-marker"><div class="tl-dot"></div></div>
+        <div class="tl-body">
+          <p class="tl-age">Usia 0 – 7 Tahun · Fase Imprinting</p>
+          <h3 class="tl-title">Otak Bayi adalah Spons Hypnotic</h3>
+          <p class="tl-content">
+            Otak anak usia ini beroperasi dominan di gelombang <em>theta dan delta</em> —
+            kondisi yang identik dengan hipnosis mendalam. Tidak ada filter kritis.
+            <strong>Semua yang dilihat, didengar, dan dirasakan langsung meresap sebagai kebenaran absolut.</strong>
+            <br><br>
+            Seorang anak yang setiap hari melihat orang tuanya stres soal tagihan, mendengar "kita tidak mampu",
+            dan merasakan energi ketakutan seputar uang — <span class="sky">secara harfiah menerima itu sebagai "kenyataan dunia".</span>
+            Tanpa mempertanyakan. Tanpa menyaring.
+          </p>
+          <div class="tl-box">
+            Penelitian Dr. Bruce Lipton: antara 0–7 tahun, anak menyerap program dari lingkungan dengan efisiensi hampir 100%. Program yang masuk di fase ini menjadi "keyakinan inti" yang paling sulit diubah di kemudian hari — karena tersimpan di lapisan terdalam bawah sadar.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-marker"><div class="tl-dot" style="border-color:var(--leaf2);"></div></div>
+        <div class="tl-body">
+          <p class="tl-age">Usia 7 – 14 Tahun · Fase Modeling</p>
+          <h3 class="tl-title">Belajar Menjadi Orang Dewasa di Sekitarnya</h3>
+          <p class="tl-content">
+            Filter kritis mulai terbentuk, tapi pengaruh lingkungan masih sangat dominan.
+            Anak mulai secara aktif <em>meniru</em> — cara orang tua mengelola uang,
+            cara mereka merespons krisis, cara mereka berbicara tentang orang kaya dan orang miskin.
+            <br><br>
+            Di sinilah pola "generasi" terbentuk. <strong>Kemiskinan tidak diwariskan melalui gen —
+            tapi melalui modeling perilaku dan keyakinan yang ditiru secara tidak sadar.</strong>
+            Anak yang melihat ayahnya menyerah saat menghadapi masalah keuangan —
+            tanpa sadar mempelajari bahwa <span class="sky">"itu cara merespons kesulitan finansial."</span>
+          </p>
+          <div class="tl-box">
+            Neuron cermin (mirror neurons) bekerja sangat aktif di usia ini. Otak secara harfiah "merekam dan memutar ulang" pola perilaku orang-orang di sekitarnya — tanpa filter, tanpa evaluasi.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-marker"><div class="tl-dot" style="border-color:var(--sky2);"></div></div>
+        <div class="tl-body">
+          <p class="tl-age">Usia 14 – 21 Tahun · Fase Identitas</p>
+          <h3 class="tl-title">Program Mengkristalisasi Menjadi Identitas</h3>
+          <p class="tl-content">
+            Masa remaja adalah fase pembentukan identitas. Semua program yang sudah masuk
+            sebelumnya mulai <em>mengeras menjadi "siapa saya."</em>
+            <br><br>
+            Remaja dari keluarga miskin yang sudah terprogram dengan mentalitas kelangkaan
+            mulai mengucapkan kalimat-kalimat yang akan mendefinisikan hidupnya:
+            <strong>"Orang seperti saya memang tidak bisa kaya."
+            "Sekolah bagus bukan untuk orang seperti kami."
+            "Lebih baik dapat sedikit tapi pasti daripada mimpi yang tidak jelas."</strong>
+            <br><br>
+            <span class="sky">Ini bukan kelemahan karakter. Ini adalah sistem perlindungan diri — otak sedang mencegah "kekecewaan" dengan menurunkan ekspektasi.</span>
+            Tapi sistem perlindungan ini juga yang mencegah pertumbuhan.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-marker"><div class="tl-dot" style="border-color:var(--gold);"></div></div>
+        <div class="tl-body">
+          <p class="tl-age">Usia 21+ · Konfirmasi Bias Permanen</p>
+          <h3 class="tl-title">Dunia Selalu Membuktikan Apa yang Dipercayai</h3>
+          <p class="tl-content">
+            Di sinilah paradoks terbesar terjadi. Otak dewasa —
+            dengan program yang sudah mengkristal — mulai secara aktif
+            <em>mencari bukti yang mengkonfirmasi keyakinannya</em> dan mengabaikan bukti yang bertentangan.
+            <br><br>
+            Orang dengan mental miskin yang melihat berita tentang orang kaya yang korup akan berkata:
+            "Itu buktinya!" — tapi mengabaikan ratusan kisah sukses yang jujur.
+            <strong>Reticular Activating System (RAS) di otak memfilter jutaan informasi per detik
+            dan hanya "mengizinkan" masuk informasi yang selaras dengan keyakinan yang sudah ada.</strong>
+            <br><br>
+            <span class="lf">Artinya: duniamu — secara harfiah — terbentuk oleh apa yang kamu percayai tentangnya.</span>
+          </p>
+          <div class="tl-box">
+            RAS adalah "gatekeeper" kesadaran. Itulah mengapa ketika kamu beli mobil baru, tiba-tiba kamu melihat mobil itu di mana-mana. Bukan karena jumlahnya bertambah — tapi karena RAS-mu sekarang memprioritaskannya. Program kekayaan atau kemiskinan bekerja dengan mekanisme yang persis sama.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 12 TANDA SIGNATURES ═══ -->
+<section class="sig-section">
+  <div class="sig-wrap">
+    <div class="sl">12 Tanda Pengenal — Kenali Dirimu</div>
+    <p style="font-size:15px;color:var(--w70);max-width:580px;margin-bottom:40px;line-height:1.85;">
+      Bukan untuk menghakimi — tapi untuk <em>mendiagnosis dengan jujur.</em>
+      Kamu tidak bisa menyembuhkan apa yang tidak kamu akui.
+    </p>
+
+    <div class="sig-tabs">
+      <div class="sig-tab poor-tab active" onclick="switchTab('poor')">🌑 &nbsp; 12 Tanda Mental Miskin</div>
+      <div class="sig-tab rich-tab" onclick="switchTab('rich')">🌕 &nbsp; 12 Tanda Mental Kaya</div>
+    </div>
+
+    <div class="sig-panel active" id="poor-panel">
+      <div class="sig-card poor-card"><div class="sc-num poor-n">01</div><div class="sc-title">Berbicara tentang Orang</div><div class="sc-desc poor-d">Topik favoritnya adalah gosip, membandingkan diri dengan orang lain, dan membicarakan siapa yang punya apa. <em>Fokus ke luar, bukan ke dalam.</em></div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">02</div><div class="sc-title">Beli untuk Terlihat Kaya</div><div class="sc-desc poor-d">Membeli barang mahal untuk impresi sosial — bahkan dengan uang pinjaman. <em>"Tampak kaya" lebih penting dari "menjadi kaya."</em></div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">03</div><div class="sc-title">Menunggu Momen "Siap"</div><div class="sc-desc poor-d">Selalu ada alasan untuk menunda: <em>"nanti kalau sudah ada modal", "nanti kalau anak sudah besar."</em> Momen sempurna tidak pernah datang.</div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">04</div><div class="sc-title">Takut Berkorban</div><div class="sc-desc poor-d">Tidak mau melepas kenyamanan kecil untuk hasil yang lebih besar. <em>Gaji bulanan terasa "aman" — padahal ia menjebak.</em></div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">05</div><div class="sc-title">Meremehkan Ilmu</div><div class="sc-desc poor-d">"Buat apa beli buku mahal / ikut seminar — buang-buang uang." Padahal <em>investasi terbaik adalah di diri sendiri.</em></div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">06</div><div class="sc-title">Mengandalkan Satu Sumber</div><div class="sc-desc poor-d">Seluruh hidup bergantung pada satu pekerjaan atau satu sumber penghasilan. <em>Satu titik kegagalan = keruntuhan total.</em></div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">07</div><div class="sc-title">Tidak Punya Anggaran</div><div class="sc-desc poor-d">Tidak tahu ke mana uangnya pergi setiap bulan. <em>Uang dikelola secara reaktif, bukan proaktif.</em></div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">08</div><div class="sc-title">Iri pada Kesuksesan Orang Lain</div><div class="sc-desc poor-d">Kesuksesan orang lain terasa mengancam, bukan menginspirasi. <em>"Kenapa dia yang sukses, bukan aku?"</em> — bukan "Apa yang bisa aku pelajari dari dia?"</div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">09</div><div class="sc-title">Menolak Tanggung Jawab</div><div class="sc-desc poor-d">Kondisi keuangan selalu salah faktor eksternal: <em>pemerintah, bos, pasangan, keadaan.</em> Tidak pernah ada evaluasi diri.</div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">10</div><div class="sc-title">Berhenti Belajar Setelah Sekolah</div><div class="sc-desc poor-d">Menganggap pendidikan formal sudah cukup. <em>Tidak membaca buku, tidak mengikuti perkembangan, tidak mengembangkan skill baru.</em></div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">11</div><div class="sc-title">Menghindari Percakapan Keuangan</div><div class="sc-desc poor-d">Canggung membicarakan uang, investasi, atau bisnis. <em>Menganggap topik itu "materialistis" atau "tidak sopan."</em></div></div>
+      <div class="sig-card poor-card"><div class="sc-num poor-n">12</div><div class="sc-title">Tidak Punya Visi Finansial</div><div class="sc-desc poor-d">Tidak punya target keuangan yang jelas untuk 1, 5, atau 10 tahun ke depan. <em>Hidup dari bulan ke bulan — secara literal dan mental.</em></div></div>
+    </div>
+
+    <div class="sig-panel" id="rich-panel">
+      <div class="sig-card rich-card"><div class="sc-num rich-n">01</div><div class="sc-title">Berbicara tentang Ide</div><div class="sc-desc rich-d">Topik favoritnya adalah peluang, solusi, dan strategi. <em>Fokus ke depan, ke nilai yang bisa diciptakan.</em></div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">02</div><div class="sc-title">Beli Aset, Bukan Gaya</div><div class="sc-desc rich-d">Prioritas pertama adalah sesuatu yang <em>menghasilkan uang saat tidur:</em> properti, bisnis, saham, skill. Gaya hidup dari hasil aset, bukan dari modal.</div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">03</div><div class="sc-title">Mulai Sekarang dengan Apa yang Ada</div><div class="sc-desc rich-d"><em>Iterasi lebih baik dari perfeksi.</em> Mulai kecil, pelajari, perbaiki. Momentum dibangun dari tindakan, bukan dari kondisi sempurna.</div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">04</div><div class="sc-title">Bersedia Membayar Harga</div><div class="sc-desc rich-d">Memahami bahwa setiap level kehidupan punya harganya. <em>Bersedia berkorban jangka pendek untuk kebebasan jangka panjang.</em></div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">05</div><div class="sc-title">Investor Diri yang Konsisten</div><div class="sc-desc rich-d">Buku, kursus, mentor, pengalaman — semua dianggap investasi. <em>"Kapasitasku adalah asetku yang paling berharga."</em></div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">06</div><div class="sc-title">Membangun Multiple Streams</div><div class="sc-desc rich-d">Terus mencari cara menambah sumber penghasilan. <em>Tidak nyaman bergantung pada satu pihak untuk kelangsungan hidupnya.</em></div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">07</div><div class="sc-title">Tahu ke Mana Uangnya Pergi</div><div class="sc-desc rich-d">Mencatat, merencanakan, dan mengevaluasi keuangan secara rutin. <em>"Uang yang tidak diperhatikan tidak berkembang."</em></div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">08</div><div class="sc-title">Merayakan Kesuksesan Orang Lain</div><div class="sc-desc rich-d">Kesuksesan orang lain adalah <em>bukti nyata bahwa itu mungkin.</em> Mendekat, bertanya, belajar — bukan iri dari kejauhan.</div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">09</div><div class="sc-title">Radikal Bertanggung Jawab</div><div class="sc-desc rich-d"><em>"Kondisi ini adalah hasil pilihan-pilihanku. Dan aku bisa membuat pilihan yang berbeda mulai sekarang."</em> Tidak ada korban, hanya pemimpin.</div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">10</div><div class="sc-title">Belajar Seumur Hidup</div><div class="sc-desc rich-d">Membaca minimal satu buku per bulan. Mengikuti perkembangan industri. Selalu ada satu skill baru yang sedang dikembangkan. <em>Penasaran adalah modal terbesar.</em></div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">11</div><div class="sc-title">Fasih Berbicara Keuangan</div><div class="sc-desc rich-d">Memahami dasar-dasar: aset vs liabilitas, arus kas, investasi, pajak, dan leverage. <em>Bahasa keuangan adalah bahasa kebebasan.</em></div></div>
+      <div class="sig-card rich-card"><div class="sc-num rich-n">12</div><div class="sc-title">Visi Finansial yang Kristal</div><div class="sc-desc rich-d">Punya angka yang jelas: berapa yang ingin dicapai, kapan, melalui apa. <em>"Tujuan yang kabur menghasilkan tindakan yang kabur."</em></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7 TAHAP TRANSFORMASI ═══ -->
+<section class="transform-section">
+  <div class="tf-wrap">
+    <div class="sl leaf-sl">7 Tahap Transformasi Mental</div>
+
+    <p class="meter-intro">
+      Ini bukan proses instan. Ini adalah <strong>perjalanan yang bisa memakan waktu bulan hingga tahun</strong> —
+      tapi setiap tahapnya menghasilkan perubahan nyata yang terasa dalam kehidupan sehari-hari.
+      Kamu tidak perlu menyelesaikan semua sebelum merasakan hasilnya.
+    </p>
+
+    <div class="stages">
+
+      <div class="stage">
+        <div class="stage-num-col"><div class="stage-num">01</div></div>
+        <div class="stage-body">
+          <p class="stage-phase">Tahap Pertama · Kesadaran</p>
+          <div class="stage-name">Melihat Program yang Selama Ini Berjalan</div>
+          <div class="stage-desc">
+            Tidak ada yang bisa diubah sebelum diakui. Tahap pertama adalah yang paling tidak nyaman:
+            <em>melihat dengan jujur pola pikir, keyakinan, dan kebiasaan finansialmu</em> —
+            tanpa pembelaan, tanpa alasan.
+            <br><br>
+            Tanyakan: dari mana keyakinanku tentang uang berasal? Apa yang dulu sering kudengar tentang orang kaya?
+            Apa perasaanku saat melihat harga barang mahal? Apa reaksi pertamaku saat ada peluang bisnis?
+            <br><br>
+            <strong>Kesadaran adalah kebebasan pertama.</strong>
+            Selama kamu tidak sadar bahwa kamu sedang menjalankan program lama — program itu akan terus berkuasa.
+          </div>
+          <div class="stage-action">Mulai: Audit Keyakinan Finansial</div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num-col"><div class="stage-num">02</div></div>
+        <div class="stage-body">
+          <p class="stage-phase">Tahap Kedua · Penerimaan</p>
+          <div class="stage-name">Berhenti Menyalahkan — Mulai Bertanggung Jawab</div>
+          <div class="stage-desc">
+            Setelah sadar dari mana programmu berasal, ada godaan untuk menyalahkan:
+            orang tua, lingkungan, sistem, nasib.
+            <br><br>
+            Tahap kedua mengajarkan satu kebenaran yang membebaskan:
+            <em>"Kamu tidak bertanggung jawab atas apa yang diprogramkan kepadamu saat kecil —
+            tapi kamu sepenuhnya bertanggung jawab atas apa yang kamu lakukan sekarang."</em>
+            <br><br>
+            <strong>Penerimaan bukan menyerah. Penerimaan adalah titik awal kekuatan.</strong>
+            Karena hanya yang menerima realitasnya yang bisa mulai mengubahnya.
+          </div>
+          <div class="stage-action">Praktik: Surat Maaf kepada Diri Sendiri</div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num-col"><div class="stage-num">03</div></div>
+        <div class="stage-body">
+          <p class="stage-phase">Tahap Ketiga · Pemrograman Ulang</p>
+          <div class="stage-name">Mengganti Kode Sumber di Bawah Sadar</div>
+          <div class="stage-desc">
+            Inilah inti dari seluruh perjalanan. Menggunakan teknik-teknik yang sudah dibahas
+            dalam bab hipnosis: <em>afirmasi di kondisi theta, visualisasi vivid, emotional anchoring,
+            dan terutama — pengulangan yang konsisten.</em>
+            <br><br>
+            Tapi yang paling powerful dari semuanya adalah ini: <strong>ubah identitasmu.</strong>
+            Bukan "saya ingin kaya" — tapi "saya adalah orang yang mengelola uang dengan cerdas."
+            Bukan "saya sedang belajar investasi" — tapi "saya adalah investor yang sedang tumbuh."
+            <br><br>
+            <span class="lf">Identitas menentukan tindakan. Tindakan menentukan hasil.</span>
+          </div>
+          <div class="stage-action">Teknik: Identity-Based Wealth Affirmations</div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num-col"><div class="stage-num">04</div></div>
+        <div class="stage-body">
+          <p class="stage-phase">Tahap Keempat · Edukasi</p>
+          <div class="stage-name">Belajar Bahasa yang Tidak Diajarkan di Sekolah</div>
+          <div class="stage-desc">
+            Mental kaya tanpa literasi keuangan adalah seperti mesin bagus tanpa bensin.
+            Tahap keempat adalah belajar secara aktif:
+            <em>apa itu aset vs liabilitas, bagaimana arus kas bekerja,
+            apa perbedaan tabungan dan investasi, bagaimana pajak bekerja untukmu bukan melawanmu.</em>
+            <br><br>
+            <strong>Orang miskin berpikir: "Saya tidak punya uang untuk diinvestasikan."
+            Orang kaya berpikir: "Bagaimana cara saya memulai dengan apa yang saya punya sekarang?"</strong>
+            <br><br>
+            Mulai dengan buku. Banyak yang gratis. Mulai dengan Rp 10.000 sekalipun untuk investasi —
+            bukan karena nominalnya signifikan, tapi karena <span class="lf">habit lebih berharga dari jumlahnya.</span>
+          </div>
+          <div class="stage-action">Baca: Rich Dad Poor Dad, The Psychology of Money</div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num-col"><div class="stage-num">05</div></div>
+        <div class="stage-body">
+          <p class="stage-phase">Tahap Kelima · Lingkungan</p>
+          <div class="stage-name">Ganti Siapa yang Ada di Sekitarmu</div>
+          <div class="stage-desc">
+            Jim Rohn berkata: <em>"Kamu adalah rata-rata dari lima orang yang paling sering kamu habiskan waktu bersamanya."</em>
+            Ini bukan sekadar motivasi — ini adalah neurosains.
+            <br><br>
+            Neuron cermin di otakmu terus-menerus memodelkan pola pikir dan perilaku
+            orang-orang di sekitarmu. <strong>Jika lingkunganmu memiliki mental kelangkaan —
+            meski tanpa kata-kata — energi, kebiasaan, dan cara pandang itu akan meresap.</strong>
+            <br><br>
+            Kamu tidak perlu membuang orang-orang lama. Tapi tambahkan secara aktif
+            orang-orang yang sudah ada di level yang kamu tuju —
+            melalui komunitas, mentor, buku, podcast, atau bahkan media sosial yang kamu konsumsi.
+            <span class="lf">Lingkunganmu adalah hipnosis yang berjalan 24 jam sehari.</span>
+          </div>
+          <div class="stage-action">Aksi: Audit Lingkaran Sosialmu</div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num-col"><div class="stage-num">06</div></div>
+        <div class="stage-body">
+          <p class="stage-phase">Tahap Keenam · Aksi Berani</p>
+          <div class="stage-name">Satu Langkah Luar Zona Nyaman, Setiap Hari</div>
+          <div class="stage-desc">
+            Mental kaya tidak terbentuk dari membaca buku saja.
+            Ia terbentuk dari <em>aksi nyata yang melawan program lama</em> —
+            dan membuktikan kepada bawah sadar bahwa "kamu bisa."
+            <br><br>
+            Mulai bisnis kecil-kecilan. Tawarkan jasamu. Investasikan uang pertamamu.
+            Hubungi mentor yang kamu kagumi. Hadir di komunitas yang berbeda.
+            <strong>Setiap aksi yang berhasil — sekecil apapun — melemahkan program lama
+            dan memperkuat program baru.</strong>
+            <br><br>
+            Jangan tunggu merasa berani. <span class="lf">Keberanian muncul setelah tindakan — bukan sebelumnya.</span>
+          </div>
+          <div class="stage-action">Komitmen: Satu Aksi Keuangan Baru per Minggu</div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num-col"><div class="stage-num">07</div></div>
+        <div class="stage-body">
+          <p class="stage-phase">Tahap Ketujuh · Konsistensi & Sabar</p>
+          <div class="stage-name">Jalani dengan Sabar — Hasilnya Majemuk</div>
+          <div class="stage-desc">
+            Kekayaan bekerja seperti bunga majemuk: <em>lambat di awal, eksplosif di akhir.</em>
+            Mental kaya yang baru ditanam juga bekerja dengan cara yang sama —
+            hasilnya tidak langsung terlihat, tapi akumulasinya dahsyat.
+            <br><br>
+            Yang berhenti di bulan ke-3 tidak akan pernah melihat bulan ke-36 yang luar biasa.
+            <strong>Konsistensi yang tidak dramatis mengalahkan motivasi yang naik turun.</strong>
+            <br><br>
+            Dan ingat: perjalanan ini bukan hanya tentang uang.
+            Ini tentang menjadi versi dirimu yang lebih bebas, lebih sadar, lebih bertanggung jawab —
+            yang secara alami <span class="lf">menarik kelimpahan dalam segala bentuknya.</span>
+          </div>
+          <div class="stage-action">Sistem: Review & Evaluasi Bulanan</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DAILY PROTOCOL ═══ -->
+<section class="protocol-section">
+  <div class="proto-wrap">
+    <div class="sl gold-sl">Protokol Harian — Membangun Mental Kaya</div>
+    <p class="proto-intro">
+      Bukan daftar tugas yang membebani. Ini adalah <em>ritual minimalis yang konsisten</em> —
+      yang dirancang untuk secara perlahan menggantikan program lama dengan yang baru,
+      satu hari pada satu waktu.
+    </p>
+
+    <div class="time-blocks">
+
+      <div class="time-block" data-time="Pagi">
+        <div class="tb-icon">🌅</div>
+        <p class="tb-time-label">05.00 – 06.00</p>
+        <div class="tb-name">Ritual Pembuka</div>
+        <div class="tb-desc">
+          10 menit sebelum aktivitas: baca satu halaman buku finansial / pengembangan diri.
+          Ucapkan <em>3 identitas kaya</em> dalam kondisi setengah terjaga.
+          Visualisasikan satu tujuan finansialmu selama 2 menit.
+        </div>
+      </div>
+
+      <div class="time-block" data-time="Siang">
+        <div class="tb-icon">☀️</div>
+        <p class="tb-time-label">12.00 – 13.00</p>
+        <div class="tb-name">Satu Aksi Finansial</div>
+        <div class="tb-desc">
+          Satu hal kecil setiap hari: transfer Rp 10.000 ke rekening investasi,
+          belajar satu konsep keuangan, <em>hubungi satu koneksi bisnis,</em>
+          atau audit satu pos pengeluaran tidak perlu.
+        </div>
+      </div>
+
+      <div class="time-block" data-time="Sore">
+        <div class="tb-icon">🌤️</div>
+        <p class="tb-time-label">16.00 – 17.00</p>
+        <div class="tb-name">Konsumsi Konten Berkualitas</div>
+        <div class="tb-desc">
+          Ganti 15 menit scroll media sosial dengan podcast bisnis,
+          YouTube edukatif, atau <em>bab buku yang sedang dibaca.</em>
+          Lingkungan informasimu membentuk cara pandangmu.
+        </div>
+      </div>
+
+      <div class="time-block" data-time="Malam">
+        <div class="tb-icon">🌙</div>
+        <p class="tb-time-label">21.00 – 22.00</p>
+        <div class="tb-name">Ritual Penutup</div>
+        <div class="tb-desc">
+          Catat 3 hal finansial yang kamu syukuri hari ini.
+          Review satu tujuan keuangan jangka panjang.
+          <em>Lakukan self-hypnosis 10 menit</em> dengan sugesti kekayaan tepat sebelum tidur.
+        </div>
+      </div>
+
+      <div class="time-block" data-time="Minggu">
+        <div class="tb-icon">📊</div>
+        <p class="tb-time-label">Setiap Minggu</p>
+        <div class="tb-name">Audit Keuangan</div>
+        <div class="tb-desc">
+          30 menit setiap akhir minggu: cek arus kas, evaluasi pengeluaran,
+          review portofolio investasi (sekecil apapun), dan rencanakan
+          <em>satu langkah finansial minggu depan.</em>
+        </div>
+      </div>
+
+      <div class="time-block" data-time="Bulanan">
+        <div class="tb-icon">🎯</div>
+        <p class="tb-time-label">Setiap Bulan</p>
+        <div class="tb-name">Review Identitas</div>
+        <div class="tb-desc">
+          Baca ulang visi finansialmu. Perbarui angka targetmu.
+          Tambah satu koneksi baru di lingkaran yang kamu tuju.
+          Rayakan <em>kemajuan kecil</em> — bukan hanya hasil besar.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GANTI MANTRAS ═══ -->
+<section class="mantra-section">
+  <div class="mantra-bg"></div>
+  <div class="mantra-wrap">
+    <div class="sl" style="justify-content:center;margin-bottom:40px;">
+      <div style="width:40px;height:1px;background:rgba(200,146,42,.5);"></div>
+      &nbsp; Ganti Kalimat Lamamu &nbsp;
+      <div style="width:40px;height:1px;background:rgba(200,146,42,.5);"></div>
+    </div>
+
+    <p class="mantra-intro">
+      Kata-kata yang kamu ucapkan kepada dirimu sendiri <em>setiap hari</em><br>
+      adalah sugesti yang paling kuat dan paling sering — gantilah dengan sadar.
+    </p>
+
+    <div class="mantra-grid">
+
+      <div class="mantra-pair">
+        <div class="mantra-old"><p>"Saya tidak punya uang untuk diinvestasikan"</p></div>
+        <div class="mantra-new"><p>"Saya mulai membangun kekayaan dengan apa yang saya miliki hari ini"</p></div>
+      </div>
+
+      <div class="mantra-pair">
+        <div class="mantra-old"><p>"Orang kaya itu beruntung atau curang"</p></div>
+        <div class="mantra-new"><p>"Kekayaan adalah hasil dari keputusan dan kebiasaan yang bisa kupelajari"</p></div>
+      </div>
+
+      <div class="mantra-pair">
+        <div class="mantra-old"><p>"Uang itu bukan segalanya, yang penting bahagia"</p></div>
+        <div class="mantra-new"><p>"Uang adalah alat kebebasan — dan aku layak memilikinya dalam jumlah besar"</p></div>
+      </div>
+
+      <div class="mantra-pair">
+        <div class="mantra-old"><p>"Saya tidak pintar soal bisnis dan keuangan"</p></div>
+        <div class="mantra-new"><p>"Literasi keuangan adalah skill yang bisa kupelajari — dan aku sedang belajar"</p></div>
+      </div>
+
+      <div class="mantra-pair">
+        <div class="mantra-old"><p>"Nanti kalau sudah ada modal baru mulai"</p></div>
+        <div class="mantra-new"><p>"Saya memulai sekarang dan membangun modal dari perjalanan itu"</p></div>
+      </div>
+
+      <div class="mantra-pair">
+        <div class="mantra-old"><p>"Sudah takdir saya orang susah"</p></div>
+        <div class="mantra-new"><p>"Saya adalah penulis takdir finansial saya sendiri, mulai dari hari ini"</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WEALTH SIGNALS CHECKLIST ═══ -->
+<section class="signals-section">
+  <div class="sig2-wrap">
+    <div class="sl leaf-sl">Sinyal Perubahan — Centang yang Sudah Ada dalam Dirimu</div>
+    <p style="font-size:15px;color:var(--w70);max-width:560px;line-height:1.85;">
+      Perubahan mental sering terjadi sebelum terlihat di rekening bank.
+      Ini adalah <em>tanda-tanda bahwa programmu sedang berubah</em> — rayakan setiap satu yang muncul.
+    </p>
+
+    <div class="signal-list">
+      <div class="signal-item" onclick="toggleSignal(this)">
+        <div class="si-text">Kamu mulai <strong>tertarik membaca</strong> tentang bisnis, investasi, atau pengembangan diri — bukan karena terpaksa, tapi karena genuinely penasaran</div>
+        <div class="si-check">○</div>
+      </div>
+      <div class="signal-item" onclick="toggleSignal(this)">
+        <div class="si-text">Saat melihat kesuksesan orang lain, reaksi pertamamu adalah <strong>inspirasi</strong> — bukan iri atau curiga</div>
+        <div class="si-check">○</div>
+      </div>
+      <div class="signal-item" onclick="toggleSignal(this)">
+        <div class="si-text">Kamu mulai <strong>mempertanyakan</strong> pengeluaran impulsif sebelum melakukannya: "Ini aset atau liabilitas?"</div>
+        <div class="si-check">○</div>
+      </div>
+      <div class="signal-item" onclick="toggleSignal(this)">
+        <div class="si-text">Kamu mulai <strong>mencari tahu</strong> cara menambah penghasilan — bukan hanya cara mengurangi pengeluaran</div>
+        <div class="si-check">○</div>
+      </div>
+      <div class="signal-item" onclick="toggleSignal(this)">
+        <div class="si-text">Kegagalan kecil tidak lagi membuatmu menyerah — kamu mulai melihatnya sebagai <strong>data untuk iterasi</strong></div>
+        <div class="si-check">○</div>
+      </div>
+      <div class="signal-item" onclick="toggleSignal(this)">
+        <div class="si-text">Kamu mulai <strong>nyaman berbicara</strong> tentang uang, tujuan finansial, dan mimpi bisnismu kepada orang lain</div>
+        <div class="si-check">○</div>
+      </div>
+      <div class="signal-item" onclick="toggleSignal(this)">
+        <div class="si-text">Kamu punya <strong>target finansial yang spesifik</strong> — bukan sekadar "ingin kaya" tapi angka, waktu, dan caranya</div>
+        <div class="si-check">○</div>
+      </div>
+      <div class="signal-item" onclick="toggleSignal(this)">
+        <div class="si-text">Kamu mulai secara aktif <strong>mencari mentor atau komunitas</strong> yang sudah ada di level yang kamu tuju</div>
+        <div class="si-check">○</div>
+      </div>
+      <div class="signal-item" onclick="toggleSignal(this)">
+        <div class="si-text">Kata-kata <strong>"saya tidak bisa"</strong> mulai tergantikan dengan <strong>"saya belum tahu caranya — tapi bisa dipelajari"</strong></div>
+        <div class="si-check">○</div>
+      </div>
+      <div class="signal-item" onclick="toggleSignal(this)">
+        <div class="si-text">Kamu mulai <strong>menyisihkan uang</strong> — berapapun nominalnya — sebelum digunakan untuk konsumsi, bukan sisanya</div>
+        <div class="si-check">○</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WORKSHEET ═══ -->
+<section class="ws-section">
+  <div class="ws-wrap">
+    <div class="sl">Worksheet · X-TRA Bonus</div>
+
+    <div class="ws-card">
+      <p class="ws-title">Audit & Transformasi Mental Finansialmu</p>
+
+      <div class="q-block">
+        <span class="q-num">Pertanyaan 01</span>
+        <p class="q-text">Kalimat apa tentang uang yang <em>paling sering kamu dengar</em> saat kecil — dan bagaimana itu mempengaruhi caramu mengelola uang hari ini?</p>
+        <p class="q-hint">Telusuri: siapa yang mengucapkannya, dalam situasi apa, dan emosi apa yang menyertainya. Itulah "kode" yang sedang berjalan.</p>
+        <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-num">Pertanyaan 02</span>
+        <p class="q-text">Apa <em>tiga keyakinan finansialmu</em> yang paling membatasi — dan dari mana masing-masing berasal?</p>
+        <p class="q-hint">Contoh: "Saya tidak bisa kaya karena tidak punya koneksi." Dari mana keyakinan itu? Siapa yang menanamkannya? Apakah benar-benar fakta?</p>
+        <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-num">Pertanyaan 03</span>
+        <p class="q-text">Jika kamu memiliki mental kaya sejak lahir — keputusan apa yang sudah berbeda dalam hidupmu? Dan keputusan apa yang masih bisa kamu ubah <em>mulai sekarang?</em></p>
+        <p class="q-hint">Ini bukan untuk menyesal — tapi untuk melihat gap antara versi lama dan versi barumu. Gap itu adalah peta perjalananmu.</p>
+        <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+      </div>
+
+      <div class="q-block">
+        <span class="q-num">Identitas Baru · Tulisan Tangan</span>
+        <p class="q-text">Tuliskan <em>pernyataan identitas finansialmu yang baru</em> — siapa kamu sebagai pengelola uang, investor, dan pencipta nilai:</p>
+        <p class="q-hint">Mulai dengan: "Saya adalah..." Buat sedetail dan sepersonal mungkin. Ini akan menjadi affirmasi utamamu selama 90 hari ke depan.</p>
+        <div class="write-area"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GRAND FINALE ═══ -->
+<section class="finale">
+  <div class="finale-bg"></div>
+  <div class="finale-content">
+    <p class="finale-pre">Kebenaran Terakhir yang Perlu Kamu Dengar</p>
+
+    <h2 class="finale-text">
+      Kemiskinan dan kekayaan<br>
+      dimulai di tempat yang sama —
+      <strong>di dalam pikiranmu.</strong>
+      Bukan di rekeningmu.
+    </h2>
+
+    <div class="finale-divider"><div class="fd-gem"></div></div>
+
+    <p class="finale-body">
+      Seseorang yang lahir miskin dan mati kaya<br>
+      tidak mengubah kondisinya terlebih dahulu.<br>
+      Ia mengubah <em>cara ia memandang dirinya dan dunianya</em> — terlebih dahulu.<br><br>
+      Dan karena pandangannya berubah, keputusannya berubah.<br>
+      Karena keputusannya berubah, tindakannya berubah.<br>
+      Karena tindakannya berubah, hidupnya berubah.<br><br>
+      <strong class="lf">Kamu tidak perlu menunggu kondisimu membaik untuk mulai berpikir seperti orang kaya.</strong><br>
+      Mulai berpikir seperti orang kaya — dan kondisimu akan menyusul.
+    </p>
+
+    <div class="finale-seal">✦ &nbsp; X-TRA BONUS SELESAI &nbsp; ✦</div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">SADAR SEJATI</div>
+  <p class="footer-copy">X-TRA Bonus · Mental Miskin vs Mental Kaya · Pembahasan Tuntas</p>
+</footer>
+
+<script>
+// Tab switching
+function switchTab(type) {
+  document.querySelectorAll('.sig-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.sig-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('.' + type + '-tab').classList.add('active');
+  document.getElementById(type + '-panel').classList.add('active');
+}
+
+// Signal checklist
+function toggleSignal(el) {
+  const check = el.querySelector('.si-check');
+  if (check.classList.contains('done')) {
+    check.classList.remove('done');
+    check.textContent = '○';
+  } else {
+    check.classList.add('done');
+    check.textContent = '✦';
+  }
+}
+</script>
+</body>
+</html>
